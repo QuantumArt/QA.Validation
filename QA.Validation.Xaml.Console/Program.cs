@@ -8,7 +8,6 @@ namespace QA.Validation.Xaml.Console
 {
     using System;
     using System.Diagnostics;
-    using QA.Core;
     using QA.Validation.Xaml.Console.ValidationRules;
 
     class Program
@@ -23,18 +22,6 @@ namespace QA.Validation.Xaml.Console
 
             var type = typeof(Person);
             string propertyName = "Name";
-
-            var accessor = new FastPropertyAccessor(type, propertyName);
-
-            Stopwatch st = new Stopwatch();
-            st.Start();
-            for (int i = 0; i < 1000000; i++)
-            {
-                var person = new Person() { Name = "1234" };
-                var prop1 = accessor.GetValue(person);
-            }
-
-            Console.WriteLine(st.ElapsedMilliseconds);
 
             XamlObjectValidator validator = null;
 
@@ -97,10 +84,7 @@ namespace QA.Validation.Xaml.Console
 
                 dValiudator.Validate(person, ctx);
             }
-
-            NLogLogger logger = new NLogLogger("nlogclient.config");
-            logger.Info("123");
-            logger.ErrorException("exception", new Exception("exc", new StackOverflowException("SckOverflowException", new InvalidOperationException("invaliud"))));
+          
 
         }
 
@@ -129,7 +113,7 @@ namespace QA.Validation.Xaml.Console
             validator.Validate(person1, ctx);
 
             Console.WriteLine("*******************************************************************");
-            Console.WriteLine(QA.Core.ObjectDumper.DumpObject(person1));
+            
             Console.WriteLine("IsValid: {0}", ctx.IsValid);
             Console.WriteLine("Messages: ", ctx.IsValid);
 

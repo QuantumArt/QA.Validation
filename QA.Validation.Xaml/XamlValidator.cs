@@ -81,7 +81,18 @@ namespace QA.Validation.Xaml
                         double res;
                         if (!Double.TryParse(value, NumberStyles.Float, culture, out res))
                         {
-                            return Convert.ToDouble(value, culture);
+                            if (!Double.TryParse(value.Replace(",", "."), NumberStyles.Float, CultureInfo.InvariantCulture, out res))
+                            {
+                                return Convert.ToDouble(value, culture);
+                            }
+                            else
+                            {
+                                return res;
+                            }
+                        }
+                        else
+                        {
+                            return res;
                         }
                     }
 

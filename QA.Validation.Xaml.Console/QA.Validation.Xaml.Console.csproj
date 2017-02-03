@@ -80,10 +80,6 @@
       <HintPath>..\packages\QA.Configuration.1.0.1.0\lib\net40\QA.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="QA.Core">
-      <HintPath>..\packages\QA.Core.3.0.6.0\lib\net45\QA.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />

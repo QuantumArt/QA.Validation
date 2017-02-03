@@ -20,19 +20,19 @@ namespace QA.Validation.Extensions.Tests
         /// по адресу http://localhost:60857/testhandler.ashx
         /// Проверяется вся цепочка удаленной валидации с участием веб-приложения с валидационным хендлером.
         /// </summary>
-        [TestMethod]
+        //[TestMethod]
         [TestCategory("Remote validation: integration tests")]
         public void Test_RemoteValidation_Check_Whole_Workflow_With_Real_HttpHandler()
         {
             // подготовим и настроим все объекты
             var validator = PrepareDefinitions(new ProcessRemoteValidationIf(), "http://localhost:60857/testhandler.ashx");
 
-            var values = new Dictionary<string, string> { 
-                { "prop1", "" }, 
+            var values = new Dictionary<string, string> {
+                { "prop1", "" },
                 { "prop2", "12" },
                 { "prop3", "" },
                 { "prop4", "99.99" },
-                { "prop5", "" } 
+                { "prop5", "" }
             };
 
             var ctx = new ValidationContext();
@@ -68,19 +68,19 @@ namespace QA.Validation.Extensions.Tests
         /// по адресу http://localhost:51380/remotevalidation
         /// Проверяется вся цепочка удаленной валидации с участием веб-приложения с валидационным хендлером.
         /// </summary>
-        [TestMethod]
+        //[TestMethod]
         [TestCategory("Remote validation: integration tests")]
         public void Test_RemoteValidation_Check_Whole_Workflow_With_Real_Mvc4_Application_EmptyDate()
         {
             // подготовим и настроим все объекты
             var validator = PrepareDefinitions(new ProcessRemoteValidationIf(), "http://localhost:51380/remotevalidation");
 
-            var values = new Dictionary<string, string> { 
-                { "prop1", "" }, 
+            var values = new Dictionary<string, string> {
+                { "prop1", "" },
                 { "prop2", "12" },
                 { "prop3", "" },
                 { "prop4", "99.99" },
-                { "prop5", "" } 
+                { "prop5", "" }
             };
 
             var ctx = new ValidationContext();
@@ -102,19 +102,19 @@ namespace QA.Validation.Extensions.Tests
         /// по адресу http://localhost:51380/remotevalidation
         /// Проверяется вся цепочка удаленной валидации с участием веб-приложения с валидационным хендлером.
         /// </summary>
-        [TestMethod]
+        //[TestMethod]
         [TestCategory("Remote validation: integration tests")]
         public void Test_RemoteValidation_Check_Whole_Workflow_With_Real_Mvc4_Application_CorrectDate()
         {
             // подготовим и настроим все объекты
             var validator = PrepareDefinitions(new ProcessRemoteValidationIf(), "http://localhost:51380/remotevalidation");
 
-            var values = new Dictionary<string, string> { 
-                { "prop1", "" }, 
+            var values = new Dictionary<string, string> {
+                { "prop1", "" },
                 { "prop2", "12" },
                 { "prop3", "2012.11.07" },
                 { "prop4", "99.99" },
-                { "prop5", "" } 
+                { "prop5", "" }
             };
 
             var ctx = new ValidationContext();
@@ -137,15 +137,15 @@ namespace QA.Validation.Extensions.Tests
         /// по адресу http://localhost:51380/remotevalidation
         /// Проверяется вся цепочка удаленной валидации с участием веб-приложения с валидационным хендлером.
         /// </summary>
-        [TestMethod]
+        //[TestMethod]
         [TestCategory("Remote validation: integration tests")]
         public void Test_RemoteValidation_Check_Whole_Workflow_With_Real_Mvc4_Application_List_of_int()
         {
             // подготовим и настроим все объекты
             var validator = PrepareDefinitionsWithArray(new ProcessRemoteValidationIf(), "http://localhost:51380/remotevalidation/listofinttest");
 
-            var values = new Dictionary<string, string> { 
-                { "prop6", "1,2,3,4,5,6,7,8,9" } 
+            var values = new Dictionary<string, string> {
+                { "prop6", "1,2,3,4,5,6,7,8,9" }
             };
 
             var ctx = new ValidationContext();
@@ -167,12 +167,12 @@ namespace QA.Validation.Extensions.Tests
             // подготовим и настроим все объекты
             var validator = PrepareDefinitions(new ProcessRemoteValidationIf(), "http://localhost:51380/remotevalidation");
 
-            var values = new Dictionary<string, string> { 
-                { "prop1", "" }, 
+            var values = new Dictionary<string, string> {
+                { "prop1", "" },
                 { "prop2", "12" },
                 { "prop3", "2012.11.07asd" }, // некорректное значение даты
                 { "prop4", "99.99" },
-                { "prop5", "" } 
+                { "prop5", "" }
             };
 
             var ctx = new ValidationContext();
@@ -260,12 +260,12 @@ namespace QA.Validation.Extensions.Tests
             var validator = PrepareDefinitions(new ProcessRemoteValidationIf(manager), "http://app.com");
 
             // устанавливаенм значения формы
-            var values = new Dictionary<string, string> { 
-                { "prop1", "test text" }, 
+            var values = new Dictionary<string, string> {
+                { "prop1", "test text" },
                 { "prop2", "12" },
                 { "prop3", "2012.01.01" },
                 { "prop4", "99,99" },
-                { "prop5", "false" }, 
+                { "prop5", "false" },
             };
 
             var ctx = new ValidationContext();
@@ -308,8 +308,8 @@ namespace QA.Validation.Extensions.Tests
 
             validator.ValidationRules.Add(condition);
             // устанавливаенм значения формы
-            var values = new Dictionary<string, string> { 
-                { "prop1", "1, 2, 3, 4" }, 
+            var values = new Dictionary<string, string> {
+                { "prop1", "1, 2, 3, 4" },
             };
 
             var ctx = new ValidationContext();
@@ -345,8 +345,8 @@ namespace QA.Validation.Extensions.Tests
 
             validator.ValidationRules.Add(condition);
             // устанавливаенм значения формы
-            var values = new Dictionary<string, string> { 
-                { "prop1", "name, name1, name2, name3" }, 
+            var values = new Dictionary<string, string> {
+                { "prop1", "name, name1, name2, name3" },
             };
 
             var ctx = new ValidationContext();
@@ -389,9 +389,9 @@ namespace QA.Validation.Extensions.Tests
             var serializer = new JavaScriptSerializer();
             var obj = serializer.DeserializeObject(text);
 
-            Assert.IsNotNull(obj);         
+            Assert.IsNotNull(obj);
         }
-      
+
         private static XamlValidator PrepareDefinitions(ProcessRemoteValidationIf condition, string url)
         {
             var validator = new XamlValidator();
