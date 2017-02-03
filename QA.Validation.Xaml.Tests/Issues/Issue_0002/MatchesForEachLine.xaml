@@ -1,0 +1,48 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib">
+    <!--описание полей-->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="String_Field" PropertyName="String_Field" PropertyType="{x:Type sys:String}"/>
+        <PropertyDefinition Alias="String_Field2" PropertyName="String_Field2" PropertyType="{x:Type sys:String}"/>
+        <PropertyDefinition Alias="String_Field3" PropertyName="String_Field3" PropertyType="{x:Type sys:String}"/>
+    </XamlValidator.Definitions>
+
+    <ForMember Definition="{x:Definition String_Field}">
+        <If>
+            <!--установка свойства Condition (оно указано как ContentProperty)-->
+            <Or>
+                <IsNullOrEmpty />
+                <MatchesForEachLine Expression="^[0-9]+$" />
+            </Or>
+            <If.False>
+                <WithMessage Text="failure" />
+            </If.False>
+        </If>
+    </ForMember>
+
+    <ForMember Definition="{x:Definition String_Field2}">
+        <If>
+            <Or>
+                <IsNullOrEmpty />
+                <MatchesForEachLine Expression="^[0-9]+$" />
+            </Or>
+            <If.False>
+                <WithMessage Text="failure" />
+            </If.False>
+        </If>
+    </ForMember>
+    
+    <ForMember Definition="{x:Definition String_Field3}">
+        <If>
+            <Or>
+                <IsNullOrEmpty />
+                <MatchesForEachLine Trim="True" Expression="^[0-9]+$" />
+            </Or>
+            <If.False>
+                <WithMessage Text="failure" />
+            </If.False>
+        </If>
+    </ForMember>
+</XamlValidator>

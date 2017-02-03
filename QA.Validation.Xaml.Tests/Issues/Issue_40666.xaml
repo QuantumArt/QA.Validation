@@ -1,0 +1,41 @@
+﻿<XamlValidator Discriminator="{x:Null}" xmlns="http://artq.com/validation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="Year" Description="Year" PropertyName="field_173111" PropertyType="x:Int32" />
+        <PropertyDefinition Alias="SortOrder" Description="SortOrder" PropertyName="field_173112" PropertyType="x:Int32"/>
+    </XamlValidator.Definitions>
+    <ForMember Definition="{x:Definition Year}">
+        <If>
+            <Not>
+                <IsNull />
+            </Not>
+            <If.True>
+                <If>
+
+                    <LessThan Source="{x:Definition Year}" Value="2000"/>
+
+                    <If.True>
+                        <WithMessage Text="Год для документа должен быть больше 2000" />
+                    </If.True>
+                </If>
+            </If.True>
+        </If>
+    </ForMember>
+    <ForMember Definition="{x:Definition SortOrder}">
+        <If>
+            <And>
+                <Not>
+                    <IsNull/>
+                </Not>
+            </And>
+            <If.True>
+                <If>
+                    <GreaterThan  Value="-1"/>
+                    <If.False>
+                        <WithMessage Text="Порядок должен быть неотрицательным " />
+                    </If.False>
+                </If>
+            </If.True>
+        </If>
+    </ForMember>
+
+</XamlValidator>

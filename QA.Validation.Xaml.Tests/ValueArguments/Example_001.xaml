@@ -1,0 +1,52 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib">
+
+    <!--
+        описание полей
+        Alias:          ключ для использования в валидаторе. Произвольный текст (латинские быквы, цифры, подчеркивание)
+        PropertyName:   имя поля в QP8 (формат field_<id>)
+        PropertyType:   Тип поля (фреймоворк поддерживает все clr-типы)
+        Description:    Описание (опциональное)
+    -->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="Name" PropertyName="field_1234" PropertyType="{x:Type x:String}"/>
+        <PropertyDefinition Alias="DuplicateName" PropertyName="field_1235" PropertyType="{x:Type x:String}"/>
+    </XamlValidator.Definitions>
+
+    <!--пример устаногвки значения-->
+    <ForMember Definition="{x:Definition Name}">
+        <If>
+            <IsNullOrEmpty  />
+            <If.Then>
+                <ApplyValue>
+                    <FromFormatted Text="Example {0} {1} transliterated: {2} now: {3:yyyy-MM-dd_HH-mm} {4}">
+                        <FromFormatted.Arguments>
+                            <x:String>test</x:String>
+                            <x:Double>10.12</x:Double>
+                            <ReplaceText>
+                                <ReplaceText.Replacement>
+                                    <Replacement Expression="[a-z\-_0-2]" RegexOptions="IgnoreCase" Value="_" IsNegative="True" />
+                                </ReplaceText.Replacement>
+                                <Transliterate>
+                                    <Transliterate.Mappings>
+                                        <x:String x:Key="ё">ye</x:String>
+                                    </Transliterate.Mappings>
+                                    <ExtractValue Source="{x:Definition DuplicateName}" />
+                                </Transliterate>
+                            </ReplaceText>
+                            <FromLambda>DateTime.Now</FromLambda>
+                            <Encode EncodingType="JsEncode">
+                                <Transliterate>
+                                    <FromLambda>Convert.ToString(model["DuplicateName"]).ToLower()</FromLambda>
+                                </Transliterate>
+                            </Encode>
+                        </FromFormatted.Arguments>
+                    </FromFormatted>
+                </ApplyValue>
+            </If.Then>
+        </If>
+    </ForMember>
+
+</XamlValidator>

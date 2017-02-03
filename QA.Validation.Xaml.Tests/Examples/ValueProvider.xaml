@@ -1,0 +1,34 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace: System;assembly=mscorlib">
+    <!--описание полей-->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="Name" PropertyName="field_1234" PropertyType="{x:Type x:String}"/>
+    </XamlValidator.Definitions>
+
+    <!-- Заполнение поля ValidationRules (оно указано как ContentProperty)-->
+
+    <!--применение правила к свойству (к полю)
+        Если поле Name имеет значение null, то выводится ошибка "Не может быть null"
+    -->
+
+    <!--<ForMember Definition="{x:Definition Name}">
+        <WithMessage>
+            <x:String x:FactoryMethod="s:String.Format">
+                <x:Arguments>
+                    <x:String>Hello {0}</x:String>
+                    <s:Object x:FactoryMethod="ValueProvider.Provide">
+                        <x:Arguments>
+                            <x:Definition Key="Name" />
+                        </x:Arguments>
+                    </s:Object>
+                </x:Arguments>
+            </x:String>
+        </WithMessage>
+    </ForMember>-->
+
+    <ForMember Definition="{x:Definition Name}">
+        <WithValueFormattedMessage Text="Hello {0}" />
+    </ForMember>
+</XamlValidator>

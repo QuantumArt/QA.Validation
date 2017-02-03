@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Nickolay Karlov</authors>
+    <owners>Quantum Art</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Remote validation, additional rules and conditions</description>
+    <releaseNotes>Initial Release</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Core XAML Validation Extensions Remote</tags>
+    <dependencies>
+      <dependency id="QA.Validation.Xaml" version="1.0.1" />
+    </dependencies>
+  </metadata>
+</package>

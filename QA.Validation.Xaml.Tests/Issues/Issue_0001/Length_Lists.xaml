@@ -1,0 +1,26 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib">
+    <!--описание полей-->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="ints" PropertyName="ints" PropertyType="{x:Type ListOfInt}"/>
+        <PropertyDefinition Alias="strings" PropertyName="strings" PropertyType="{x:Type ListOfString}"/>
+    </XamlValidator.Definitions>
+
+    <ForMember Definition="{x:Definition ints}">
+        <If x:Name="condition">
+            <!--установка свойства Condition (оно указано как ContentProperty)-->
+            <Length MinLength="2" MaxLength="5"/>
+            <If.Then>
+                <WithMessage Text="OK" />
+            </If.Then>
+            <If.Else>
+                <WithMessage Text="FAIL" />
+            </If.Else>
+        </If>
+    </ForMember>
+
+    <ForMember Definition="{x:Definition strings}" Condition="{x:Reference condition}">       
+    </ForMember>
+</XamlValidator>

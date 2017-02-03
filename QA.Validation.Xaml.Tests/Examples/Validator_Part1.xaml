@@ -1,0 +1,40 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib">
+    <!--описание полей-->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="Name" PropertyName="field_1234" PropertyType="{x:Type x:String}"/>
+        <PropertyDefinition Alias="DuplicateName" PropertyName="field_1235" PropertyType="{x:Type x:String}"/>
+    </XamlValidator.Definitions>
+
+    <!-- Заполнение поля ValidationRules (оно указано как ContentProperty)-->
+    
+    <!--применение правила к свойству (к полю)
+        Если поле Name имеет значение null, то выводится ошибка "Не может быть null"
+    -->
+  
+    <ForMember Definition="{x:Definition Name}">
+        <If>
+            <!--установка свойства Condition (оно указано как ContentProperty)-->
+            <IsNull  />
+            <If.True>
+                <!--добавление ошибки валидации-->
+                <WithMessage Text="Не может быть null" />
+            </If.True>
+        </If>
+    </ForMember>
+
+    <!--применение правила к свойству (к полю)
+        Пример обратного синтаксиса: 
+            Поле DuplicateName обязательно для заполнения, если поле Name не пустое
+        Пример приведения типов: полю Message класса RequiredIf устанавливается объект типа WithMessage-->
+    <ForMember Definition="{x:Definition DuplicateName}">
+        <RequiredIf Message="Поле DuplicateName обязательно для заполнения, если поле Name не пустое.">
+            <Not>
+                <IsNullOrEmpty Source="{x:Definition Name}" />
+            </Not>
+        </RequiredIf>
+    </ForMember>
+
+</XamlValidator>

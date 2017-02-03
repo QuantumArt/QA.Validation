@@ -1,0 +1,129 @@
+﻿<XamlObjectValidator
+    xmlns="http://artq.com/validation"
+    xmlns:model="clr-namespace: QA.Validation.Xaml.Console;assembly=QA.Validation.Xaml.Console"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib"
+    Type="{x:Type model:Person}">
+    <XamlObjectValidator.Definitions>
+        <PropertyDefinition Alias="Name" PropertyName="Name" PropertyType="{x:Type x:String}"/>
+        <PropertyDefinition Alias="Passport" PropertyName="Passport" PropertyType="{x:Type x:String}"/>
+        <PropertyDefinition Alias="Date" PropertyName="Date" PropertyType="{x:Type sys:DateTime}"/>
+        <PropertyDefinition Alias="DuplicateName" PropertyName="DuplicateName" PropertyType="{x:Type x:String}"/>
+        <PropertyDefinition Alias="Age" PropertyName="Age" PropertyType="{x:Type x:Int32}"/>
+    </XamlObjectValidator.Definitions>
+
+    <!--поддержка ресурсов для констант и часто использующихся условий-->
+    <XamlObjectValidator.Resources>
+        <!--константы-->
+        <sys:String x:Key="msg_Null">Не может быть null</sys:String>
+        <sys:String x:Key="msg_Empty">Не может быть null</sys:String>
+        <sys:String x:Key="msg_Pass">Лица старше 16 лет обязаны указывать паспорт.</sys:String>
+
+        <!--общие для нескольких правил условия-->
+        <Sequence x:Key="expr" StopOnFirstFailure="True">
+            <!--поддержка последовательных условий c различными сообщениями-->
+            <If>
+                <IsNull />
+                <If.True>
+                    <WithMessage Text="Не может быть null" />
+                </If.True>
+            </If>
+            <If>
+                <IsNullOrEmpty />
+                <If.True>
+                    <WithMessage Text="Не может быть пустой" />
+                </If.True>
+            </If>
+            <If>
+                <Length MinLength="5"/>
+                <If.True>
+                    <WithMessage Text="Длина поля должна быть не менее 5 символов." />
+                </If.True>
+            </If>
+        </Sequence>
+    </XamlObjectValidator.Resources>
+
+    <!--к полю Name применяем условия, указанные в ресурсном словаре-->
+    <ForMember Definition="{x:Definition Name}" Condition="{x:Resource expr}" />
+
+    <!--к полю DuplicateName применяем те же условия, что и к Name-->
+    <ForMember Definition="{x:Definition DuplicateName}" Condition="{x:Resource expr}"/>
+
+    <!--дополнительные правила валидации-->
+    <ForMember Definition="{x:Definition DuplicateName}">
+        <If>
+            <AreEqual Source="{x:Definition Name}" Target="{x:Definition DuplicateName}"/>
+            <If.False>
+                <WithMessage Text="Имя и повтор имени должны совпадать" />
+            </If.False>
+        </If>
+    </ForMember>
+
+    <ForMember Definition="{x:Definition Date}">
+        <!--пример сложного условия: Если поле не пустое, то его значение должно быть валидировано-->
+        <If>
+            <Not>
+                <IsNull />
+            </Not>
+            <If.True>
+                <If>
+                    <GreaterThan Value="2012.03.03 00:00:00"/>
+                    <If.False>
+                        <WithMessage Text="Если дата указана, то она должна быть не ранее 2012.03.03" />
+                    </If.False>
+                </If>
+            </If.True>
+        </If>
+    </ForMember>
+
+    <ForMember Definition="{x:Definition Age}">
+        <If>
+            <GreaterThan Value="90"/>
+            <If.True>
+                <WithMessage Text="Значение должно быть не более 90" />
+            </If.True>
+            <If.False>
+                <!--поддержка вложенных условий-->
+                <!--пример конвертации string -> WithMessage-->
+                <If >
+                    <LessThan Value="10"/>
+                    <If.True>
+                        <WithMessage>Значение должно быть не менее 10</WithMessage>
+                    </If.True>
+                </If>
+            </If.False>
+        </If>
+    </ForMember>
+
+    <Must>
+        <If>
+            <Equals Source="{x:Definition Name}" Value="qwerty" />
+            <If.False>
+                <!--поддержка локализации сообщений-->
+                <WithLocalizedMessage Text="Должно быть равно 'qwerty' (default culture)">
+                    <sys:String x:Key="ru-ru">Должно быть равно 'qwerty'</sys:String>
+                    <sys:String x:Key="en-us">Must be equal to 'qwerty'</sys:String>
+                </WithLocalizedMessage>
+            </If.False>
+        </If>
+    </Must>
+
+    <Must>
+        <If>
+            <And>
+                <!--поддержка логических операндов для условий-->
+                <GreaterThan Source="{x:Definition Age}" Value="16" />
+                <Or>
+                    <IsNullOrEmpty Source="{x:Definition Passport}" />
+                    <Not>
+                        <!--поддержка Regex условий-->
+                        <Matches Source="{x:Definition Passport}" Expression="[0-9]{4} [0-9]{6}" RegexOptions="IgnoreCase,CultureInvariant" />
+                    </Not>
+                </Or>
+            </And>
+            <If.True>
+                <WithMessage Text="{x:Resource msg_Pass}" />
+            </If.True>
+        </If>
+    </Must>
+</XamlObjectValidator>

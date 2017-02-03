@@ -1,0 +1,100 @@
+﻿<DynamicResourceDictionaryContainer 
+    xmlns="http://artq.com/validation"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--Словарь Messages
+        валидационные сообщения-->
+    <DynamicResourceDictionary Name="Messages">
+        <WithMessage x:Key="test">Не может быть null</WithMessage>
+        <WithMessage x:Key="msg_Required">Не может быть null</WithMessage>
+        <WithMessage x:Key="msg_IsNotEmpty">Поле не может быть пустым.</WithMessage>
+        <WithMessage x:Key="msg_IsNotLastName">Неверный формат фамилии или имени (динамические ресурсы).</WithMessage>
+
+        <WithLocalizedMessage x:Key="msg_LastNameLength" Text="The text is not specified.">
+            <sys:String x:Key="ru-ru">Неверная длина вводимого текста.</sys:String>
+            <sys:String x:Key="en-us">The length of the input is invalid.</sys:String>
+        </WithLocalizedMessage>
+        <x:String x:Key="baseUrl" x:Name="base_url">http://domain.com/path</x:String>
+        <x:String x:Key="remote_url" x:FactoryMethod="Format">
+            <x:Arguments>
+                <x:String>{0}/{1}</x:String>
+                <x:Reference>base_url</x:Reference>
+                <x:String>remotevalidation/content309</x:String>
+            </x:Arguments>
+        </x:String>
+    </DynamicResourceDictionary>
+
+    <!--Словарь Conditions
+        условия-->
+    <DynamicResourceDictionary Name="Conditions">
+        <!--условие, которое никогда не выполняется-->
+        <And x:Key="never">
+            <IsNull/>
+            <Not>
+                <IsNull/>
+            </Not>
+        </And>
+
+        <!--стандартный набор условий для проверки фамилии или имени-->
+        <And x:Key="lastname">
+            <Not>
+                <IsNull />
+            </Not>
+            <Not>
+                <Equals Value=""/>
+            </Not>
+            <Length MaxLength="50" MinLength="1"/>
+            <Matches Expression="[a-z|а-я|'|\ \-]" RegexOptions="IgnoreCase"/>
+        </And>
+
+        <!--стандартный набор условий для проверки фамилии или имени c сообщениями-->
+        <Sequence x:Key="lastname_with_messages" StopOnFirstFailure="True">
+            <If>
+                <IsNull />
+                <If.True>
+                    <x:DynamicResource Name="Messages" Key="msg_Required"/>
+                </If.True>
+            </If>
+            <If>
+                <Equals Value=""/>
+                <If.True>
+                    <x:DynamicResource Name="Messages" Key="msg_IsNotEmpty"/>
+                </If.True>
+            </If>
+            <If>
+                <Length MaxLength="50" MinLength="1"/>
+                <If.False>
+                    <x:DynamicResource Name="Messages" Key="msg_LastNameLength"/>
+                </If.False>
+            </If>
+            <If>
+                <Matches Expression="[a-z|а-я|'|\ \-]" RegexOptions="IgnoreCase"/>
+                <If.True>
+                    <x:DynamicResource Name="Messages" Key="msg_IsNotLastName"/>
+                </If.True>
+            </If>
+        </Sequence>
+        <!--использование местного ресурсного словаря-->
+
+        <!--стандартный набор условий для проверки фамилии или имени-->
+        <And x:Key="lastname2">
+            <Not>
+                <x:Resource Key="lastname"/>
+            </Not>
+            <Not>
+                <Equals Value="123"/>
+            </Not>
+        </And>
+
+        <DynamicResourceDictionary Name="embedded_dictionary">
+            <Not x:Key="lastname">
+                <Equals Value=""/>
+            </Not>
+
+            <And x:Key="lastname2">
+                <x:Resource Key="lastname"/>
+            </And>
+        </DynamicResourceDictionary>
+    </DynamicResourceDictionary>
+</DynamicResourceDictionaryContainer>

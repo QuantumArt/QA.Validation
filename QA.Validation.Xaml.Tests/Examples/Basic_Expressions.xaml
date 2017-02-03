@@ -1,0 +1,62 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib">
+    <!--описание полей-->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="Name" PropertyName="Name" PropertyType="{x:Type x:String}"/>
+        <PropertyDefinition Alias="Age" PropertyName="Age" PropertyType="{x:Type x:Int32}"/>
+        <PropertyDefinition Alias="Date" PropertyName="Date" PropertyType="{x:Type sys:DateTime}"/>
+    </XamlValidator.Definitions>
+
+    <!-- Заполнение поля ValidationRules (оно указано как ContentProperty)-->
+
+    <!--применение правила к свойству (к полю)
+        Если поле Name имеет значение null, то выводится ошибка "Не может быть null"
+    -->
+
+    <ForMember Definition="{x:Definition Name}">
+        <If>
+            <SatisfyExpression>Model["Name"] == "123"</SatisfyExpression>
+            <If.False>
+                <!--добавление ошибки валидации-->
+                <WithMessage Text="должно быть значение 123" />
+            </If.False>
+        </If>
+    </ForMember>
+
+    <ForMember Definition="{x:Definition Age}">
+        <If>
+            <SatisfyExpression>
+                <![CDATA[ 
+                Int32(Value) % 2 == 1 && Int32(Model["Age"]) > 10
+                ]]>
+            </SatisfyExpression>
+            <If.False>
+                <!--добавление ошибки валидации-->
+                <WithMessage Text="должно быть нечетное и больше 10" />
+            </If.False>
+        </If>
+    </ForMember>
+
+
+    <ForMember Definition="{x:Definition Date}">
+        <If>
+            <SatisfyExpression>Convert.ToDateTime(Value) >= DateTime.Now</SatisfyExpression>
+            <If.False>
+                <!--добавление ошибки валидации-->
+                <WithMessage Text="дата должна быть не позднее текущей" />
+            </If.False>
+        </If>
+    </ForMember>
+
+    <ForMember Definition="{x:Definition Date}">
+        <If>
+            <SatisfyExpression>it.IsValid("Name") and Convert.ToDateTime(Value).Year > 2012</SatisfyExpression>
+            <If.False>
+                <!--добавление ошибки валидации-->
+                <WithMessage>it.IsValid("Name") and Convert.ToDateTime(Value).Year > 2012</WithMessage>
+            </If.False>
+        </If>
+    </ForMember>
+</XamlValidator>

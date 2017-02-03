@@ -1,0 +1,28 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib">
+    <!--описание полей-->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="Age" PropertyName="field_1239" PropertyType="{x:Type x:Int32}"/>
+    </XamlValidator.Definitions>
+
+    <ForMember Definition="{x:Definition Age}">
+        <If>
+            <GreaterThan Value="90"/>
+            <If.True>
+                <WithMessage Text="Значение должно быть не более 90" />
+            </If.True>
+            <If.False>
+                <!--поддержка вложенных условий-->
+                <!--пример конвертации string -> WithMessage-->
+                <If >
+                    <LessThan Value="10"/>
+                    <If.True>
+                        <WithMessage>Значение должно быть не менее 10</WithMessage>
+                    </If.True>
+                </If>
+            </If.False>
+        </If>
+    </ForMember>
+</XamlValidator>

@@ -1,0 +1,55 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib">
+    <!--описание полей-->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="Name" PropertyName="Name" PropertyType="{x:Type x:String}"/>
+        <PropertyDefinition Alias="DuplicateName" PropertyName="DuplicateName" PropertyType="{x:Type x:String}"/>
+    </XamlValidator.Definitions>
+
+    <!-- Заполнение поля ValidationRules (оно указано как ContentProperty)-->
+
+    <!--применение правила к свойству (к полю)
+        Если поле Name имеет значение null, то выводится ошибка "Не может быть null"-->
+    <ForMember Definition="{x:Definition Name}">
+        <ForMember.Condition>
+            <If>
+                <!--установка свойства Condition (оно указано как ContentProperty)-->
+                <IsNull  />
+                <If.Then>
+                    <!--добавление ошибки валидации-->
+                    <WithMessage Text="Не может быть null" />
+                </If.Then>
+            </If>
+        </ForMember.Condition>
+    </ForMember>
+
+    <!--применение правила к свойству (к полю)
+        Пример обратного синтаксиса: 
+            Поле DuplicateName обязательно для заполнения, если поле Name не пустое
+        Пример приведения типов: полю Message класса RequiredIf устанавливается объект типа WithMessage-->
+    <ForMember Definition="{x:Definition DuplicateName}">
+        <RequiredIf Message="Поле DuplicateName обязательно для заполнения, если поле Name не пустое.">
+            <Not>
+                <IsNullOrEmpty Source="{x:Definition Name}" />
+            </Not>
+        </RequiredIf>
+    </ForMember>
+
+    <!--применение правила ко всему объекту
+        Если значения полей Name и DuplicateName не совпадают, 
+            то выводится локализованное сообщение-->
+    <Must>
+        <If>
+            <AreEqual Source="{x:Definition Name}" Target="{x:Definition DuplicateName}" />
+            <If.False>
+                <!--поддержка локализации сообщений-->
+                <WithLocalizedMessage Text="Имя и повтор имени должны совпадать (default culture)">
+                    <sys:String x:Key="ru-ru">Имя и повтор имени должны совпадать</sys:String>
+                    <sys:String x:Key="en-us">Must be equal.</sys:String>
+                </WithLocalizedMessage>
+            </If.False>
+        </If>
+    </Must>
+</XamlValidator>

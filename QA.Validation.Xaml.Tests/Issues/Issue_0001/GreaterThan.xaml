@@ -1,0 +1,28 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib">
+    <!--описание полей-->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="String_Field" PropertyName="String_Field" PropertyType="{x:Type sys:String}"/>
+        <PropertyDefinition Alias="Int32_Field" PropertyName="Int32_Field" PropertyType="{x:Type x:Int32}"/>
+    </XamlValidator.Definitions>
+
+    <ForMember Definition="{x:Definition String_Field}">
+        <If x:Name="condition">
+            <!--установка свойства Condition (оно указано как ContentProperty)-->
+            <GreaterThan Value="99" />
+            <If.True>
+                <WithMessage Text="greater than 99" />
+            </If.True>
+            <If.False>
+                <WithMessage Text="not greater than 99" />
+            </If.False>
+        </If>
+    </ForMember>
+
+    <ForMember Definition="{x:Definition Int32_Field}">
+        <x:Reference>condition</x:Reference>
+    </ForMember>
+
+</XamlValidator>

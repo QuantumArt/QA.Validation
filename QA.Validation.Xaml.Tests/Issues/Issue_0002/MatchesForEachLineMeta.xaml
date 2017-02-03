@@ -1,0 +1,27 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib">
+    <!--описание полей-->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="String_Field" PropertyName="String_Field" PropertyType="{x:Type sys:String}"/>
+    </XamlValidator.Definitions>
+
+    <ForMember Definition="{x:Definition String_Field}">
+        <If>
+            <!--установка свойства Condition (оно указано как ContentProperty)-->
+            <Or>
+                <IsNullOrEmpty />
+                <MatchesForEachLine Expression="^&lt;meta[ ]+((name[ ]*=[ ]*&quot;([\w\-])+&quot;[ ]+)|(content[ ]*=[ ]*&quot;([\w\-;\.,=\\/? ])+&quot;[ ]+)|(http-equiv[ ]*=[ ]*&quot;([\w\-])+&quot;[ ]+))+/&gt;$" 
+                                    RegexOptions="IgnoreCase,CultureInvariant" 
+                                    Trim="True"  />
+            </Or>
+            <If.False>
+                <WithLocalizedMessage Text="Введенный текст не является мета-тегами">
+                    <x:String x:Key="ru-ru">Введенный текст не является мета-тегами</x:String>
+                    <x:String x:Key="en-us">Input is not a valid meta.</x:String>
+                </WithLocalizedMessage>
+            </If.False>
+        </If>
+    </ForMember>
+</XamlValidator>

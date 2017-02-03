@@ -1,0 +1,23 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib">
+    <!--описание полей-->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="field1" PropertyName="field1" PropertyType="{x:Type sys:DateTime}"/>
+        <PropertyDefinition Alias="field2" PropertyName="field2" PropertyType="{x:Type sys:DateTime}"/>
+    </XamlValidator.Definitions>
+
+    <ForMember Definition="{x:Definition field1}">
+        <If x:Name="condition">
+            <!--установка свойства Condition (оно указано как ContentProperty)-->
+            <GreaterThan Target="{x:Definition field2}" />
+            <If.True>
+                <WithMessage Text="true" />
+            </If.True>
+            <If.False>
+                <WithMessage Text="false" />
+            </If.False>
+        </If>
+    </ForMember>
+</XamlValidator>
