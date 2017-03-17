@@ -42,7 +42,6 @@ TestResult.xml
 dlldata.c
 
 # DNX
-project.fragment.lock.json
 project.lock.json
 artifacts/
 
@@ -244,4 +243,8 @@ _Pvt_Extensions
 .idea/
 *.sln.iml
 
-
+# QP Generated And Builded
+*.orig
+*.sublime-workspace
+**/*.generated.cs
+npm-debug.log.*
