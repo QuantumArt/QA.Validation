@@ -39,8 +39,8 @@
     <DocumentationFile>bin\Release\QA.Validation.Xaml.Extensions.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="QA.Configuration, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\QA.Configuration.1.0.1.0\lib\net40\QA.Configuration.dll</HintPath>
+    <Reference Include="QA.Configuration, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QA.Configuration.1.0.2\lib\net40\QA.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
