@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Xaml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QA.Validation.Xaml.Extensions.Conditions;
 using QA.Validation.Xaml.ListTypes;
@@ -23,6 +25,87 @@ namespace QA.Validation.Xaml.Tests
             var email = new IsEmail();
             Trace.WriteLine(email.ToString());
         }
+        #region Тестирование установки значений
+
+        [TestMethod]
+        [TestCategory("set values")]
+        public void Test_Applying_new_value_of_type_string()
+        {
+            string fieldName = "field_1234";
+            string valueToSet = "new value";
+
+            var model = CreateValidatorAndRun<string>(fieldName, valueToSet);
+
+            Assert.AreEqual(valueToSet, model[fieldName]);
+        }
+
+        [TestMethod]
+        [TestCategory("set values")]
+        public void Test_Applying_new_value_of_type_int()
+        {
+            string fieldName = "field_1234";
+            int valueToSet = 12;
+
+            var model = CreateValidatorAndRun<string>(fieldName, valueToSet);
+
+            Assert.AreEqual(valueToSet.ToString(), model[fieldName]);
+        }
+
+        [TestMethod]
+        [TestCategory("set values")]
+        public void Test_Applying_new_value_of_type_bool()
+        {
+            string fieldName = "field_1234";
+            bool valueToSet = true;
+
+            var model = CreateValidatorAndRun<string>(fieldName, valueToSet);
+
+            Assert.AreEqual(valueToSet.ToString(), model[fieldName]);
+        }
+
+        private static Dictionary<string, string> CreateValidatorAndRun<T>(string fieldName, object valueToSet)
+        {
+            // создадим пустой валидатор c одним полем
+            string newValidatorText = CreateSimpleValidatorText<T>(fieldName, valueToSet);
+
+            // это модель с полями статьи
+            var model = new Dictionary<string, string>()
+            {
+                {"field_1234", null},
+                {"field_1235", null},
+            };
+
+            var result = ValidationServices.ValidateModel(model, newValidatorText, null);
+
+            Assert.IsTrue(result.IsValid);
+
+            // после запуска валидатора модель должна поменяться
+            return model;
+        }
+
+        private static string CreateSimpleValidatorText<T>(string fieldName, object fieldValue)
+        {
+            var emptyValidatorString = ValidationServices.GenerateXamlValidatorText(new PropertyDefinition[] { new PropertyDefinition
+            {
+                PropertyName = fieldName,
+                PropertyType = typeof(string),
+                Alias = fieldName }
+            });
+
+            var validator = (XamlValidator)XamlServices.Parse(emptyValidatorString);
+
+            // добавим в валидатор логику выставления значения для этого поля
+            validator.ValidationRules.Add(new ForMember
+            {
+                Definition = validator.Definitions[fieldName],
+                Condition = new ApplyValue { Value = fieldValue }
+            });
+
+            var newValidatorText = XamlServices.Save(validator);
+            return newValidatorText;
+        } 
+        #endregion
+
 
         #region Тестирование проверки валидаторов
 
@@ -52,7 +135,7 @@ namespace QA.Validation.Xaml.Tests
             var resourceDictrionary = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container);
             var validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Alias_Dictionary);
 
-            var model = new Dictionary<string, string>() 
+            var model = new Dictionary<string, string>()
             {
                 {"field_1234", null},
                 {"field_1235", null},
@@ -69,7 +152,7 @@ namespace QA.Validation.Xaml.Tests
             var resourceDictrionary = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container);
             var validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Alias_Dictionary);
 
-            var model = new Dictionary<string, string>() 
+            var model = new Dictionary<string, string>()
             {
                 // убираем поле из модели. В валидаторе оно по-прежнему присутствует
                 //{"field_1234", null},
@@ -86,7 +169,7 @@ namespace QA.Validation.Xaml.Tests
             var resourceDictrionary = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container);
             var validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Alias_Dictionary);
 
-            var model = new Dictionary<string, string>() 
+            var model = new Dictionary<string, string>()
             {
                 // в описании валидатора есть только такие поля:
                 {"field_1234", null},
@@ -109,8 +192,8 @@ namespace QA.Validation.Xaml.Tests
             var resourceDictrionary = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container);
             var validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Alias_Dictionary);
 
-            var model = new Dictionary<string, string>() 
-            { 
+            var model = new Dictionary<string, string>()
+            {
                 {"field_1234", null},
                 {"field_1235", null},
             };
@@ -149,8 +232,8 @@ namespace QA.Validation.Xaml.Tests
             var resourceDictrionary = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container);
             var validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Alias_Advanced);
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_1234", "Alexander" },
                     { "field_1235", "Alexander" },
                     { "field_1236", "1234 123456" },
@@ -173,8 +256,8 @@ namespace QA.Validation.Xaml.Tests
             Assert.AreEqual(1, result.Result.Errors.Count);
 
             // Указываем пустое значение, 
-            model = new Dictionary<string, string>() 
-                { 
+            model = new Dictionary<string, string>()
+                {
                     { "field_1234", "Alexander" },
                     { "field_1235", "Alexander" },
                     { "field_1236", "1234 123456" },
@@ -198,7 +281,7 @@ namespace QA.Validation.Xaml.Tests
             var validator1 = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part1);
             var validator2 = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part2);
 
-            var model = new Dictionary<string, string>() 
+            var model = new Dictionary<string, string>()
                 { 
                     // эти два поля указаны в первом валидаторе (принадлежат главной стаье)
                     { "field_1234", null },
@@ -235,7 +318,7 @@ namespace QA.Validation.Xaml.Tests
             // этот валидатор валидирует поле field_1240 при условии
             var validator3 = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part3);
 
-            var model = new Dictionary<string, string>() 
+            var model = new Dictionary<string, string>()
                 { 
                     // эти два поля указаны в первом валидаторе (принадлежат главной стаье)
                     { "field_1234", null },
@@ -442,7 +525,7 @@ namespace QA.Validation.Xaml.Tests
             //добавим объекты типа System.Drawing.*
             dict.Resources.Add("MyLocation", new System.Drawing.Point { X = 554400, Y = 373000 });
             dict.Resources.Add("MyFavoriteColor", System.Drawing.Color.AliceBlue);
-            
+
             // добавим объект из этой сборки
             dict.Resources.Add("MyInfo", new QA.Validation.Xaml.Tests.Model.Person
             {
