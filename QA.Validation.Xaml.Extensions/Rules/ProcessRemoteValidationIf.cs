@@ -137,12 +137,13 @@ namespace QA.Validation.Xaml.Extensions.Rules
             RemoteValidationResult result = (new JavaScriptSerializer())
                 .Deserialize<RemoteValidationResult>(responseBody);
 
-            if (ApplyValues)
-            {
-                // смотрим, пришли ли значения полей, и если пришли, то применяем
 
-                if (result.NewValues != null)
+            if (result.NewValues != null)
+            {
+                if (ApplyValues)
                 {
+                    // смотрим, пришли ли значения полей, и если пришли, то применяем
+
                     foreach (var kvp in result.NewValues)
                     {
                         var definition = DefinitionsToSend.FirstOrDefault(x => x.PropertyName == kvp.Key);
@@ -154,6 +155,11 @@ namespace QA.Validation.Xaml.Extensions.Rules
 
                         ctx.ValueProvider.SetValue(definition, kvp.Value);
                     }
+                }
+                else if(result.NewValues.Any())
+                {
+                    // add error
+                    ctx.Messages.Add("Unable to set value from remote validation thus applying of values is disabled. Consider to set ApplyValues to true.");
                 }
             }
 
