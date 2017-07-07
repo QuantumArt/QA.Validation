@@ -538,6 +538,7 @@ namespace QA.Validation.Extensions.Tests
             validator.Validate(values, ctx);
 
             Assert.AreEqual("old", values["prop1"]);
+            Assert.IsFalse(ctx.IsValid);
         }
 
         private static XamlValidator PrepareDefinitions(ProcessRemoteValidationIf condition, string url)
