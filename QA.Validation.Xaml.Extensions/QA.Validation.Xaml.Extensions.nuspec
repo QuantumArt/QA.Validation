@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package >
   <metadata>
     <id>$id$</id>
@@ -12,7 +12,7 @@
     <copyright>Copyright 2016</copyright>
     <tags>Core XAML Validation Extensions Remote</tags>
     <dependencies>
-      <dependency id="QA.Validation.Xaml" version="1.0.1" />
+      <dependency id="QA.Validation.Xaml" version="1.0.4" />
     </dependencies>
   </metadata>
 </package>

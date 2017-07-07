@@ -19,6 +19,24 @@ namespace QA.Validation.Xaml.Tests
 
         [TestMethod]
         [TestCategory("ValueArgumentTest")]
+        public void Test_setting_value()
+        {
+            var model = new Dictionary<string, string>()
+                {
+                    { "field_1234", "" }
+                };
+
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_000);
+            var context = new ValidationContext();
+
+            validator.Validate(model, context);
+
+            Assert.AreEqual("new value", model["field_1234"]) ;
+        }
+
+
+        [TestMethod]
+        [TestCategory("ValueArgumentTest")]
         public void Basic_arguments()
         {
             var model = new Dictionary<string, string>() 
