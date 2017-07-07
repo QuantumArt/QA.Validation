@@ -392,6 +392,154 @@ namespace QA.Validation.Extensions.Tests
             Assert.IsNotNull(obj);
         }
 
+
+        [TestMethod]
+        [TestCategory("Remote validation: fixture")]
+        public void Test_RemoteValidation_Check_Set_correct_string_value()
+        {
+            var manager = new StubWebInteractionManager(() =>
+                new StubValidationHandler(
+                    (c, m) =>
+                    {
+                        c.SetValue(m, "prop1", "test");
+                    }));
+
+            var validator = new XamlValidator();
+            validator.Definitions.Add("prop1", new PropertyDefinition("prop1", "prop1", typeof(string)));
+
+            var condition = new ProcessRemoteValidationIf(manager);
+            condition.HttpMethod = "POST";
+            condition.SiteId = 35;
+            condition.CustomerCode = "QP123";
+            condition.Timeout = 5000;
+            condition.Url = new Uri("http://app.com");
+            condition.DefinitionsToSend.AddRange(validator.Definitions.Values);
+            condition.ApplyValues = true;
+
+            validator.ValidationRules.Add(condition);
+            // устанавливаенм значения формы
+            var values = new Dictionary<string, string> {
+                { "prop1", "name, name1, name2, name3" },
+            };
+
+            var ctx = new ValidationContext();
+
+            validator.Validate(values, ctx);
+
+            Assert.AreEqual("test", values["prop1"]);
+        }
+
+
+        [TestMethod]
+        [TestCategory("Remote validation: fixture")]
+        public void Test_RemoteValidation_Check_Set_correct_int_value()
+        {
+            var manager = new StubWebInteractionManager(() =>
+                new StubValidationHandler(
+                    (c, m) =>
+                    {
+                        c.SetValue(m, "prop1", 10);
+                    }));
+
+            var validator = new XamlValidator();
+            validator.Definitions.Add("prop1", new PropertyDefinition("prop1", "prop1", typeof(int)));
+
+            var condition = new ProcessRemoteValidationIf(manager);
+            condition.HttpMethod = "POST";
+            condition.SiteId = 35;
+            condition.CustomerCode = "QP123";
+            condition.Timeout = 5000;
+            condition.Url = new Uri("http://app.com");
+            condition.DefinitionsToSend.AddRange(validator.Definitions.Values);
+            condition.ApplyValues = true;
+
+            validator.ValidationRules.Add(condition);
+            // устанавливаенм значения формы
+            var values = new Dictionary<string, string> {
+                { "prop1", "" },
+            };
+
+            var ctx = new ValidationContext();
+
+            validator.Validate(values, ctx);
+
+            Assert.AreEqual("10", values["prop1"]);
+        }
+
+
+        [TestMethod]
+        [TestCategory("Remote validation: fixture")]
+        public void Test_RemoteValidation_Check_Set_correct_boolean_value()
+        {
+            var manager = new StubWebInteractionManager(() =>
+                new StubValidationHandler(
+                    (c, m) =>
+                    {
+                        c.SetValue(m, "prop1", true);
+                    }));
+
+            var validator = new XamlValidator();
+            validator.Definitions.Add("prop1", new PropertyDefinition("prop1", "prop1", typeof(int)));
+
+            var condition = new ProcessRemoteValidationIf(manager);
+            condition.HttpMethod = "POST";
+            condition.SiteId = 35;
+            condition.CustomerCode = "QP123";
+            condition.Timeout = 5000;
+            condition.Url = new Uri("http://app.com");
+            condition.DefinitionsToSend.AddRange(validator.Definitions.Values);
+            condition.ApplyValues = true;
+
+            validator.ValidationRules.Add(condition);
+            // устанавливаенм значения формы
+            var values = new Dictionary<string, string> {
+                { "prop1", "" },
+            };
+
+            var ctx = new ValidationContext();
+
+            validator.Validate(values, ctx);
+
+            Assert.AreEqual("True", values["prop1"]);
+        }
+
+
+        [TestMethod]
+        [TestCategory("Remote validation: fixture")]
+        public void Test_RemoteValidation_Check_That_does_not_Set_When_ApplyValues_is_false()
+        {
+            var manager = new StubWebInteractionManager(() =>
+                new StubValidationHandler(
+                    (c, m) =>
+                    {
+                        c.SetValue(m, "prop1", "test");
+                    }));
+
+            var validator = new XamlValidator();
+            validator.Definitions.Add("prop1", new PropertyDefinition("prop1", "prop1", typeof(string)));
+
+            var condition = new ProcessRemoteValidationIf(manager);
+            condition.HttpMethod = "POST";
+            condition.SiteId = 35;
+            condition.CustomerCode = "QP123";
+            condition.Timeout = 5000;
+            condition.Url = new Uri("http://app.com");
+            condition.DefinitionsToSend.AddRange(validator.Definitions.Values);
+            condition.ApplyValues = false;
+
+            validator.ValidationRules.Add(condition);
+            // устанавливаенм значения формы
+            var values = new Dictionary<string, string> {
+                { "prop1", "old" },
+            };
+
+            var ctx = new ValidationContext();
+
+            validator.Validate(values, ctx);
+
+            Assert.AreEqual("old", values["prop1"]);
+        }
+
         private static XamlValidator PrepareDefinitions(ProcessRemoteValidationIf condition, string url)
         {
             var validator = new XamlValidator();
