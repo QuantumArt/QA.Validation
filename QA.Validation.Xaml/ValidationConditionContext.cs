@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace QA.Validation.Xaml
 {
@@ -50,7 +49,20 @@ namespace QA.Validation.Xaml
         /// </summary>
         public IServiceProvider ServiceProvider { get; set; }
 
-        public ValidationConditionContext(IValueProvider provider)
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CustomerCode { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int SiteId { get; set; }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public ValidationConditionContext()
         {
             Messages = new List<string>();
             Result = new ValidationResult();

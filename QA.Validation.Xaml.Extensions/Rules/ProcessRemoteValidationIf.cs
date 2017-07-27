@@ -14,7 +14,7 @@ namespace QA.Validation.Xaml.Extensions.Rules
     /// </summary>
     public class ProcessRemoteValidationIf : ObjectValidationRule
     {
-        private IWebInteractionManager _manager;
+        private readonly IWebInteractionManager _manager;
 
         #region Properties
         /// <summary>
@@ -84,6 +84,11 @@ namespace QA.Validation.Xaml.Extensions.Rules
             _manager = manager;
         }
 
+        /// <summary>
+        /// Обработчик валидационного события
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <returns></returns>
         protected override bool OnValidate(ValidationConditionContext ctx)
         {
             // пропускаем валидацию, если необходимо
@@ -101,10 +106,10 @@ namespace QA.Validation.Xaml.Extensions.Rules
 
             var context = new RemoteValidationContext
             {
-                CustomerCode = CustomerCode,
+                CustomerCode = ctx.CustomerCode ?? CustomerCode,
                 CurrentUICulture = CultureInfo.CurrentUICulture.Name,
                 CurrentCulture = CultureInfo.CurrentCulture.Name,
-                SiteId = SiteId,
+                SiteId = ctx.SiteId != 0 ? ctx.SiteId : SiteId,
                 Values = values,
                 Definitions = DefinitionsToSend.Select(x => new RemotePropertyDefinition
                 {
@@ -120,9 +125,11 @@ namespace QA.Validation.Xaml.Extensions.Rules
             {
                 headers.Add("X-Requested-With", "XMLHttpRequest");
             }
-            
+            string delimiter = !Url.ToString().Contains("?") ? "?" : "&";
+            var url = (context.CustomerCode == null) ? Url : new Uri(Url + delimiter + "customerCode=" + context.CustomerCode);
+
             var responseBody = _manager
-                .GetResponseBody(Url,
+                .GetResponseBody(url,
                     RemoteValidationContext.GetJson(context),
                     HttpMethod,
                     ContentType,

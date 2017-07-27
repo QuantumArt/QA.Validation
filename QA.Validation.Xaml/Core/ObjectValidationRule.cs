@@ -13,12 +13,14 @@ namespace QA.Validation.Xaml
 
         public bool Validate(IValueProvider provider, IDefinitionStorage storage, ValidationContext result)
         {
-            var ctx = new ValidationConditionContext(provider)
+            var ctx = new ValidationConditionContext()
             {
                 Definition = new PropertyDefinition { },
                 All = storage.GetAll(),
                 ValueProvider = provider,
-                ServiceProvider = result.ServiceProvider
+                ServiceProvider = result.ServiceProvider,
+                CustomerCode = result.CustomerCode,
+                SiteId = result.SiteId
             };
 
             var isValid = OnValidate(ctx);
