@@ -17,6 +17,7 @@ namespace QA.Validation.Xaml.Extensions.Rules
         public string CustomerCode { get; set; }
         public int SiteId { get; set; }
         public Dictionary<string, object> Values { get; set; }
+
         public List<RemotePropertyDefinition> Definitions { get; set; }
 
         public RemoteValidationContext()
@@ -77,6 +78,29 @@ namespace QA.Validation.Xaml.Extensions.Rules
         }
 
         /// <summary>
+        /// Установка значения свойства
+        /// </summary>
+        /// <param name="definition">описание</param>
+        /// /// <param name="value">значение</param>
+        /// <returns></returns>
+        public void SetValue(RemoteValidationResult result, RemotePropertyDefinition definition, object value)
+        {
+            result.NewValues[definition.PropertyName] = value;
+        }
+
+        /// <summary>
+        /// Установка значения свойства
+        /// </summary>
+        /// <param name="propertyName">имя свойства</param>
+        /// <param name="value">значение</param>
+        public void SetValue(RemoteValidationResult result, string propertyName, object value)
+        {
+            RemotePropertyDefinition definition = FindDefinition(propertyName);
+
+            SetValue(result, FindDefinition(propertyName), value);
+        }
+
+        /// <summary>
         /// Получение значения свойства по определению с конвертацией типа приведением
         /// </summary>
         public T ProvideValueExact<T>(RemotePropertyDefinition definition)
@@ -84,11 +108,18 @@ namespace QA.Validation.Xaml.Extensions.Rules
             var value = ProvideValueExact(definition);
             return value == null ? default(T) : (T)value;
         }
-        
+
         /// <summary>
         /// Получение значения свойства по имени с конвертацией типа и приведением
         /// </summary>
         public T ProvideValueExact<T>(string propertyName)
+        {
+            RemotePropertyDefinition definition = FindDefinition(propertyName);
+
+            return ProvideValueExact<T>(definition);
+        }
+
+        private RemotePropertyDefinition FindDefinition(string propertyName)
         {
             var definition = Definitions.FirstOrDefault(x => x.PropertyName == propertyName);
             if (definition == null)
@@ -96,7 +127,7 @@ namespace QA.Validation.Xaml.Extensions.Rules
                 throw new KeyNotFoundException("Definition with the given key is not found.");
             }
 
-            return ProvideValueExact<T>(definition);
+            return definition;
         }
 
         /// <summary>

@@ -1,0 +1,21 @@
+﻿<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+        описание полей
+        Alias:          ключ для использования в валидаторе. Произвольный текст (латинские быквы, цифры, подчеркивание)
+        PropertyName:   имя поля в QP8 (формат field_<id>)
+        PropertyType:   Тип поля (фреймоворк поддерживает все clr-типы)
+        Description:    Описание (опциональное)
+    -->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="Title" PropertyName="field_1234" PropertyType="{x:Type x:String}"/>
+    </XamlValidator.Definitions>
+
+    <!--пример устаногвки значения-->
+    <ForMember Definition="{x:Definition Title}">
+        <ApplyValue>new value</ApplyValue>
+    </ForMember>
+
+</XamlValidator>

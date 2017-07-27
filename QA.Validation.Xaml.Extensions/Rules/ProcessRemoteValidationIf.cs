@@ -56,7 +56,12 @@ namespace QA.Validation.Xaml.Extensions.Rules
         /// <summary>
         /// Флаг устанавливки заголовка X-Requested-With
         /// </summary>
-        public bool AddAjaxHeader { get; set; } 
+        public bool AddAjaxHeader { get; set; }
+
+        /// <summary>
+        /// Применять ли новые значения полей во время валидации
+        /// </summary>
+        public bool ApplyValues { get; set; }
         #endregion
 
         /// <summary>
@@ -138,6 +143,32 @@ namespace QA.Validation.Xaml.Extensions.Rules
 
             RemoteValidationResult result = (new JavaScriptSerializer())
                 .Deserialize<RemoteValidationResult>(responseBody);
+
+
+            if (result.NewValues != null)
+            {
+                if (ApplyValues)
+                {
+                    // смотрим, пришли ли значения полей, и если пришли, то применяем
+
+                    foreach (var kvp in result.NewValues)
+                    {
+                        var definition = DefinitionsToSend.FirstOrDefault(x => x.PropertyName == kvp.Key);
+                        if (definition == null)
+                        {
+                            throw new XamlValidatorException(XamlValidatorException.ValidatorErrorReason.ValidatorError,
+                                $"Unable to set value for definition ('{kvp.Key}') which is not in the 'Definitions to send' collection.");
+                        }
+
+                        ctx.ValueProvider.SetValue(definition, kvp.Value);
+                    }
+                }
+                else if(result.NewValues.Any())
+                {
+                    // add error
+                    ctx.Messages.Add("Unable to set value from remote validation thus applying of values is disabled. Consider to set ApplyValues to true.");
+                }
+            }
 
             ctx.Messages.AddRange(result.Messages);
             ctx.Result.Errors.AddRange(result.Result.Errors);
