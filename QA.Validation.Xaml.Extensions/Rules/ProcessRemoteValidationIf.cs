@@ -115,6 +115,7 @@ namespace QA.Validation.Xaml.Extensions.Rules
                 CurrentUICulture = CultureInfo.CurrentUICulture.Name,
                 CurrentCulture = CultureInfo.CurrentCulture.Name,
                 SiteId = ctx.SiteId != 0 ? ctx.SiteId : SiteId,
+                ContentId = ctx.ContentId,
                 Values = values,
                 Definitions = DefinitionsToSend.Select(x => new RemotePropertyDefinition
                 {

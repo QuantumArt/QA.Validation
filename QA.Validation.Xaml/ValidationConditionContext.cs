@@ -50,14 +50,19 @@ namespace QA.Validation.Xaml
         public IServiceProvider ServiceProvider { get; set; }
 
         /// <summary>
-        /// 
+        /// Код пользователя
         /// </summary>
         public string CustomerCode { get; set; }
 
         /// <summary>
-        /// 
+        /// Id сайта
         /// </summary>
         public int SiteId { get; set; }
+
+        /// <summary>
+        /// Id контента
+        /// </summary>
+        public int ContentId { get; set; }
 
         /// <summary>
         /// Конструктор

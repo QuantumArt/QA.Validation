@@ -24,6 +24,11 @@ namespace QA.Validation.Xaml
         public int SiteId { get; set; }
 
         /// <summary>
+        /// ID контента
+        /// </summary>
+        public int ContentId { get; set; }
+
+        /// <summary>
         /// Объект, предоставляющий доступ правилам валидации к дополнительному функционалу.
         /// Является необязательным
         /// </summary>

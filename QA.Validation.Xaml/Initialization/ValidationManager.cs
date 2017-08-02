@@ -183,7 +183,8 @@ namespace QA.Validation.Xaml.Initialization
             {
                 ServiceProvider = serviceProvider,
                 CustomerCode = paramObject.CustomerCode,
-                SiteId = paramObject.SiteId
+                SiteId = paramObject.SiteId,
+                ContentId = paramObject.ContentId
             };
 
             foreach (var validator in validators)

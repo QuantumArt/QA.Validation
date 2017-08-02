@@ -44,6 +44,11 @@ namespace QA.Validation.Xaml
         public int SiteId { get; set; }
 
         /// <summary>
+        /// Id контента
+        /// </summary>
+        public int ContentId { get; set; }
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         public ValidationParamObject()

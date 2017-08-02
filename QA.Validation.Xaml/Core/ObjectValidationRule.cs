@@ -20,7 +20,9 @@ namespace QA.Validation.Xaml
                 ValueProvider = provider,
                 ServiceProvider = result.ServiceProvider,
                 CustomerCode = result.CustomerCode,
-                SiteId = result.SiteId
+                SiteId = result.SiteId,
+                ContentId = result.ContentId
+
             };
 
             var isValid = OnValidate(ctx);
