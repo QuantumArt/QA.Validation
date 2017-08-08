@@ -12,7 +12,7 @@
     <copyright>Copyright 2016</copyright>
     <tags>Core XAML Validation Extensions Remote</tags>
     <dependencies>
-      <dependency id="QA.Validation.Xaml" version="1.0.4" />
+      <dependency id="QA.Validation.Xaml" version="1.1.0" />
     </dependencies>
   </metadata>
 </package>

@@ -23,12 +23,9 @@ namespace QA.Validation.Xaml.Initialization
             DynamicResourceDictionaryContainer.SetResourceProvider((this).GetDynamicResource);
         }
 
-        public ValidationContext ValidateModel(Dictionary<string, string> model,
-            string validatorText,
-            string[] aggregatedValidatorList,
-            string dynamicResourceText, IServiceProvider serviceProvider)
+        public ValidationContext ValidateModel(ValidationParamObject paramObject, IServiceProvider serviceProvider)
         {
-            return ValidateInternal(model, validatorText, aggregatedValidatorList, dynamicResourceText, true, serviceProvider);
+            return ValidateInternal(paramObject, true, serviceProvider);
         }
 
 
@@ -63,6 +60,7 @@ namespace QA.Validation.Xaml.Initialization
         /// <param name="model">Словарь с полями формы</param>
         /// <param name="validatorText">Текст валидатора</param>
         /// <param name="dynamicResourceText">Текст ресурсного словаря</param>
+        /// <param name="serviceProvider"></param>
         public void TestValidator(Dictionary<string, string> model,
             string validatorText, string dynamicResourceText, 
             IServiceProvider serviceProvider)
@@ -76,7 +74,8 @@ namespace QA.Validation.Xaml.Initialization
 
             var fields = validators.Cast<XamlValidator>()
                 .SelectMany(x => x.Definitions)
-                .Select(x => x.Value);
+                .Select(x => x.Value)
+                .ToArray();
 
             foreach (var field in fields)
             {
@@ -103,15 +102,17 @@ namespace QA.Validation.Xaml.Initialization
                 if (!model.ContainsKey(field))
                 {
                     throw new XamlValidatorException(XamlValidatorException.ValidatorErrorReason.ValidatorError,
-                        string.Format("Validator is not valid. Property  with name {0} is not presented in model.", field));
+                        $"Validator is not valid. Property  with name {field} is not presented in model.");
                 }
                 var _ = model[field];
             }
 
             // Производим валидацию. Результат не интересует, важно, чтобы ничего не упало.
 
-            var result = new ValidationContext();
-            result.ServiceProvider = serviceProvider;
+            var result = new ValidationContext
+            {
+                ServiceProvider = serviceProvider
+            };
 
             Array.ForEach(validators.ToArray(),
                 x => x.Validate(model, result));
@@ -159,36 +160,36 @@ namespace QA.Validation.Xaml.Initialization
 
 
         #region Protected members
-        protected ValidationContext ValidateInternal(Dictionary<string, string> model, 
-            string validatorText,
-            string[] aggregatedValidatorList,
-            string dynamicResourceText, 
-            bool useCache,
-            IServiceProvider serviceProvider)
+        protected ValidationContext ValidateInternal(ValidationParamObject paramObject, bool useCache, IServiceProvider serviceProvider)
         {
-            if (model == null)
+            if (paramObject.Model == null)
             {
-                throw new ArgumentNullException("model");
+                throw new ArgumentNullException(nameof(paramObject.Model));
             }
 
-            if (string.IsNullOrEmpty(validatorText))
+            if (string.IsNullOrEmpty(paramObject.Validator))
             {
-                throw new ArgumentNullException("validatorText");
+                throw new ArgumentNullException(nameof(paramObject.Validator));
             }
 
             List<IDictionaryValidator> validators = new List<IDictionaryValidator>();
 
             lock (_cache)
             {
-                CreateValidators(validatorText, aggregatedValidatorList, dynamicResourceText, useCache, validators);
+                CreateValidators(paramObject.Validator, paramObject.AggregatedValidatorList, paramObject.DynamicResource, useCache, validators);
             }
 
-            var result = new ValidationContext();
-            result.ServiceProvider = serviceProvider;
+            var result = new ValidationContext
+            {
+                ServiceProvider = serviceProvider,
+                CustomerCode = paramObject.CustomerCode,
+                SiteId = paramObject.SiteId,
+                ContentId = paramObject.ContentId
+            };
 
             foreach (var validator in validators)
             {
-                validator.Validate(model, result);
+                validator.Validate(paramObject.Model, result);
             }
 
             return result;
@@ -262,11 +263,11 @@ namespace QA.Validation.Xaml.Initialization
 
 
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hash.Length; i++)
+            foreach (byte t in hash)
             {
-                sb.Append(hash[i].ToString("X2"));
+                sb.Append(t.ToString("X2"));
             }
-            return string.Format("{0}_{1}", prefix, sb.ToString());
+            return $"{prefix}_{sb}";
         }
         #endregion
     }

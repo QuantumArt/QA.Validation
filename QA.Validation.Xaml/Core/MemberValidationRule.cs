@@ -20,7 +20,7 @@ namespace QA.Validation.Xaml
 
         public bool Validate(IValueProvider provider, IDefinitionStorage storage, ValidationContext result)
         {
-            var ctx = new ValidationConditionContext(provider)
+            var ctx = new ValidationConditionContext()
             {
                 Definition = Definition,
                 All = storage.GetAll(),

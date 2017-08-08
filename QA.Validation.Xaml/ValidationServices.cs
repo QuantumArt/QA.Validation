@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading;
-using System.Xaml;
 using QA.Validation.Xaml.Core;
 using QA.Validation.Xaml.Initialization;
 
@@ -13,7 +12,7 @@ namespace QA.Validation.Xaml
     /// </summary>
     public static class ValidationServices
     {
-        private static Lazy<ValidationManager> Manager = new Lazy<ValidationManager>(
+        private static readonly Lazy<ValidationManager> Manager = new Lazy<ValidationManager>(
             () => new ValidationManager(),
             LazyThreadSafetyMode.ExecutionAndPublication);
 
@@ -27,19 +26,41 @@ namespace QA.Validation.Xaml
         /// <param name="dynamicResource">Ресурсный словарь</param>
         /// <param name="connection">текущее подключение к БД</param>
         /// <returns>Объект с результатами валидации</returns>
+        [Obsolete("Use ValidationParamObject instead of separate parameters")]
         public static ValidationContext ValidateModel(Dictionary<string, string> model,
             string validator,
             string[] aggregatedValidatorList,
             string dynamicResource,
             SqlConnection connection)
         {
+            var obj = new ValidationParamObject()
+            {
+                Model = model,
+                Validator = validator,
+                AggregatedValidatorList = aggregatedValidatorList,
+                DynamicResource = dynamicResource,
+                Connection = connection
+            };
+
+            return ValidateModel(obj);
+        }
+
+        /// <summary>
+        /// Валидация данных.
+        /// </summary>
+        /// <param name="paramObject">DTO</param>
+        /// <returns>Объект с результатами валидации</returns>
+        public static ValidationContext ValidateModel(ValidationParamObject paramObject)
+        {
             var serviceProvider = new ConfigurationProvider();
 
-            if (connection != null)
-                serviceProvider[typeof(SqlConnection)] = connection;
+            if (paramObject.Connection != null)
+                serviceProvider[typeof(SqlConnection)] = paramObject.Connection;
 
-            return Manager.Value.ValidateModel(model, validator, aggregatedValidatorList, dynamicResource, serviceProvider);
+            return Manager.Value.ValidateModel(paramObject, serviceProvider);
         }
+
+
 
         /// <summary>
         /// Валидация данных.
@@ -49,12 +70,21 @@ namespace QA.Validation.Xaml
         /// <param name="aggregatedValidatorList">Валидаторы для агрегированных статей</param>
         /// <param name="dynamicResource">Ресурсный словарь</param>
         /// <returns>Объект с результатами валидации</returns>
+        [Obsolete("Use ValidationParamObject instead of separate parameters")]
         public static ValidationContext ValidateModel(Dictionary<string, string> model,
             string validator,
             string[] aggregatedValidatorList,
             string dynamicResource)
         {
-            return ValidateModel(model, validator, aggregatedValidatorList, dynamicResource, null);
+            var obj = new ValidationParamObject()
+            {
+                Model = model,
+                Validator = validator,
+                AggregatedValidatorList = aggregatedValidatorList,
+                DynamicResource = dynamicResource,
+            };
+
+            return ValidateModel(obj);
         }
 
         /// <summary>
@@ -64,11 +94,19 @@ namespace QA.Validation.Xaml
         /// <param name="validator">Основное валидатор контента</param>
         /// <param name="dynamicResource">Ресурсный словарь</param>
         /// <returns>Объект с результатами валидации</returns>
+        [Obsolete("Use ValidationParamObject instead of separate parameters")]
         public static ValidationContext ValidateModel(Dictionary<string, string> model,
             string validator,
             string dynamicResource)
         {
-            return ValidateModel(model, validator, new string[] { }, dynamicResource);
+            var obj = new ValidationParamObject()
+            {
+                Model = model,
+                Validator = validator,
+                DynamicResource = dynamicResource,
+            };
+
+            return ValidateModel(obj);
         }
 
         /// <summary>
@@ -79,11 +117,20 @@ namespace QA.Validation.Xaml
         /// <param name="connection">текущее подключение к БД</param>
         /// <param name="dynamicResource">Ресурсный словарь</param>
         /// <returns>Объект с результатами валидации</returns>
+        [Obsolete("Use ValidationParamObject instead of separate parameters")]
         public static ValidationContext ValidateModel(Dictionary<string, string> model,
             string validator,
             string dynamicResource, SqlConnection connection)
         {
-            return ValidateModel(model, validator, new string[] { }, dynamicResource, connection);
+            var obj = new ValidationParamObject()
+            {
+                Model = model,
+                Validator = validator,
+                DynamicResource = dynamicResource,
+                Connection = connection
+            };
+
+            return ValidateModel(obj);
         } 
         #endregion
 
@@ -164,7 +211,6 @@ namespace QA.Validation.Xaml
         /// <summary>
         /// Генерация текста подключаемого ресурсного словаря
         /// </summary>
-        /// <param name="definitions"></param>
         /// <returns></returns>
         public static string GenerateDynamicResourceText(DynamicResourceDictionaryContainer dictionary)
         {

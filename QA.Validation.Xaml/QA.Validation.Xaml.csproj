@@ -88,6 +88,7 @@
     <Compile Include="RuleConditions\SatisfyExpression.cs" />
     <Compile Include="RuleConditions\SqlCondition.cs" />
     <Compile Include="ValidationContextBase.cs" />
+    <Compile Include="ValidationParamObject.cs" />
     <Compile Include="ValueProvider.cs" />
     <Compile Include="RuleConditions\IsFalse.cs" />
     <Compile Include="RuleConditions\IsTrue.cs" />

@@ -15,7 +15,11 @@ namespace QA.Validation.Xaml.Extensions.Rules
     public class RemoteValidationContext
     {
         public string CustomerCode { get; set; }
+
         public int SiteId { get; set; }
+
+        public int ContentId { get; set; }
+
         public Dictionary<string, object> Values { get; set; }
 
         public List<RemotePropertyDefinition> Definitions { get; set; }

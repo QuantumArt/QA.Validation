@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Xaml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -189,16 +190,17 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("ValidationServices: samples")]
         public void Test_ValidateModel_Checks_That_One_Property_Is_Not_Null()
         {
-            var resourceDictrionary = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container);
-            var validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Alias_Dictionary);
-
-            var model = new Dictionary<string, string>()
+            var obj = new ValidationParamObject
             {
-                {"field_1234", null},
-                {"field_1235", null},
+                DynamicResource = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container),
+                Validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Alias_Dictionary),
+                Model = new Dictionary<string, string>()
+                {
+                    {"field_1234", null},
+                    {"field_1235", null},
+                }
             };
-
-            var result = ValidationServices.ValidateModel(model, validator, resourceDictrionary);
+            var result = ValidationServices.ValidateModel(obj);
 
             Assert.IsFalse(result.IsValid);
             Assert.IsNotNull(result.Messages);
@@ -229,22 +231,24 @@ namespace QA.Validation.Xaml.Tests
 
             #endregion
 
-            var resourceDictrionary = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container);
-            var validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Alias_Advanced);
-
-            var model = new Dictionary<string, string>()
+            var obj = new ValidationParamObject
+            {
+                DynamicResource = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container),
+                Validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Alias_Advanced),
+                Model = new Dictionary<string, string>()
                 {
-                    { "field_1234", "Alexander" },
-                    { "field_1235", "Alexander" },
-                    { "field_1236", "1234 123456" },
-                    { "field_1237", new DateTime(2011, 1, 1).ToString() },
-                    { "field_1238", "mail@mail.ru" },
-                    { "field_1239", "35" },
-                    { "field_1210", "1, 2, 3, 4" },
-                    { "field_1211", "a, b, c, d" },
-                };
+                    {"field_1234", "Alexander"},
+                    {"field_1235", "Alexander"},
+                    {"field_1236", "1234 123456"},
+                    {"field_1237", new DateTime(2011, 1, 1).ToString(CultureInfo.InvariantCulture)},
+                    {"field_1238", "mail@mail.ru"},
+                    {"field_1239", "35"},
+                    {"field_1210", "1, 2, 3, 4"},
+                    {"field_1211", "a, b, c, d"},
+                }
+            };
 
-            var result = ValidationServices.ValidateModel(model, validator, resourceDictrionary);
+            var result = ValidationServices.ValidateModel(obj);
 
             Assert.IsFalse(result.IsValid);
             Assert.IsNotNull(result.Messages);
@@ -256,19 +260,19 @@ namespace QA.Validation.Xaml.Tests
             Assert.AreEqual(1, result.Result.Errors.Count);
 
             // Указываем пустое значение, 
-            model = new Dictionary<string, string>()
+            obj.Model = new Dictionary<string, string>() 
                 {
                     { "field_1234", "Alexander" },
                     { "field_1235", "Alexander" },
                     { "field_1236", "1234 123456" },
-                    { "field_1237", new DateTime(2014, 1, 1).ToString() },
+                    { "field_1237", new DateTime(2014, 1, 1).ToString(CultureInfo.InvariantCulture) },
                     { "field_1238", "mail@mail.ru" },
                     { "field_1239", "35" },
                     { "field_1210", "1, 2, 3, 4" },
                     { "field_1211", "a, b, c, d" },
                 };
 
-            result = ValidationServices.ValidateModel(model, validator, resourceDictrionary);
+            result = ValidationServices.ValidateModel(obj);
 
             Assert.IsTrue(result.IsValid);
         }
@@ -277,20 +281,26 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("ValidationServices: samples")]
         public void Test_TestValidator_Checks_Multiple_Validators()
         {
-            var resourceDictrionary = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container);
-            var validator1 = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part1);
-            var validator2 = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part2);
-
-            var model = new Dictionary<string, string>()
-                { 
+            var obj = new ValidationParamObject
+            {
+                DynamicResource = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container),
+                Validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part1),
+                AggregatedValidatorList = new[]
+                {
+                    ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part2)
+                },
+                Model = new Dictionary<string, string>()
+                {
                     // эти два поля указаны в первом валидаторе (принадлежат главной стаье)
-                    { "field_1234", null },
-                    { "field_1235", "" },
+                    {"field_1234", null},
+                    {"field_1235", ""},
                     // это поле принадлежит статье-агрегату (указано во втором валидаторе)
-                    { "field_1239", "100" },
-                };
+                    {"field_1239", "100"},
+                }
+            };
 
-            var result = ValidationServices.ValidateModel(model, validator1, new string[] { validator2 }, resourceDictrionary);
+
+            var result = ValidationServices.ValidateModel(obj);
 
             Assert.IsFalse(result.IsValid);
             Assert.IsNotNull(result.Messages);
@@ -312,24 +322,29 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("ValidationServices: samples")]
         public void Test_TestValidator_Checks_Validation_Of_Aggregated_Models_With_Multiple_Validators()
         {
-            var resourceDictrionary = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container);
-            var validator1 = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part1);
-            var validator2 = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part2);
-            // этот валидатор валидирует поле field_1240 при условии
-            var validator3 = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part3);
-
-            var model = new Dictionary<string, string>()
-                { 
+            var obj = new ValidationParamObject()
+            {
+                DynamicResource = ValidationHelper.GetEmbeddedResourceText(DynamicResourceConstants.Container),
+                Validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part1),
+                AggregatedValidatorList = new[]
+                {
+                    ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part2),
+                    ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Validator_Part3)
+                },
+                Model = new Dictionary<string, string>()
+                {
                     // эти два поля указаны в первом валидаторе (принадлежат главной стаье)
-                    { "field_1234", null },
-                    { "field_1235", "" },
+                    {"field_1234", null},
+                    {"field_1235", ""},
                     // это поле принадлежит первой статье-агрегату (указано во втором валидаторе)
-                    { "field_1239", "100" },
+                    {"field_1239", "100"},
                     // это поле принадлежит второй статье-агрегату (указано в третьем валидаторе)
-                    { "field_1240", "" },
-                };
+                    {"field_1240", ""},
+                }
 
-            var result = ValidationServices.ValidateModel(model, validator1, new string[] { validator2, validator3 }, resourceDictrionary);
+            };
+
+            var result = ValidationServices.ValidateModel(obj);
 
             Assert.IsFalse(result.IsValid);
             Assert.IsNotNull(result.Messages);
@@ -384,7 +399,7 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "Name", PropertyName = "", PropertyType = typeof(string), Description = "Имя" },
             };
 
-            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            ValidationServices.GenerateXamlValidatorText(definitions);
         }
 
         [TestMethod]
@@ -397,7 +412,7 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "", PropertyName = "field_1234", PropertyType = typeof(string), Description = "Имя" },
             };
 
-            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            ValidationServices.GenerateXamlValidatorText(definitions);
         }
 
         [TestMethod]
@@ -411,7 +426,7 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "Name", PropertyName = "field_1235", PropertyType = typeof(string), Description = "Отчество" },
             };
 
-            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            ValidationServices.GenerateXamlValidatorText(definitions);
         }
 
         [TestMethod]
@@ -424,7 +439,7 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "Name Name() - 123 !@#$%^&*()_+", PropertyName = "field_1234", PropertyType = typeof(string) },
             };
 
-            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            ValidationServices.GenerateXamlValidatorText(definitions);
         }
 
         [TestMethod]
@@ -437,7 +452,7 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "1Name", PropertyName = "field_1234", PropertyType = typeof(string), Description = "Имя" },
             };
 
-            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            ValidationServices.GenerateXamlValidatorText(definitions);
         }
 
         [TestMethod]
@@ -467,7 +482,7 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "_Nam e", PropertyName = "field_1234", PropertyType = typeof(string), Description = "Имя" },
             };
 
-            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            ValidationServices.GenerateXamlValidatorText(definitions);
         }
 
         [TestMethod]
@@ -516,7 +531,7 @@ namespace QA.Validation.Xaml.Tests
             dynamicResource.ResourceDictionaries.Add("Second", new DynamicResourceDictionary() { Name = "Second" });
 
             // в первый словарь добавляем объекты:
-            DynamicResourceDictionary dict = null;
+            DynamicResourceDictionary dict;
             dynamicResource.TryGetResourceDictionary("First", out dict);
 
             //добавим объект типа string
@@ -527,7 +542,7 @@ namespace QA.Validation.Xaml.Tests
             dict.Resources.Add("MyFavoriteColor", System.Drawing.Color.AliceBlue);
 
             // добавим объект из этой сборки
-            dict.Resources.Add("MyInfo", new QA.Validation.Xaml.Tests.Model.Person
+            dict.Resources.Add("MyInfo", new Model.Person
             {
                 Age = 12,
                 Date = DateTime.Now,
