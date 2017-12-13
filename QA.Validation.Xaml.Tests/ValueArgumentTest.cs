@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -51,6 +51,71 @@ namespace QA.Validation.Xaml.Tests
             validator.Validate(model, context);
 
             Assert.IsTrue(((string)model["field_1234"]).Length > 100);
+        }
+
+
+        [TestMethod]
+        [TestCategory("ValueArgumentTest")]
+        public void Basic_extract_with_regular_expression_and_apply_to_another()
+        {
+            var model = new Dictionary<string, string>()
+                {
+                    { "field_1234", "PE1234.123" },
+                    { "field_1235", "" },
+                    { "field_1236", "" },
+                };
+
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_002);
+            var context = new ValidationContext();
+
+            validator.Validate(model, context);
+
+            Assert.IsTrue(context.IsValid, "The model should be valid");
+            Assert.AreEqual("PE1234", model["field_1235"], "global code should be extracted");
+            Assert.AreEqual("123", model["field_1236"], "version should be extracted");
+        }
+
+        [TestMethod]
+        [TestCategory("ValueArgumentTest")]
+        public void Basic_extract_shuldnot_fail_on_empty_value()
+        {
+            var model = new Dictionary<string, string>()
+                {
+                    { "field_1234", "" },
+                    { "field_1235", "" },
+                    { "field_1236", "" },
+                };
+
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_002);
+            var context = new ValidationContext();
+
+            validator.Validate(model, context);
+
+            Assert.IsTrue(context.IsValid, "The model should be valid");
+            Assert.AreEqual("", model["field_1235"], "global code should be empty");
+            Assert.AreEqual("", model["field_1236"], "version should be empty");
+        }
+
+
+        [TestMethod]
+        [TestCategory("ValueArgumentTest")]
+        public void Basic_extract_shuldnot_fail_on_null()
+        {
+            var model = new Dictionary<string, string>()
+                {
+                    { "field_1234", null },
+                    { "field_1235", "" },
+                    { "field_1236", "" },
+                };
+
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_002);
+            var context = new ValidationContext();
+
+            validator.Validate(model, context);
+
+            Assert.IsTrue(context.IsValid, "The model should be valid");
+            Assert.AreEqual("", model["field_1235"], "global code should be empty");
+            Assert.AreEqual("", model["field_1236"], "version should be empty");
         }
 
         #region Setting of Values

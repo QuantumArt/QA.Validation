@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,6 +54,7 @@ namespace QA.Validation.Xaml.Tests.Util
         public static class ValueArguments
         {
             public const string Example_001 = "QA.Validation.Xaml.Tests.ValueArguments.Example_001.xaml";
+            public const string Example_002 = "QA.Validation.Xaml.Tests.ValueArguments.Example_002.xaml";
             public const string Example_000 = "QA.Validation.Xaml.Tests.ValueArguments.Example_000.xaml";
         }
     }
