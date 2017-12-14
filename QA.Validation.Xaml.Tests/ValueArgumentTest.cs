@@ -118,6 +118,48 @@ namespace QA.Validation.Xaml.Tests
             Assert.AreEqual("", model["field_1236"], "version should be empty");
         }
 
+        [TestMethod]
+        [TestCategory("ValueArgumentTest")]
+        public void Basic_replace_should_work_with_CDATA()
+        {
+            var model = new Dictionary<string, string>()
+                {
+                    { "field_1234", "PE1234.56.78" },
+                    { "field_1235", "" },
+                    { "field_1236", "" },
+                };
+
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_002);
+            var context = new ValidationContext();
+
+            validator.Validate(model, context);
+
+            Assert.IsTrue(context.IsValid, "The model should be valid");
+            Assert.AreEqual("56.78", model["field_1236"], "global code should be resolved");
+
+        }
+
+        [TestMethod]
+        [TestCategory("ValueArgumentTest")]
+        public void Basic_replace_should_work_with_nested_replacements()
+        {
+            var model = new Dictionary<string, string>()
+                {
+                    { "field_1234", "a; bb; ccc;" },
+                    { "field_1235", "" },
+                    { "field_1236", "" },
+                };
+
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_003);
+            var context = new ValidationContext();
+
+            validator.Validate(model, context);
+
+            Assert.IsTrue(context.IsValid, "The model should be valid");
+            Assert.AreEqual("*;**;***;", model["field_1235"], "global code should be resolved");
+
+        }
+
         #region Setting of Values
         [TestMethod]
         [TestCategory("ValueArgumentTest")]

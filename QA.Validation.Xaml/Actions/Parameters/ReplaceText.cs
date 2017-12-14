@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Markup;
 
 namespace QA.Validation.Xaml
 {
@@ -66,6 +67,7 @@ namespace QA.Validation.Xaml
         }
     }
 
+    [ContentProperty("Expression")]
     public class Replacement
     {
         internal bool IsValueSet = false;
