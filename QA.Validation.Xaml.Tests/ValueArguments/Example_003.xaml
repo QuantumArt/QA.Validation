@@ -1,0 +1,52 @@
+<XamlValidator
+    xmlns="http://artq.com/validation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace: System;assembly=mscorlib">
+
+    <!--
+        описание полей
+        Alias:          ключ для использования в валидаторе. Произвольный текст (латинские быквы, цифры, подчеркивание)
+        PropertyName:   имя поля в QP8 (формат field_<id>)
+        PropertyType:   Тип поля (фреймоворк поддерживает все clr-типы)
+        Description:    Описание (опциональное)
+    -->
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="GlobalCode" PropertyName="field_1234" PropertyType="{x:Type x:String}"/>
+        <PropertyDefinition Alias="Nesting" PropertyName="field_1235" PropertyType="{x:Type x:String}"/>
+        <PropertyDefinition Alias="Cdata" PropertyName="field_1236" PropertyType="{x:Type x:String}"/>
+    </XamlValidator.Definitions>
+
+    <!--пример устаногвки значения-->
+    <ForMember Definition="{x:Definition Cdata}">
+        <ApplyValue>
+            <ReplaceText>
+                <ReplaceText.Replacement>
+                    <Replacement RegexOptions="IgnoreCase" Value="" IsNegative="False" >
+                        <Replacement.Expression>
+                            <![CDATA[(?<=^[\w_\-]+\.)([\w_\-]+)(?=\.|$)]]>
+                        </Replacement.Expression>
+                    </Replacement>
+                </ReplaceText.Replacement>
+                <ExtractValue Source="{x:Definition GlobalCode}" />
+            </ReplaceText>
+        </ApplyValue>
+    </ForMember>
+
+    <ForMember Definition="{x:Definition Nesting}">
+        <ApplyValue>
+            <ReplaceText>
+                <ReplaceText.Replacement>
+                    <!--Replace any letter or digit by '*' -->
+                    <Replacement Expression="[aA-zZ0-9]" RegexOptions="IgnoreCase" Value="*" IsNegative="False" />
+                </ReplaceText.Replacement>
+                <ReplaceText>
+                    <ReplaceText.Replacement>
+                        <!--replace whitespaces and ',' by ';'-->
+                        <Replacement Expression="[;,\s]+"  Value=";" IsNegative="False" />
+                    </ReplaceText.Replacement>
+                    <ExtractValue Source="{x:Definition GlobalCode}" />
+                </ReplaceText>
+            </ReplaceText>
+        </ApplyValue>
+    </ForMember>
+</XamlValidator>
