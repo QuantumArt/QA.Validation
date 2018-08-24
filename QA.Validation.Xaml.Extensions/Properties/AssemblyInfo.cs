@@ -34,7 +34,7 @@ using QA.Validation.Xaml;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.2.0.0")]
-[assembly: AssemblyInformationalVersion("1.2.0.0-beta1")]
+[assembly: AssemblyInformationalVersion("1.2.0.0")]
 [assembly: XmlnsDefinition("http://artq.com/validation", "QA.Validation.Xaml.Extensions")]
 [assembly: XmlnsDefinition("http://artq.com/validation", "QA.Validation.Xaml.Extensions.Conditions")]
 [assembly: XmlnsDefinition("http://artq.com/validation", "QA.Validation.Xaml.Extensions.Rules")]
