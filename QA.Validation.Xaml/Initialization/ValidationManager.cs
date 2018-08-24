@@ -5,6 +5,8 @@ using System.Runtime.Caching;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xaml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace QA.Validation.Xaml.Initialization
 {
@@ -62,7 +64,7 @@ namespace QA.Validation.Xaml.Initialization
         /// <param name="dynamicResourceText">Текст ресурсного словаря</param>
         /// <param name="serviceProvider"></param>
         public void TestValidator(Dictionary<string, string> model,
-            string validatorText, string dynamicResourceText, 
+            string validatorText, string dynamicResourceText,
             IServiceProvider serviceProvider)
         {
             List<IDictionaryValidator> validators = new List<IDictionaryValidator>();
@@ -202,12 +204,51 @@ namespace QA.Validation.Xaml.Initialization
                 _container = GetResourceDictionary(dynamicResourceText, useCache);
             }
 
-            validators.Add(GetValidator(validatorText, dynamicResourceText, useCache));
-
             foreach (var aggregatedText in aggregatedValidatorList)
             {
-                validators.Add(GetValidator(aggregatedText, dynamicResourceText, useCache));
+                validatorText = MergeValidators(validatorText, aggregatedText);
             }
+
+            validators.Add(GetValidator(validatorText, dynamicResourceText, useCache));
+        }
+
+        private string MergeValidators(string validatorText, string aggregatedText)
+        {
+
+            var result = validatorText;
+            if (!String.IsNullOrEmpty(aggregatedText) && !string.IsNullOrEmpty(validatorText))
+            {
+                var x1 = XElement.Parse(validatorText);
+                var x2 = XElement.Parse(aggregatedText);
+
+                XNamespace ns = "http://artq.com/validation";
+                var def1 = x1.Element(ns + "XamlValidator.Definitions");
+                var def2 = x2.Element(ns + "XamlValidator.Definitions");
+
+                if (def1 != null && def2 != null)
+                {
+                    var defToCopy = def2
+                            .Elements(ns + "PropertyDefinition")
+                            .Where(n => !new[] { "Id", "StatusTypeId" }.Contains(n.Attribute("Alias")?.Value))
+                            .ToArray();
+
+                    foreach (var d in defToCopy)
+                    {
+                        def1.Add(d);
+                    }
+
+                    var rest = x2.Elements().Where(n => n.Name != ns + "XamlValidator.Definitions").ToArray();
+
+                    foreach (var r in rest)
+                    {
+                        x1.Add(r);
+                    }
+
+                    result = x1.ToString();
+                }
+            }
+
+            return result;
         }
 
         protected IDictionaryValidator GetValidator(string text, string dynamicResourceText, bool useCache = true)
