@@ -34,7 +34,7 @@ using QA.Validation.Xaml;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.2.1.0")]
-[assembly: AssemblyInformationalVersion("1.2.1.0-beta1")]
+[assembly: AssemblyInformationalVersion("1.2.1.0-beta2")]
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml", "QA.Validation.Xaml.Markup")]
 [assembly: XmlnsDefinition("http://artq.com/validation", "QA.Validation.Xaml")]
 [assembly: XmlnsDefinition("http://artq.com/validation", "QA.Validation.Xaml.ListTypes")]

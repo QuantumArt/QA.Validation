@@ -65,16 +65,19 @@ namespace QA.Validation.Xaml.Initialization
         /// <param name="model">Словарь с полями формы</param>
         /// <param name="validatorText">Текст валидатора</param>
         /// <param name="dynamicResourceText">Текст ресурсного словаря</param>
+        /// <param name="baseValidatorText"></param>
         /// <param name="serviceProvider"></param>
         public void TestValidator(Dictionary<string, string> model,
-            string validatorText, string dynamicResourceText,
+            string validatorText, string dynamicResourceText, string baseValidatorText,
             IServiceProvider serviceProvider)
         {
             List<IDictionaryValidator> validators = new List<IDictionaryValidator>();
 
             lock (_cache)
             {
-                CreateValidators(validatorText, new string[] { }, dynamicResourceText, false, validators);
+                var extValidatorTexts = (baseValidatorText != null) ? new string[] { validatorText } : new string[] {};
+                baseValidatorText = baseValidatorText ?? validatorText;
+                CreateValidators(baseValidatorText, extValidatorTexts, dynamicResourceText, false, validators);
             }
 
             var fields = validators.Cast<XamlValidator>()

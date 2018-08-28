@@ -157,9 +157,10 @@ namespace QA.Validation.Xaml
         /// <param name="validatorText">текст с xaml-описанием валидатора</param>
         /// <param name="model">Словарь со всеми полями, участвующими в валидации. Значения должны быть пустыми</param>
         /// <param name="dynamicResourceText">ресурсный словарь</param>
-        public static void TestValidator(Dictionary<string, string> model, string validatorText, string dynamicResourceText)
+        /// <param name="baseValidatorText"></param>
+        public static void TestValidator(Dictionary<string, string> model, string validatorText, string dynamicResourceText, string baseValidatorText = null)
         {
-            TestValidator(model, validatorText, dynamicResourceText, null);
+            TestValidator(model, validatorText, dynamicResourceText, baseValidatorText, null);
         }
 
         /// <summary>
@@ -169,15 +170,16 @@ namespace QA.Validation.Xaml
         /// <param name="validatorText">текст с xaml-описанием валидатора</param>
         /// <param name="model">Словарь со всеми полями, участвующими в валидации. Значения должны быть пустыми</param>
         /// <param name="dynamicResourceText">ресурсный словарь</param>
+        /// <param name="baseValidatorText"></param>
         /// <param name="connection">текущее подключение к БД</param>
-        public static void TestValidator(Dictionary<string, string> model, string validatorText, string dynamicResourceText, SqlConnection connection)
+        public static void TestValidator(Dictionary<string, string> model, string validatorText, string dynamicResourceText, string baseValidatorText, SqlConnection connection)
         {
             var serviceProvider = new ConfigurationProvider();
 
             if (connection != null)
                 serviceProvider[typeof(SqlConnection)] = connection;
 
-            Manager.Value.TestValidator(model, validatorText, dynamicResourceText, serviceProvider);
+            Manager.Value.TestValidator(model, validatorText, dynamicResourceText, baseValidatorText, serviceProvider);
 
         }
         #endregion Manager.Value.TestValidator(model, validatorText, dynamicResourceText);
