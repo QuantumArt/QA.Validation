@@ -131,21 +131,23 @@ namespace QA.Validation.Xaml
             };
 
             return ValidateModel(obj);
-        } 
+        }
         #endregion
 
         #region TestValidator
+
         /// <summary>
         /// Проверяет корректность валидатора.
-        /// Данный метод можно использовать для начальной проверки корректности синтаксиса Xaml, 
+        /// Данный метод можно использовать для начальной проверки корректности синтаксиса Xaml,
         /// корректности пространств имен используемых типов.
         /// Необходимо передавать ресурный словарь.
         /// </summary>
         /// <param name="validatorText">текст с xaml-описанием валидатора</param>
         /// <param name="dynamicResourceText">ресурсный словарь</param>
-        public static void TestValidator(string validatorText, string dynamicResourceText)
+        /// <param name="baseValidatorText"></param>
+        public static void TestValidator(string validatorText, string dynamicResourceText, string baseValidatorText = null)
         {
-            Manager.Value.TestValidator(validatorText, dynamicResourceText);
+            Manager.Value.TestValidator(validatorText, dynamicResourceText, baseValidatorText);
         }
 
         /// <summary>
@@ -176,7 +178,7 @@ namespace QA.Validation.Xaml
                 serviceProvider[typeof(SqlConnection)] = connection;
 
             Manager.Value.TestValidator(model, validatorText, dynamicResourceText, serviceProvider);
-        
+
         }
         #endregion Manager.Value.TestValidator(model, validatorText, dynamicResourceText);
 
@@ -219,7 +221,7 @@ namespace QA.Validation.Xaml
 
         /// <summary>
         /// Получение списка полей, использующихся в валидаторе.
-        /// Если валидатор некорректен, выкидывается исключение. 
+        /// Если валидатор некорректен, выкидывается исключение.
         /// Данный метод уже включает проверку XamlSerices.TestValidator.
         /// </summary>
         /// <param name="validatorText"></param>
