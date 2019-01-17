@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace QA.Validation.Xaml
+﻿namespace QA.Validation.Xaml
 {
     /// <summary>
     /// Базовый класс для условий валидации, которые можут быть привязаны к какому-либо полю модели

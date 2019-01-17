@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using QA.Configuration;
 using System.IO;
-using System.Xaml;
 
 namespace QA.Validation.Xaml.Tests.Util
 {

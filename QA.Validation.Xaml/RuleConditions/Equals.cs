@@ -1,6 +1,5 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows.Markup;
+﻿using System.ComponentModel;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {

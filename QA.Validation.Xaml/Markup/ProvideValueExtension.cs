@@ -2,10 +2,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
-using System.Windows.Markup;
-using System.Xaml;
+using Portable.Xaml;
+using Portable.Xaml.Markup;
 using QA.Validation.Xaml.Core;
 
 namespace QA.Validation.Xaml.Markup

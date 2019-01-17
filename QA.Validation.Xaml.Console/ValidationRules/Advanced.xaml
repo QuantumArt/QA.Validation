@@ -1,5 +1,5 @@
 ﻿<XamlObjectValidator
-    xmlns="http://artq.com/validation"
+    xmlns="clr-namespace:QA.Validation.Xaml;assembly=QA.Validation.Xaml"
     xmlns:model="clr-namespace: QA.Validation.Xaml.Console;assembly=QA.Validation.Xaml.Console"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace: System;assembly=mscorlib"
@@ -126,4 +126,4 @@
             </If.True>
         </If>
     </Must>
-</XamlObjectValidator>
+</xaml:XamlObjectValidator>

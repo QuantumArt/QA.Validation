@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Windows.Markup;
-using System.Xaml;
+using Portable.Xaml;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml.Markup
 {

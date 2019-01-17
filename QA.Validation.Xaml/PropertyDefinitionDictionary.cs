@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text.RegularExpressions;
 
 namespace QA.Validation.Xaml
 {
-    public class PropertyDefinitionDictionary : IDictionary<string, PropertyDefinition>
+    public class PropertyDefinitionDictionary : IDictionary<string, PropertyDefinition>, IDictionary
     {
         IDictionary<string, PropertyDefinition> _innerDictionary = new Dictionary<string, PropertyDefinition>();
         private IDefinitionStorage _validator;
@@ -42,7 +43,7 @@ namespace QA.Validation.Xaml
 
             if (!AliasPattern.IsMatch(value.Alias))
             {
-                throw new XamlValidatorException(XamlValidatorException.ValidatorErrorReason.ValidatorError, 
+                throw new XamlValidatorException(XamlValidatorException.ValidatorErrorReason.ValidatorError,
                     "Alias may contain only characters in set: 'a-z|A-Z|0-9|_'.");
             }
 

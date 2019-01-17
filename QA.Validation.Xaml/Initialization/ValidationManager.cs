@@ -4,9 +4,8 @@ using System.Linq;
 using System.Runtime.Caching;
 using System.Security.Cryptography;
 using System.Text;
-using System.Xaml;
 using System.Xml.Linq;
-using System.Xml.Serialization;
+using Portable.Xaml;
 
 namespace QA.Validation.Xaml.Initialization
 {

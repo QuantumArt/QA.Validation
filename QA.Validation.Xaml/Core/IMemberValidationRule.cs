@@ -1,5 +1,4 @@
-﻿using System;
-namespace QA.Validation.Xaml.Core
+﻿namespace QA.Validation.Xaml.Core
 {
     public interface IMemberValidationRule
     {

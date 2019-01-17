@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Markup;
+using Portable.Xaml.Markup;
 using QA.Validation.Xaml.ListTypes;
 using QA.Validation.Xaml.RuleConditions;
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-namespace QA.Validation.Xaml
+﻿namespace QA.Validation.Xaml
 {
     public interface IDefinitionStorage
     {

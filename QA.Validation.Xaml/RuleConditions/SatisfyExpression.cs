@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Dynamic2;
-using System.Windows.Markup;
+using Portable.Xaml.Markup;
 using QA.Validation.Xaml.Dynamic;
 
 namespace QA.Validation.Xaml

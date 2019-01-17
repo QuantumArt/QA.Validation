@@ -1,6 +1,5 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using System.Windows.Markup;
+﻿using System.Text.RegularExpressions;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {

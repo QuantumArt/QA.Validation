@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Windows.Markup;
-using QA.Validation.Xaml.Initialization;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace QA.Validation.Xaml.Tests.Util
+﻿namespace QA.Validation.Xaml.Tests.Util
 {
     public static class DynamicResourceConstants
     {

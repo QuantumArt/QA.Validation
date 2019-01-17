@@ -1,5 +1,4 @@
-﻿using System;
-namespace QA.Validation.Xaml.Tests
+﻿namespace QA.Validation.Xaml.Tests
 {
     interface IPropertyAccessor
     {

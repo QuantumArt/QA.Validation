@@ -1,7 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Reflection;
-using System.Windows.Markup;
 
 namespace QA.Validation.Xaml
 {

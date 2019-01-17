@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Markup;
+using Portable.Xaml.Markup;
 using QA.Validation.Xaml;
 
 // General Information about an assembly is controlled through the following

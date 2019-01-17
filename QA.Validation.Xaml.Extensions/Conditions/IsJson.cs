@@ -1,5 +1,6 @@
 ﻿using System.Web.Script.Serialization;
 using System.Windows.Markup;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml.Extensions.Conditions
 {

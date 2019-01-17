@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Xaml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Portable.Xaml;
 using QA.Validation.Xaml.Extensions.Conditions;
 using QA.Validation.Xaml.ListTypes;
 using QA.Validation.Xaml.Tests.Util;

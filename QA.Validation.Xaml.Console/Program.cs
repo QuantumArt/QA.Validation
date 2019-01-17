@@ -49,9 +49,9 @@ namespace QA.Validation.Xaml.Console
 
             /**
              * 1) var ctx = new ValidationContext();
-             * 
+             *
              * 2) validator.Validate(objectToValidate, ctx);
-             * 
+             *
              * 3) ctx.IsValid, ctx.Result, ctx.Errors, ...
              * */
 
@@ -59,9 +59,9 @@ namespace QA.Validation.Xaml.Console
 
             /**
              * Другой подход - валидация словаря <PropertyName, PropertyValue>
-             * 
-             * 1) var ctx = new ValidationContext();              
-             * 2) validator.Validate(dictionaryToValidate, ctx);              
+             *
+             * 1) var ctx = new ValidationContext();
+             * 2) validator.Validate(dictionaryToValidate, ctx);
              * 3) ctx.IsValid, ctx.Result, ctx.Errors, ...
              * */
 
@@ -73,8 +73,8 @@ namespace QA.Validation.Xaml.Console
                 var dValiudator = (XamlValidator)XamlConfigurationParser.CreateFrom(stream);
                 var ctx = new ValidationContext();
 
-                var person = new Dictionary<string, string>() 
-                { 
+                var person = new Dictionary<string, string>()
+                {
                     { "Name", "Ivan" },
                     { "DuplicateName", "Ivan1" },
                     { "Age", "18" },
@@ -84,7 +84,7 @@ namespace QA.Validation.Xaml.Console
 
                 dValiudator.Validate(person, ctx);
             }
-          
+
 
         }
 
@@ -113,7 +113,7 @@ namespace QA.Validation.Xaml.Console
             validator.Validate(person1, ctx);
 
             Console.WriteLine("*******************************************************************");
-            
+
             Console.WriteLine("IsValid: {0}", ctx.IsValid);
             Console.WriteLine("Messages: ", ctx.IsValid);
 
