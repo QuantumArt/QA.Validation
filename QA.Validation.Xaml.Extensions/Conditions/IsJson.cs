@@ -1,5 +1,4 @@
-﻿using System.Web.Script.Serialization;
-using System.Windows.Markup;
+﻿using Newtonsoft.Json.Linq;
 using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml.Extensions.Conditions
@@ -17,9 +16,7 @@ namespace QA.Validation.Xaml.Extensions.Conditions
             {
                 try
                 {
-                    var serializer = new JavaScriptSerializer();
-                    var obj = serializer.DeserializeObject((string)value1);
-
+                    var obj = JObject.Parse((string)value1);
                     return obj != null;
                 }
                 catch

@@ -12,8 +12,8 @@
             <!--установка свойства Condition (оно указано как ContentProperty)-->
             <Or>
                 <IsNullOrEmpty />
-                <MatchesForEachLine Expression="^&lt;meta[ ]+((name[ ]*=[ ]*&quot;([\w\-])+&quot;[ ]+)|(content[ ]*=[ ]*&quot;([\w\-;\.,=\\/? ])+&quot;[ ]+)|(http-equiv[ ]*=[ ]*&quot;([\w\-])+&quot;[ ]+))+/&gt;$" 
-                                    RegexOptions="IgnoreCase,CultureInvariant" 
+                <MatchesForEachLine Expression="^&lt;meta[ ]+((name[ ]*=[ ]*&quot;([\w\-])+&quot;[ ]+)|(content[ ]*=[ ]*&quot;([\w\-;\.,=\\/? ])+&quot;[ ]+)|(http-equiv[ ]*=[ ]*&quot;([\w\-])+&quot;[ ]+))+/&gt;$"
+                                    RegexOptions="IgnoreCase,CultureInvariant"
                                     Trim="True"  />
             </Or>
             <If.False>

@@ -13,7 +13,7 @@ namespace QA.Validation.Xaml
         /// Правила валидации
         /// </summary>
         [Ambient]
-        public List<IValidationRule> ValidationRules { get; private set; }
+        public IList<IValidationRule> ValidationRules { get; private set; }
 
         /// <summary>
         /// Описания полейы

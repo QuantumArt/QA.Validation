@@ -1,7 +1,7 @@
 ﻿<XamlValidator Discriminator="{x:Null}" xmlns="http://artq.com/validation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <XamlValidator.Definitions>
-        <PropertyDefinition Alias="Year" Description="Year" PropertyName="field_173111" PropertyType="x:Int32" />
-        <PropertyDefinition Alias="SortOrder" Description="SortOrder" PropertyName="field_173112" PropertyType="x:Int32"/>
+        <PropertyDefinition Alias="Year" Description="Year" PropertyName="field_173111" PropertyType="x:Int32" x:Key="Year" />
+        <PropertyDefinition Alias="SortOrder" Description="SortOrder" PropertyName="field_173112" PropertyType="x:Int32" x:Key="SortOrder" />
     </XamlValidator.Definitions>
     <ForMember Definition="{x:Definition Year}">
         <If>

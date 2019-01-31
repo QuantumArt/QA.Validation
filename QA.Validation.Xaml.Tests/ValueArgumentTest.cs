@@ -37,25 +37,6 @@ namespace QA.Validation.Xaml.Tests
 
         [TestMethod]
         [TestCategory("ValueArgumentTest")]
-        public void Basic_arguments()
-        {
-            var model = new Dictionary<string, string>() 
-                { 
-                    { "field_1234", "" },
-                    { "field_1235", "ТЕСТ все Входящие для ёжика буД!@#$%^&ут бесплатны!123 123 3" },
-                };
-
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_001);
-            var context = new ValidationContext();
-
-            validator.Validate(model, context);
-
-            Assert.IsTrue(((string)model["field_1234"]).Length > 100);
-        }
-
-
-        [TestMethod]
-        [TestCategory("ValueArgumentTest")]
         public void Basic_extract_with_regular_expression_and_apply_to_another()
         {
             var model = new Dictionary<string, string>()
@@ -225,8 +206,8 @@ namespace QA.Validation.Xaml.Tests
        // [TestCategory("Lambda test")]
         public void Test_lambda_all_args()
         {
-            var dict = new Dictionary<string, Type> 
-            { 
+            var dict = new Dictionary<string, Type>
+            {
                 { "prop1", typeof(string) },
             };
 

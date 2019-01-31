@@ -21,10 +21,10 @@
         <ApplyValue>
             <ReplaceText>
                 <ReplaceText.Replacement>
-                    <Replacement RegexOptions="IgnoreCase" Value="" IsNegative="False" >
-                        <Replacement.Expression>
-                            <![CDATA[(?<=^[\w_\-]+\.)([\w_\-]+)(?=\.|$)]]>
-                        </Replacement.Expression>
+                    <Replacement RegexOptions="IgnoreCase" Value="" IsNegative="False">
+                        <![CDATA[
+                            (?<=^[\w_\-]+\.)([\w_\-]+)(?=\.|$)
+                        ]]>
                     </Replacement>
                 </ReplaceText.Replacement>
                 <ExtractValue Source="{x:Definition GlobalCode}" />

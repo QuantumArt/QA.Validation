@@ -9,7 +9,7 @@
     </XamlValidator.Definitions>
 
     <!-- Заполнение поля ValidationRules (оно указано как ContentProperty)-->
-  
+
     <ForMember Definition="{x:Definition Ids}">
         <If>
             <!--установка свойства Condition (оно указано как ContentProperty)-->

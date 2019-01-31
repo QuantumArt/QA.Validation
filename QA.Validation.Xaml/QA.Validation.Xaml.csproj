@@ -1,163 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4D482388-33C4-47C3-86C8-935C4F07D80D}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>QA.Validation.Xaml</RootNamespace>
-    <AssemblyName>QA.Validation.Xaml</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\QA.Validation.Xaml.XML</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\QA.Validation.Xaml.XML</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
+    <TargetFramework>net471</TargetFramework>
+    <Version>1.3.0-portable1</Version>
+    <Authors>Nickolay Karlov</Authors>
+    <Company>Quantum Art</Company>
+    <Product>QA.Validation.Xaml.Extensions</Product>
+    <Description>Xaml validation engine</Description>
+    <Copyright>Copyright © 2007-2019 Quantum Art</Copyright>
+    <PackageReleaseNotes>Update to .net standard.</PackageReleaseNotes>
+    <PackageLicense>MPL2.0</PackageLicense>
+    <PackageProjectUrl>https://github.com/QuantumArt/QA.Validation/QA.Validation.Xaml.Extensions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/QuantumArt/QA.Validation</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Core Configuration</PackageTags>
+    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Portable.Xaml, Version=0.24.0.0, Culture=neutral, PublicKeyToken=ba4456acace7dab7">
-      <HintPath>..\packages\Portable.Xaml.0.24.0\lib\netstandard2.0\Portable.Xaml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="QA.Configuration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\QA.Configuration.1.1.0-portable1\lib\net471\QA.Configuration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <PackageReference Include="Portable.Xaml" Version="0.30.0-alpha7" />
+    <PackageReference Include="QA.Configuration" Version="1.1.0-portable4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="netstandard" />
     <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Actions\ApplyValue.cs" />
-    <Compile Include="Actions\Parameters\ActionParameterWrapper.cs" />
-    <Compile Include="Actions\Parameters\ReplaceText.cs" />
-    <Compile Include="Actions\Parameters\FromLambda.cs" />
-    <Compile Include="Actions\Parameters\TextActionParameter.cs" />
-    <Compile Include="Actions\Parameters\FromFormatted.cs" />
-    <Compile Include="Actions\Parameters\ExtractValue.cs" />
-    <Compile Include="Actions\Parameters\Transliterate.cs" />
-    <Compile Include="IValueArgument.cs" />
-    <Compile Include="Actions\WithValueFormattedMessage.cs" />
-    <Compile Include="Actions\WithLocalizedMessage.cs" />
-    <Compile Include="Actions\WithMessage.cs" />
-    <Compile Include="Adapters\DynamicAdapter.cs" />
-    <Compile Include="Adapters\DynamicExtensions.cs" />
-    <Compile Include="Core\ConfigurationProvider.cs" />
-    <Compile Include="Core\IMemberValidationRule.cs" />
-    <Compile Include="Core\PropertyValidationCondition.cs" />
-    <Compile Include="Dynamic\Dynamic.cs" />
-    <Compile Include="Dynamic\DynamicContext.cs" />
-    <Compile Include="Fluent\AbstractValidator`2.cs" />
-    <Compile Include="Adapters\IModelAdapter.cs" />
-    <Compile Include="IDictionaryValidator.cs" />
-    <Compile Include="IDynamicResourceContainer.cs" />
-    <Compile Include="Initialization\ValidationManager.cs" />
-    <Compile Include="Markup\XamlMembersHelper.cs" />
-    <Compile Include="Markup\ProvideValueExtension.cs" />
-    <Compile Include="Adapters\ReflectionModelAdapter.cs" />
-    <Compile Include="RuleConditions\LengthInRange.cs" />
-    <Compile Include="RuleConditions\Lambda.cs" />
-    <Compile Include="RuleConditions\MatchesForEachLine.cs" />
-    <Compile Include="RuleConditions\SatisfyExpression.cs" />
-    <Compile Include="RuleConditions\SqlCondition.cs" />
-    <Compile Include="ValidationContextBase.cs" />
-    <Compile Include="ValidationParamObject.cs" />
-    <Compile Include="ValueProvider.cs" />
-    <Compile Include="RuleConditions\IsFalse.cs" />
-    <Compile Include="RuleConditions\IsTrue.cs" />
-    <Compile Include="RuleConditions\ForEach.cs" />
-    <Compile Include="Core\CompositeCondition.cs" />
-    <Compile Include="Conditions\And.cs" />
-    <Compile Include="Conditions\Or.cs" />
-    <Compile Include="Conditions\If.cs" />
-    <Compile Include="Conditions\Not.cs" />
-    <Compile Include="Conditions\RequiredIf.cs" />
-    <Compile Include="Conditions\Sequence.cs" />
-    <Compile Include="DynamicResourceDictionaryContainer.cs" />
-    <Compile Include="Fluent\AbstractValidator`1.cs" />
-    <Compile Include="Fluent\FluentExtensions.cs" />
-    <Compile Include="ValidationContextExtensions.cs" />
-    <Compile Include="ValidationServices.cs" />
-    <Compile Include="IObjectValidator.cs" />
-    <Compile Include="DynamicResourceDictionary.cs" />
-    <Compile Include="ListTypes\ListOfInt.cs" />
-    <Compile Include="ListTypes\ListOfString.cs" />
-    <Compile Include="Markup\DynamicResourceExtension.cs" />
-    <Compile Include="TypeConverters\ListOfStringTypeConverter.cs" />
-    <Compile Include="TypeConverters\ListOfIntTypeConverter.cs" />
-    <Compile Include="TypeConverters\WithMessageTypeConverter.cs" />
-    <Compile Include="ValidationPluginAttribute.cs" />
-    <Compile Include="XamlValidator.cs" />
-    <Compile Include="IValueProvider.cs" />
-    <Compile Include="XamlValidatorBase.cs" />
-    <Compile Include="Core\MultiCondition.cs" />
-    <Compile Include="IValidationRule.cs" />
-    <Compile Include="IDefinitionStorage.cs" />
-    <Compile Include="Core\MemberValidationRule.cs" />
-    <Compile Include="Core\ObjectValidationRule.cs" />
-    <Compile Include="PropertyDefinition.cs" />
-    <Compile Include="PropertyDefinitionDictionary.cs" />
-    <Compile Include="RuleConditions\AreEqual.cs" />
-    <Compile Include="RuleConditions\Matches.cs" />
-    <Compile Include="RuleConditions\Length.cs" />
-    <Compile Include="RuleConditions\Equals.cs" />
-    <Compile Include="RuleConditions\GreaterThan.cs" />
-    <Compile Include="RuleConditions\IsNull.cs" />
-    <Compile Include="RuleConditions\IsNullOrEmpty.cs" />
-    <Compile Include="RuleConditions\LessThan.cs" />
-    <Compile Include="Rules\ForMember.cs" />
-    <Compile Include="Rules\Must.cs" />
-    <Compile Include="Core\ValidationCondition.cs" />
-    <Compile Include="ValidationConditionContext.cs" />
-    <Compile Include="ValidationConfiguration.cs" />
-    <Compile Include="ValidationContext.cs" />
-    <Compile Include="ValidationError.cs" />
-    <Compile Include="ValidationResult.cs" />
-    <Compile Include="XamlObjectValidator.cs" />
-    <Compile Include="Markup\DefinitionExtension.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XamlValidatorException.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="QA.Validation.Xaml.nuspec" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

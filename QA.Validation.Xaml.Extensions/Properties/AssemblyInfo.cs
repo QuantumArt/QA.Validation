@@ -1,20 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Windows.Markup;
 using Portable.Xaml.Markup;
 using QA.Validation.Xaml;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("QA.Validation.Xaml.Extensions")]
-[assembly: AssemblyDescription("Remote validation, additional rules and conditions")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Quantumart")]
-[assembly: AssemblyProduct("QA.Core.Validation.Xaml.Rules")]
-[assembly: AssemblyCopyright("Copyright ©  2012-2016")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -34,8 +25,6 @@ using QA.Validation.Xaml;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.0.0")]
-[assembly: AssemblyInformationalVersion("1.2.0.0")]
 [assembly: XmlnsDefinition("http://artq.com/validation", "QA.Validation.Xaml.Extensions")]
 [assembly: XmlnsDefinition("http://artq.com/validation", "QA.Validation.Xaml.Extensions.Conditions")]
 [assembly: XmlnsDefinition("http://artq.com/validation", "QA.Validation.Xaml.Extensions.Rules")]

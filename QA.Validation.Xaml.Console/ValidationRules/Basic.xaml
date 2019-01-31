@@ -11,7 +11,7 @@
     </XamlObjectValidator.Definitions>
 
     <!-- Заполнение поля ValidationRules (оно указано как ContentProperty)-->
-    
+
     <!--применение правила к свойству (к полю)
         Если поле Name имеет значение null, то выводится ошибка "Не может быть null"
     -->
@@ -25,16 +25,16 @@
             </If.True>
         </If>
     </ForMember>
-    
+
     <ForMember Definition="{x:Definition Name}">
         <If True="{x:DynamicResource Name=Messages,Key=msg_Required}">
             <!--установка свойства Condition (оно указано как ContentProperty)-->
-            <IsNull  />            
+            <IsNull  />
         </If>
     </ForMember>
 
     <!--применение правила к свойству (к полю)
-        Пример обратного синтаксиса: 
+        Пример обратного синтаксиса:
             Поле DuplicateName обязательно для заполнения, если поле Name не пустое
         Пример приведения типов: полю Message класса RequiredIf устанавливается объект типа WithMessage-->
     <ForMember Definition="{x:Definition DuplicateName}">
@@ -44,9 +44,9 @@
             </Not>
         </RequiredIf>
     </ForMember>
-    
+
     <!--применение правила ко всему объекту
-        Если значения полей Name и DuplicateName не совпадают, 
+        Если значения полей Name и DuplicateName не совпадают,
             то выводится локализованное сообщение-->
     <Must>
         <If>

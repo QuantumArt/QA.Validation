@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Web.Script.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using QA.Validation.Extensions.Tests.Stubs;
 using QA.Validation.Xaml;
 using QA.Validation.Xaml.Extensions.Rules;
@@ -16,7 +18,7 @@ namespace QA.Validation.Extensions.Tests
     public class RemoteValidationTest
     {
         /// <summary>
-        /// Для запуска этого теста требуется запущенное приложение QA.Validation.Xaml.Extentions.WebApp 
+        /// Для запуска этого теста требуется запущенное приложение QA.Validation.Xaml.Extentions.WebApp
         /// по адресу http://localhost:60857/testhandler.ashx
         /// Проверяется вся цепочка удаленной валидации с участием веб-приложения с валидационным хендлером.
         /// </summary>
@@ -98,7 +100,7 @@ namespace QA.Validation.Extensions.Tests
         }
 
         /// <summary>
-        /// Для запуска этого теста требуется запущенное приложение QA.Validation.Xaml.Extentions.WebApp 
+        /// Для запуска этого теста требуется запущенное приложение QA.Validation.Xaml.Extentions.WebApp
         /// по адресу http://localhost:51380/remotevalidation
         /// Проверяется вся цепочка удаленной валидации с участием веб-приложения с валидационным хендлером.
         /// </summary>
@@ -133,7 +135,7 @@ namespace QA.Validation.Extensions.Tests
 
 
         /// <summary>
-        /// Для запуска этого теста требуется запущенное приложение QA.Validation.Xaml.Extentions.WebApp 
+        /// Для запуска этого теста требуется запущенное приложение QA.Validation.Xaml.Extentions.WebApp
         /// по адресу http://localhost:51380/remotevalidation
         /// Проверяется вся цепочка удаленной валидации с участием веб-приложения с валидационным хендлером.
         /// </summary>
@@ -155,7 +157,7 @@ namespace QA.Validation.Extensions.Tests
             Assert.IsTrue(ctx.IsValid);
         }
         /// <summary>
-        /// Для запуска этого теста требуется запущенное приложение QA.Validation.Xaml.Extentions.WebApp 
+        /// Для запуска этого теста требуется запущенное приложение QA.Validation.Xaml.Extentions.WebApp
         /// по адресу http://localhost:51380/remotevalidation
         /// Проверяется вся цепочка удаленной валидации с участием веб-приложения с валидационным хендлером.
         /// </summary>
@@ -252,7 +254,9 @@ namespace QA.Validation.Extensions.Tests
                         // для уверенности десериализуем все поля формы
                         Assert.AreEqual("test text", c.ProvideValueExact<string>("prop1"));
                         Assert.AreEqual(12, c.ProvideValueExact<int?>("prop2"));
-                        Assert.AreEqual(DateTime.Parse("2012.01.01"), c.ProvideValueExact<DateTime?>("prop3"));
+
+                        var dt = c.ProvideValueExact<DateTime?>("prop3") ?? DateTime.Now;
+                        Assert.AreEqual(DateTime.Parse("2012.01.01").Date, dt.Date);
                         Assert.AreEqual(99.99, c.ProvideValueExact<double>("prop4"));
                         Assert.AreEqual(false, c.ProvideValueExact<bool?>("prop5"));
                     }));
@@ -367,13 +371,12 @@ namespace QA.Validation.Extensions.Tests
 
             var text = RemoteValidationContext.GetJson(ctx);
 
-            var serializer = new JavaScriptSerializer();
-            var obj = serializer.Deserialize<RemoteValidationContext>(text);
+            var obj = JsonConvert.DeserializeObject<RemoteValidationContext>(text);
 
             Assert.IsNotNull(obj);
             Assert.AreEqual(1, obj.Values.Keys.Count);
             Assert.IsTrue(obj.Values.ContainsKey("prop"), "should contain prop");
-            Assert.IsInstanceOfType(obj.Values["prop"], typeof(ArrayList));
+            Assert.IsInstanceOfType(obj.Values["prop"], typeof(JArray));
         }
 
         [TestMethod]
@@ -386,8 +389,7 @@ namespace QA.Validation.Extensions.Tests
 
             var text = RemoteValidationContext.GetJson(ctx);
 
-            var serializer = new JavaScriptSerializer();
-            var obj = serializer.DeserializeObject(text);
+            var obj = JsonConvert.DeserializeObject(text);
 
             Assert.IsNotNull(obj);
         }

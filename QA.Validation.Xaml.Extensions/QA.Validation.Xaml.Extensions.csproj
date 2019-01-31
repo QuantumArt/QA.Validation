@@ -1,97 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9A4775AE-447A-409E-896A-A042029901B9}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>QA.Validation.Xaml.Extensions</RootNamespace>
-    <AssemblyName>QA.Validation.Xaml.Extensions</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\Debug\QA.Validation.Xaml.Extensions.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\Release\QA.Validation.Xaml.Extensions.XML</DocumentationFile>
+    <TargetFramework>net471</TargetFramework>
+    <Version>1.3.0-portable1</Version>
+    <Authors>Nickolay Karlov</Authors>
+    <Company>Quantum Art</Company>
+    <Product>QA.Validation.Xaml.Extensions</Product>
+    <Description>Remote validation, additional rules and conditions</Description>
+    <Copyright>Copyright © 2007-2019 Quantum Art</Copyright>
+    <PackageReleaseNotes>Update to .net standard.</PackageReleaseNotes>
+    <PackageLicense>MPL2.0</PackageLicense>
+    <PackageProjectUrl>https://github.com/QuantumArt/QA.Validation/QA.Validation.Xaml.Extensions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/QuantumArt/QA.Validation</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Core Configuration</PackageTags>
+    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Portable.Xaml, Version=0.24.0.0, Culture=neutral, PublicKeyToken=ba4456acace7dab7">
-      <HintPath>..\packages\Portable.Xaml.0.24.0\lib\netstandard2.0\Portable.Xaml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="QA.Configuration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\QA.Configuration.1.1.0-portable1\lib\net471\QA.Configuration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Portable.Xaml" Version="0.30.0-alpha7" />
+    <PackageReference Include="QA.Configuration" Version="1.1.0-portable4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="netstandard" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Conditions\IsJson.cs" />
-    <Compile Include="Conditions\Intersects.cs" />
-    <Compile Include="Conditions\IsAbsoluteUrl.cs" />
-    <Compile Include="Conditions\IsUnique.cs" />
-    <Compile Include="Conditions\IsEmail.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rules\IWebInteractionManager.cs" />
-    <Compile Include="Rules\ProcessRemoteValidationIf.cs" />
-    <Compile Include="Rules\Remote\HttpHandlerBase.cs" />
-    <Compile Include="Rules\Remote\RemotePropertyDefinition.cs" />
-    <Compile Include="Rules\Remote\RemoteValidationContext.cs" />
-    <Compile Include="Rules\Remote\RemoteValidationResult.cs" />
-    <Compile Include="Rules\Remote\ValidationHandlerBase.cs" />
-    <Compile Include="Rules\Remote\ValidationRequestProcessor.cs" />
-    <Compile Include="Rules\WebInteractionManager.cs" />
-    <Compile Include="ValueArguments\EncodeType.cs" />
-    <Compile Include="ValueArguments\Encode.cs" />
+    <ProjectReference Include="..\QA.Validation.Xaml\QA.Validation.Xaml.csproj" PrivateAssets="false" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\QA.Validation.Xaml\QA.Validation.Xaml.csproj">
-      <Project>{4d482388-33c4-47c3-86c8-935c4f07d80d}</Project>
-      <Name>QA.Validation.Xaml</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="QA.Validation.Xaml.Extensions.nuspec" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

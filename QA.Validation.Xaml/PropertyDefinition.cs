@@ -8,7 +8,6 @@ namespace QA.Validation.Xaml
     /// Класс описания одного поля модели. Включает ключ, название, тип и комментарий
     /// </summary>
     [DictionaryKeyProperty("Alias")]
-    [RuntimeNameProperty("Alias")]
     [UsableDuringInitialization(true)]
     [DebuggerDisplay("{Alias}-{PropertyName}")]
     [Serializable]
@@ -16,7 +15,7 @@ namespace QA.Validation.Xaml
     {
         public PropertyDefinition() : this(null, null, null) { }
 
-        public PropertyDefinition(string alias, string propertyName, Type propertyType) 
+        public PropertyDefinition(string alias, string propertyName, Type propertyType)
         {
             Alias = alias;
             PropertyName = propertyName;

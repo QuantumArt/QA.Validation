@@ -1,16 +1,24 @@
-﻿using Portable.Xaml.Markup;
+﻿using System.Linq;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {
     /// <summary>
     /// Базовый класс для составных условий валидации
     /// </summary>
-    [ContentProperty("Condition")]
-    public abstract class CompositeCondition : ValidationCondition
+    public abstract class CompositeCondition : MultiCondition
     {
         /// <summary>
         /// Дочернее условие
         /// </summary>
-        public ValidationCondition Condition { get; set; }
+        public ValidationCondition Condition
+        {
+            get { return Items.Any() ? Items.First() : null; }
+            set
+            {
+                Items.Clear();
+                Items.Add(value);
+            }
+        }
     }
 }

@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using QA.Validation.Xaml.Extensions.Rules.Remote;
+using QA.Validation.Xaml.ListTypes;
 
 namespace QA.Validation.Xaml.Extensions.Rules
 {
@@ -32,8 +33,7 @@ namespace QA.Validation.Xaml.Extensions.Rules
 
         public static string GetJson(RemoteValidationContext model)
         {
-            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            return javaScriptSerializer.Serialize(model);
+            return JsonConvert.SerializeObject(model);
         }
 
         /// <summary>
@@ -63,6 +63,18 @@ namespace QA.Validation.Xaml.Extensions.Rules
                 }
 
                 return value;
+            }
+
+            if (type == typeof(JArray) && targetType == typeof(ListOfString))
+            {
+                var arr = ((JArray) value).AsEnumerable().Select(n => n.Value<string>());
+                return new ListOfString(arr);
+            }
+
+            if (type == typeof(JArray) && targetType == typeof(ListOfInt))
+            {
+                var arr = ((JArray) value).AsEnumerable().Select(n => n.Value<int>());
+                return new ListOfInt(arr);
             }
 
             if (converter.CanConvertFrom(type))

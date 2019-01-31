@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 using QA.Validation.Extensions.Tests;
 using QA.Validation.Xaml.Extensions.Rules;
 
@@ -56,8 +56,7 @@ namespace QA.Validation.Xaml.Extensions.MvcWebApp.Tests.Stubs
                     var selector = _expr.Compile();
 
                     var result = selector(controller)
-                        (new JavaScriptSerializer()
-                        .Deserialize<RemoteValidationContext>(modelToSent));
+                        (JsonConvert.DeserializeObject<RemoteValidationContext>(modelToSent));
 
                     result.ExecuteResult(controller.ControllerContext);
                 }

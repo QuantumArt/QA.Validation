@@ -131,9 +131,10 @@ namespace QA.Validation.Xaml.Initialization
 
             // генерация текста
             var validator = new XamlValidator();
+
             foreach (var definition in definitions)
             {
-                validator.Definitions.Add(definition.Alias, definition);
+                validator.Definitions.Add(new KeyValuePair<string, PropertyDefinition>(definition.Alias, definition));
             }
 
             return XamlServices.Save(validator);

@@ -44,12 +44,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Portable.Xaml, Version=0.24.0.0, Culture=neutral, PublicKeyToken=ba4456acace7dab7">
-      <HintPath>..\packages\Portable.Xaml.0.24.0\lib\netstandard2.0\Portable.Xaml.dll</HintPath>
+    <Reference Include="Portable.Xaml, Version=0.30.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Portable.Xaml.0.30.0-alpha7\lib\netstandard2.0\Portable.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="QA.Configuration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\QA.Configuration.1.1.0-portable1\lib\net471\QA.Configuration.dll</HintPath>
+      <HintPath>..\packages\QA.Configuration.1.1.0-portable3\lib\net471\QA.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
@@ -124,7 +124,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

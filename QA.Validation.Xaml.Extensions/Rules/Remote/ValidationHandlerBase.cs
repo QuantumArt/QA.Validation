@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace QA.Validation.Xaml.Extensions.Rules.Remote
 {
@@ -26,12 +26,8 @@ namespace QA.Validation.Xaml.Extensions.Rules.Remote
                 json = streamReader.ReadToEnd();
             }
 
-            var serializer = new JavaScriptSerializer();
+            var model = JsonConvert.DeserializeObject<RemoteValidationContext>(json);
 
-            // deserialize model
-            var model = serializer.Deserialize<RemoteValidationContext>(json);
-
-            // convert to ValidationModel
 
             // call onvalidation
             var result = new RemoteValidationResult();
@@ -39,7 +35,7 @@ namespace QA.Validation.Xaml.Extensions.Rules.Remote
 
             // serialize results
 
-            var resultJson = serializer.Serialize(result);
+            var resultJson = JsonConvert.SerializeObject(result);
 
             context.Response.Write(resultJson);
             context.Response.ContentType = "application/json; charset=UTF-8";
