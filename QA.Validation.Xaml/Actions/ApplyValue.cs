@@ -1,5 +1,8 @@
-﻿using Portable.Xaml.Markup;
-
+﻿#if NETSTANDARD
+using Portable.Xaml.Markup;
+#else
+using System.Windows.Markup;
+#endif
 namespace QA.Validation.Xaml
 {
     [ContentProperty("Value")]
@@ -8,7 +11,7 @@ namespace QA.Validation.Xaml
         private bool _isValueSet;
         private object _value;
 
-        public PropertyDefinition Source { get; set; }       
+        public PropertyDefinition Source { get; set; }
         public object Value
         {
             get

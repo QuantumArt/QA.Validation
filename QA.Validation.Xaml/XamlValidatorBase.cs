@@ -1,6 +1,10 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+#if NETSTANDARD
 using Portable.Xaml.Markup;
+#else
+using System.Windows.Markup;
+#endif
 using QA.Configuration;
 
 namespace QA.Validation.Xaml

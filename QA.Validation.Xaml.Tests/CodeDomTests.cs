@@ -9,8 +9,9 @@ using System.Dynamic;
 
 namespace QA.Validation.Xaml.Tests
 {
-
+#if !NET_CORE
     [TestClass]
+#endif
     public class CodeDomTests
     {
         [TestCategory("CSharpCodeProvider")]
@@ -119,7 +120,7 @@ namespace QA.Validation.Xaml.Tests
 
             for (int i = 0; i < 300; i++)
             {
-                result = func(result); 
+                result = func(result);
             }
         }
 
@@ -176,7 +177,7 @@ namespace QA.Validation.Xaml.Tests
         private static object GenerateInternal(string source)
         {
             System.Reflection.Assembly a;
-            Dictionary<string, string> options = new Dictionary<string, string>{ 
+            Dictionary<string, string> options = new Dictionary<string, string>{
             { "CompilerVersion", "v4.0" }};
 
             using (CSharpCodeProvider provider = new CSharpCodeProvider(options))
@@ -203,7 +204,7 @@ namespace QA.Validation.Xaml.Tests
 
                 if (r.Errors.HasErrors)
                 {
-                    throw new Exception("Errors compiling expression: " + 
+                    throw new Exception("Errors compiling expression: " +
                         string.Join(Environment.NewLine, r
                             .Errors
                             .OfType<CompilerError>()

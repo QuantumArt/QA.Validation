@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,6 +12,7 @@ using QA.Validation.Xaml.ListTypes;
 
 namespace QA.Validation.Extensions.Tests
 {
+ #if !NET_CORE
     [TestClass]
     public class RemoteValidationTest
     {
@@ -578,6 +577,6 @@ namespace QA.Validation.Extensions.Tests
             validator.ValidationRules.Add(condition);
             return validator;
         }
-
     }
+#endif
 }

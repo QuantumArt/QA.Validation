@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Dynamic2;
+#if NETSTANDARD
 using Portable.Xaml.Markup;
+#else
+using System.Windows.Markup;
+#endif
 using QA.Validation.Xaml.Dynamic;
 
 namespace QA.Validation.Xaml

@@ -3,6 +3,7 @@ using System.Web;
 
 namespace QA.Validation.Xaml.Extensions.Rules.Remote
 {
+#if !NET_STANDARD
     /// <summary>
     /// Базовый класс для http-хендлера, поддерживающего Unit-тестирование
     /// </summary>
@@ -21,7 +22,7 @@ namespace QA.Validation.Xaml.Extensions.Rules.Remote
             {
                 OnProcessRequest(new HttpContextWrapper(context));
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 context.Response.Clear();
                 context.Response.Write(ex.ToString() + " " + ex.StackTrace);
@@ -33,4 +34,5 @@ namespace QA.Validation.Xaml.Extensions.Rules.Remote
         public  abstract void OnProcessRequest(HttpContextBase context);
         #endregion
     }
+#endif
 }

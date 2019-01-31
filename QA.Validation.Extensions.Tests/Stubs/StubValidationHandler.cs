@@ -5,6 +5,7 @@ using QA.Validation.Xaml.Extensions.Rules.Remote;
 
 namespace QA.Validation.Extensions.Tests.Stubs
 {
+#if !NET_CORE
     /// <summary>
     /// Тестовый http-хендлер с возможностью вставки любой логики и проверок
     /// </summary>
@@ -26,4 +27,5 @@ namespace QA.Validation.Extensions.Tests.Stubs
             get { return true; }
         }
     }
+#endif
 }

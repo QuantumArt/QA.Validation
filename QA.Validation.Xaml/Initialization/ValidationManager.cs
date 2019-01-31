@@ -5,7 +5,11 @@ using System.Runtime.Caching;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
+#if NETSTANDARD
 using Portable.Xaml;
+#else
+using System.Xaml;
+#endif
 
 namespace QA.Validation.Xaml.Initialization
 {

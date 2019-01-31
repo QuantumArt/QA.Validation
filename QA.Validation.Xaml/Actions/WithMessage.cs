@@ -1,5 +1,9 @@
 ﻿using System.ComponentModel;
+#if NETSTANDARD
 using Portable.Xaml.Markup;
+#else
+using System.Windows.Markup;
+#endif
 using QA.Validation.Xaml.TypeConverters;
 
 namespace QA.Validation.Xaml

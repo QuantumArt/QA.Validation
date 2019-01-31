@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Windows.Markup;
+#if NET_STANDARD
 using Portable.Xaml.Markup;
+#else
+using System.Windows.Markup;
+#endif
 
 namespace QA.Validation.Xaml.Extensions.Conditions
 {
@@ -25,7 +28,7 @@ namespace QA.Validation.Xaml.Extensions.Conditions
                 return Array.TrueForAll(
                     ((IEnumerable)value1)
                         .Cast<object>()
-                        .GroupBy(x => x).ToArray(), 
+                        .GroupBy(x => x).ToArray(),
                     gr => gr.Count() == 1);
             }
 

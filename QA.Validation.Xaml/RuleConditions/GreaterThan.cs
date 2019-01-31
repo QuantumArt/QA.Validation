@@ -1,5 +1,9 @@
 ﻿using System;
+#if NETSTANDARD
 using Portable.Xaml.Markup;
+#else
+using System.Windows.Markup;
+#endif
 
 namespace QA.Validation.Xaml
 {
@@ -18,7 +22,7 @@ namespace QA.Validation.Xaml
         {
             var source = Source ?? context.Definition;
             var value1 = context.ValueProvider.GetValue(source);
-            
+
             if (value1 is IComparable)
             {
                 if (Target == null)

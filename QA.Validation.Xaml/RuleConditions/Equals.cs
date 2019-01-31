@@ -1,5 +1,9 @@
 ﻿using System.ComponentModel;
+#if NETSTANDARD
 using Portable.Xaml.Markup;
+#else
+using System.Windows.Markup;
+#endif
 
 namespace QA.Validation.Xaml
 {
@@ -22,7 +26,7 @@ namespace QA.Validation.Xaml
                 {
                     value2 = converter.ConvertFrom(value2);
                 }
-                
+
             }
 
             return object.Equals(value1, value2);

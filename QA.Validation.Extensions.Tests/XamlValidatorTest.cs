@@ -6,6 +6,7 @@ using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QA.Validation.Xaml;
 using QA.Validation.Xaml.Extensions.Conditions;
+using QA.Validation.Xaml.Extensions.ValueArguments;
 using QA.Validation.Xaml.Tests.Util;
 
 namespace QA.Validation.Extensions.Tests
@@ -16,6 +17,12 @@ namespace QA.Validation.Extensions.Tests
     [TestClass()]
     public class XamlValidatorTest
     {
+        static XamlValidatorTest()
+        {
+            var encode = new Encode();
+            System.Diagnostics.Trace.Write(encode.ToString());
+        }
+
         #region Additional test attributes
 
         /// <summary>

@@ -7,6 +7,7 @@ using QA.Validation.Xaml.Extensions.Rules.Remote;
 
 namespace QA.Validation.Extensions.Tests.Stubs
 {
+#if !NET_CORE
     public class StubWebInteractionManager : IWebInteractionManager
     {
         private Func<ValidationHandlerBase> _handlerFactory;
@@ -41,4 +42,5 @@ namespace QA.Validation.Extensions.Tests.Stubs
 
         #endregion
     }
+#endif
 }

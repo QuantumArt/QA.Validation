@@ -1,7 +1,9 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using System.Windows.Markup;
+﻿using System.Text.RegularExpressions;
+#if NET_STANDARD
 using Portable.Xaml.Markup;
+#else
+using System.Windows.Markup;
+#endif
 
 namespace QA.Validation.Xaml.Extensions.Conditions
 {

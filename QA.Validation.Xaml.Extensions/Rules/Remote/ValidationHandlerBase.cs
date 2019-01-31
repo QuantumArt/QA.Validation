@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace QA.Validation.Xaml.Extensions.Rules.Remote
 {
+#if !NET_STANDARD
     /// <summary>
     /// Базовый класс для хендлера remote-валидации
     /// </summary>
@@ -43,4 +44,5 @@ namespace QA.Validation.Xaml.Extensions.Rules.Remote
 
         protected abstract void OnValidation(RemoteValidationContext context, RemoteValidationResult result);
     }
+#endif
 }

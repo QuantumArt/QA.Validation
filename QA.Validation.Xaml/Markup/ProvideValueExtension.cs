@@ -2,8 +2,13 @@
 
 using System;
 using System.Collections.Generic;
-using Portable.Xaml;
+#if NETSTANDARD
 using Portable.Xaml.Markup;
+using Portable.Xaml;
+#else
+using System.Windows.Markup;
+using System.Xaml;
+#endif
 using QA.Validation.Xaml.Core;
 
 namespace QA.Validation.Xaml.Markup
@@ -40,7 +45,7 @@ namespace QA.Validation.Xaml.Markup
 
             return result;
         }
-               
+
         private static T FindNode<T, TParent>(IServiceProvider serviceProvider, string propertyName)
         {
             var xamlSchemaContextProvider = (IXamlSchemaContextProvider)serviceProvider.GetService(typeof(IXamlSchemaContextProvider));
@@ -65,7 +70,7 @@ namespace QA.Validation.Xaml.Markup
             {
                 XamlMember ambientMember = xamlType.GetMember(propertyName);
                 members = new XamlMember[]
-			{				
+			{
                 ambientMember,
 			};
 
@@ -73,7 +78,7 @@ namespace QA.Validation.Xaml.Markup
             XamlType[] types = new XamlType[]
 			{
 				schemaContext.GetXamlType(typeof(T))
-			
+
             };
 
             IEnumerable<AmbientPropertyValue> allAmbientValues = ambientProvider.GetAllAmbientValues(null, false, types, members);

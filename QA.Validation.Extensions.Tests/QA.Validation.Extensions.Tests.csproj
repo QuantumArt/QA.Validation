@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
+    <TargetFrameworks>net471;netcoreapp2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Moq" Version="4.5.0" />
@@ -17,6 +17,9 @@
     <ProjectReference Include="..\QA.Validation.Xaml.Extensions\QA.Validation.Xaml.Extensions.csproj" />
     <ProjectReference Include="..\QA.Validation.Xaml.Tests\QA.Validation.Xaml.Tests.csproj" />
   </ItemGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+    <DefineConstants>NET_CORE</DefineConstants>
+  </PropertyGroup>  
   <ItemGroup>
     <Folder Include="Properties" />
   </ItemGroup>

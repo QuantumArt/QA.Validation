@@ -7,6 +7,7 @@ using Moq;
 
 namespace QA.Validation.Extensions.Tests
 {
+#if !NET_CORE
     /// <summary>
     /// Настройка среды исполнения веб-приложения (настройка тестового объекта HttpContextBase).
     /// Для генерации и настройки объекта используется Moq
@@ -195,4 +196,5 @@ namespace QA.Validation.Extensions.Tests
 
         #endregion
     }
+#endif
 }

@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+#if NETSTANDARD
+using Portable.Xaml.Markup;
 using Portable.Xaml;
+#else
+using System.Windows.Markup;
+using System.Xaml;
+#endif
 
 namespace QA.Validation.Xaml.Markup
 {
@@ -41,14 +47,14 @@ namespace QA.Validation.Xaml.Markup
             {
                 XamlMember ambientMember = xamlType.GetMember(propertyName);
                 members = new XamlMember[]
-			    {				
+			    {
                     ambientMember,
 			    };
 
             }
             XamlType[] types = new XamlType[]
 			{
-				schemaContext.GetXamlType(typeof(T))			
+				schemaContext.GetXamlType(typeof(T))
             };
 
             IEnumerable<AmbientPropertyValue> allAmbientValues = ambientProvider.GetAllAmbientValues(null, false, types, members);
