@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using QA.Validation.Xaml.TypeConverters;
 using System;
-#if NETSTANDARD
+#if NET_STANDARD
 using Portable.Xaml.Markup;
 #else
 using System.Windows.Markup;

@@ -5,7 +5,7 @@ using System.Runtime.Caching;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
-#if NETSTANDARD
+#if NET_STANDARD
 using Portable.Xaml;
 #else
 using System.Xaml;

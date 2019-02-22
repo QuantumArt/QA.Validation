@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-#if NETSTANDARD
+#if NET_STANDARD
 using Portable.Xaml.Markup;
 #else
 using System.Windows.Markup;

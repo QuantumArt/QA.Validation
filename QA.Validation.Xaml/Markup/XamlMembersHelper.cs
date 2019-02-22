@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-#if NETSTANDARD
+#if NET_STANDARD
 using Portable.Xaml.Markup;
 using Portable.Xaml;
 #else

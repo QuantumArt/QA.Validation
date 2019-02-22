@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net471;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp2.2</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
@@ -18,7 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\QA.Validation.Xaml.Extensions\QA.Validation.Xaml.Extensions.csproj" />
   </ItemGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
     <DefineConstants>NET_CORE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
@@ -175,7 +175,7 @@
     <EmbeddedResource Include="Issues\TestMessageTemplate.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>  
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
@@ -188,7 +188,7 @@
     <EmbeddedResource Include="ValueArguments\Example_003.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>  
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties" />
   </ItemGroup>

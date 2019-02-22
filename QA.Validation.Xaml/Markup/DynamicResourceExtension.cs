@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if NETSTANDARD
+#if NET_STANDARD
 using Portable.Xaml.Markup;
 using Portable.Xaml;
 #else

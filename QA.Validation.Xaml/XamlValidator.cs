@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-#if NETSTANDARD
+#if NET_STANDARD
 using Portable.Xaml.Markup;
 #else
 using System.Windows.Markup;

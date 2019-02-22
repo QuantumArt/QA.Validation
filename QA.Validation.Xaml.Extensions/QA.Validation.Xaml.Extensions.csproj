@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Version>1.3.0-portable1</Version>
+    <Version>1.3.0-portable2</Version>
     <Authors>Nickolay Karlov</Authors>
     <Company>Quantum Art</Company>
     <Product>QA.Validation.Xaml.Extensions</Product>
@@ -22,12 +22,12 @@
     <PackageReference Include="QA.Configuration" Version="1.1.0-portable5" />
   </ItemGroup>
   <ItemGroup  Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Portable.Xaml" Version="0.30.0-alpha7" />    
+    <PackageReference Include="Portable.Xaml" Version="0.30.0-alpha7" />
   </ItemGroup>
   <ItemGroup  Condition="'$(TargetFramework)' == 'net471'">
     <Reference Include="System.Xaml" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Reference Include="netstandard" />
     <Reference Include="System.Web" />
