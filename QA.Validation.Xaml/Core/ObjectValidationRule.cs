@@ -41,6 +41,7 @@ namespace QA.Validation.Xaml
                 ValueProvider = provider,
                 ServiceProvider = result.ServiceProvider,
                 CustomerCode = result.CustomerCode,
+                LocalizeMessages = result.LocalizeMessages,
                 SiteId = result.SiteId,
                 ContentId = result.ContentId
 

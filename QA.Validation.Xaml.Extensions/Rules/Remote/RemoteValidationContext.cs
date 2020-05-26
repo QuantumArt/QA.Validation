@@ -17,6 +17,8 @@ namespace QA.Validation.Xaml.Extensions.Rules
     {
         public string CustomerCode { get; set; }
 
+        public bool LocalizeMessages { get; set; }
+
         public int SiteId { get; set; }
 
         public int ContentId { get; set; }

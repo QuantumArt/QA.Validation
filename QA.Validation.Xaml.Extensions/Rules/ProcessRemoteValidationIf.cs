@@ -113,6 +113,7 @@ namespace QA.Validation.Xaml.Extensions.Rules
             var context = new RemoteValidationContext
             {
                 CustomerCode = ctx.CustomerCode ?? CustomerCode,
+                LocalizeMessages = ctx.LocalizeMessages,
                 CurrentUICulture = CultureInfo.CurrentUICulture.Name,
                 CurrentCulture = CultureInfo.CurrentCulture.Name,
                 SiteId = ctx.SiteId != 0 ? ctx.SiteId : SiteId,

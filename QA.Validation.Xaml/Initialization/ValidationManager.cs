@@ -195,6 +195,7 @@ namespace QA.Validation.Xaml.Initialization
             {
                 ServiceProvider = serviceProvider,
                 CustomerCode = paramObject.CustomerCode,
+                LocalizeMessages = paramObject.LocalizeMessages,
                 SiteId = paramObject.SiteId,
                 ContentId = paramObject.ContentId
             };

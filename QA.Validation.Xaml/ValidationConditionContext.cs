@@ -54,6 +54,8 @@ namespace QA.Validation.Xaml
         /// </summary>
         public string CustomerCode { get; set; }
 
+        public bool LocalizeMessages { get; set; }
+
         /// <summary>
         /// Id сайта
         /// </summary>

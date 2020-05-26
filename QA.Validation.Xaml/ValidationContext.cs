@@ -14,9 +14,11 @@ namespace QA.Validation.Xaml
         public bool IsValid => Messages.Count == 0 && Result.Errors.Count == 0;
 
         /// <summary>
-        /// Кастомер-код    
+        /// Кастомер-код
         /// </summary>
         public string CustomerCode { get; set; }
+
+        public bool LocalizeMessages { get; set; }
 
         /// <summary>
         /// ID сайта
