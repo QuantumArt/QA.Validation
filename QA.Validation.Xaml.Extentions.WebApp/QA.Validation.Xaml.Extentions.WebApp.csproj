@@ -46,7 +46,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="netstandard" />
     <Reference Include="Portable.Xaml, Version=0.30.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Portable.Xaml.0.30.0-beta37\lib\netstandard2.0\Portable.Xaml.dll</HintPath>
+      <HintPath>..\packages\Portable.Xaml.0.30.0-beta38\lib\netstandard2.0\Portable.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="QA.Configuration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null">
