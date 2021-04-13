@@ -19,19 +19,16 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="Portable.Xaml" Version="0.30.0-beta38" />
-    <PackageReference Include="QA.Configuration" Version="1.1.0-portable8" />
+    <PackageReference Include="QA.Configuration" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <Reference Include="netstandard" />
+    <PackageReference Include="Portable.Xaml" Version="0.30.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net471'">
     <Reference Include="System.Xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-
     <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QA.Validation.Xaml\QA.Validation.Xaml.csproj" PrivateAssets="false" />

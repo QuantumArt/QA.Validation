@@ -13,7 +13,7 @@ namespace QA.Validation.Xaml.Tests.Util
                .GetManifestResourceStream(path))
             {
                 // создаем экземпляр валидатора
-                return (TValidator)XamlConfigurationParser.CreateFrom(stream);
+                return (TValidator)XamlConfigurationParser.LoadFrom(stream);
             }
         }
 
@@ -31,7 +31,7 @@ namespace QA.Validation.Xaml.Tests.Util
         }
 
         public static string GetEmbeddedResourceText(string path)
-        {            
+        {
             using (var stream = Assembly.GetExecutingAssembly()
                .GetManifestResourceStream(path))
             {

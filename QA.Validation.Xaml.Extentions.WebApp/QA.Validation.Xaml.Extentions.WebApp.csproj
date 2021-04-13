@@ -46,11 +46,11 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="netstandard" />
     <Reference Include="Portable.Xaml, Version=0.30.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Portable.Xaml.0.30.0-beta38\lib\netstandard2.0\Portable.Xaml.dll</HintPath>
+      <HintPath>..\packages\Portable.Xaml.0.30.0\lib\netstandard2.0\Portable.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="QA.Configuration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\QA.Configuration.1.1.0-portable8\lib\net471\QA.Configuration.dll</HintPath>
+      <HintPath>..\packages\QA.Configuration.1.1.0\lib\net471\QA.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />

@@ -29,7 +29,7 @@ namespace QA.Validation.Xaml.Console
             using (var stream = Assembly.GetExecutingAssembly()
                .GetManifestResourceStream(Messages_Xaml))
             {
-                var dict = (DynamicResourceDictionaryContainer)XamlConfigurationParser.CreateFrom(stream);
+                var dict = (DynamicResourceDictionaryContainer)XamlConfigurationParser.LoadFrom(stream);
                 DynamicResourceDictionaryContainer.SetResourceProvider(() => dict);
             }
 
@@ -38,7 +38,7 @@ namespace QA.Validation.Xaml.Console
                 .GetManifestResourceStream(Advanced_Xaml))
             {
                 // создаем экземпляр валидатора
-                validator = (XamlObjectValidator)XamlConfigurationParser.CreateFrom(stream);
+                validator = (XamlObjectValidator)XamlConfigurationParser.LoadFrom(stream);
             }
 
             // еще один вариант создать валидатор:
@@ -70,7 +70,7 @@ namespace QA.Validation.Xaml.Console
                 .GetManifestResourceStream(LookupValidator_Xaml))
             {
                 // создаем экземпляр валидатора
-                var dValiudator = (XamlValidator)XamlConfigurationParser.CreateFrom(stream);
+                var dValiudator = (XamlValidator)XamlConfigurationParser.LoadFrom(stream);
                 var ctx = new ValidationContext();
 
                 var person = new Dictionary<string, string>()
