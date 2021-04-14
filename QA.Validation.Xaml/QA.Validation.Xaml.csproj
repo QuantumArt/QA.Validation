@@ -18,7 +18,7 @@
     <TargetFrameworks>netstandard2.0;net471</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="QA.Configuration" Version="1.1.0" />
+    <PackageReference Include="QA.Configuration" Version="1.1.1" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Portable.Xaml" Version="0.30.0" />

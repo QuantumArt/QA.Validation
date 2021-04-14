@@ -5,6 +5,7 @@ using System.Runtime.Caching;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
+using QA.Configuration;
 #if NET_STANDARD
 using Portable.Xaml;
 #else
@@ -141,7 +142,7 @@ namespace QA.Validation.Xaml.Initialization
                 validator.Definitions.Add(new KeyValuePair<string, PropertyDefinition>(definition.Alias, definition));
             }
 
-            return XamlServices.Save(validator);
+            return XamlConfigurationParser.Save(validator);
         }
 
         public string GenerateDynamicResourceText(DynamicResourceDictionaryContainer container)
@@ -151,7 +152,7 @@ namespace QA.Validation.Xaml.Initialization
                 container = new DynamicResourceDictionaryContainer();
             }
 
-            return XamlServices.Save(container);
+            return XamlConfigurationParser.Save(container);
         }
         public PropertyDefinition[] GetPropertyDefinitions(string validatorText, string dynamicResourceText)
         {

@@ -177,9 +177,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="ValueArguments\Example_000.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>

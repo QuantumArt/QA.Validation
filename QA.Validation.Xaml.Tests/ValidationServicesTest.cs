@@ -98,7 +98,7 @@ namespace QA.Validation.Xaml.Tests
                 Alias = fieldName }
             });
 
-            var validator = (XamlValidator)XamlServices.Parse(emptyValidatorString);
+            var validator = (XamlValidator)XamlConfigurationParser.CreateFrom(emptyValidatorString);
 
             // добавим в валидатор логику выставления значения для этого поля
             validator.ValidationRules.Add(new ForMember
@@ -107,7 +107,7 @@ namespace QA.Validation.Xaml.Tests
                 Condition = new ApplyValue { Value = fieldValue }
             });
 
-            var newValidatorText = XamlServices.Save(validator);
+            var newValidatorText = XamlConfigurationParser.Save(validator);
             return newValidatorText;
         }
         #endregion
