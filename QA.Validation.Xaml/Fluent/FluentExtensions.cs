@@ -29,13 +29,13 @@ namespace QA.Validation.Xaml.Fluent
 
         public static If True(this If rule, ValidationCondition condition)
         {
-            rule.True = condition;
+            rule.Then = condition;
             return rule;
         }
 
         public static If False(this If rule, ValidationCondition condition)
         {
-            rule.False = condition;
+            rule.Else = condition;
             return rule;
         }
 

@@ -1,26 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Version>1.3.0</Version>
+    <Version>1.4.0</Version>
     <Authors>Nickolay Karlov</Authors>
     <Company>Quantum Art</Company>
     <Product>QA.Validation.Xaml.Extensions</Product>
     <Description>Remote validation, additional rules and conditions</Description>
     <Copyright>Copyright © 2007-2019 Quantum Art</Copyright>
-    <PackageReleaseNotes>Update to .net standard.</PackageReleaseNotes>
+    <PackageReleaseNotes>Update to .NET 6</PackageReleaseNotes>
     <PackageLicense>MPL2.0</PackageLicense>
     <PackageProjectUrl>https://github.com/QuantumArt/QA.Validation/QA.Validation.Xaml.Extensions</PackageProjectUrl>
     <RepositoryUrl>https://github.com/QuantumArt/QA.Validation</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Core Configuration</PackageTags>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <AssemblyVersion>1.4.0.0</AssemblyVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="QA.Configuration" Version="1.1.1" />
-    <PackageReference Include="Portable.Xaml" Version="0.30.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

@@ -392,11 +392,8 @@ namespace QA.Validation.Extensions.Tests
 
         [TestMethod]
         [TestCategory("ValidationServices: generation")]
-#if NET_CORE
         [ExpectedException(typeof(TargetInvocationException))]
-#else
-        [ExpectedException(typeof(XamlObjectWriterException))]
-#endif
+
         public void Test_GenerateXamlValidatorText_Checks_That_PropertyName_Is_Required()
         {
             List<PropertyDefinition> definitions = new List<PropertyDefinition>()
@@ -410,11 +407,7 @@ namespace QA.Validation.Extensions.Tests
 
         [TestMethod]
         [TestCategory("ValidationServices: generation")]
-#if NET_CORE
         [ExpectedException(typeof(TargetInvocationException))]
-#else
-        [ExpectedException(typeof(XamlObjectWriterException))]
-#endif
         public void Test_GenerateXamlValidatorText_Checks_That_Alias_Is_Required()
         {
             List<PropertyDefinition> definitions = new List<PropertyDefinition>()
@@ -443,11 +436,7 @@ namespace QA.Validation.Extensions.Tests
 
         [TestMethod]
         [TestCategory("ValidationServices: generation")]
-#if NET_CORE
         [ExpectedException(typeof(TargetInvocationException))]
-#else
-        [ExpectedException(typeof(XamlObjectWriterException))]
-#endif
         public void Test_GenerateXamlValidatorText_Checks_That_Alias_Consists_Of_Literals()
         {
             List<PropertyDefinition> definitions = new List<PropertyDefinition>()
@@ -461,11 +450,7 @@ namespace QA.Validation.Extensions.Tests
 
         [TestMethod]
         [TestCategory("ValidationServices: generation")]
-#if NET_CORE
         [ExpectedException(typeof(TargetInvocationException))]
-#else
-        [ExpectedException(typeof(XamlObjectWriterException))]
-#endif
         public void Test_GenerateXamlValidatorText_Checks_That_Alias_Cannot_Start_With_Number()
         {
             List<PropertyDefinition> definitions = new List<PropertyDefinition>()
@@ -496,11 +481,7 @@ namespace QA.Validation.Extensions.Tests
 
         [TestMethod]
         [TestCategory("ValidationServices: generation")]
-        #if NET_CORE
         [ExpectedException(typeof(TargetInvocationException))]
-        #else
-        [ExpectedException(typeof(XamlObjectWriterException))]
-        #endif
 
         public void Test_GenerateXamlValidatorText_Checks_That_Alias_Cannot_Contain_Spaces()
         {
