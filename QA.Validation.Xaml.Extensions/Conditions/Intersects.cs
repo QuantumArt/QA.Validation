@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
 using Portable.Xaml.Markup;
-
 using QA.Validation.Xaml.ListTypes;
 using QA.Validation.Xaml.RuleConditions;
 

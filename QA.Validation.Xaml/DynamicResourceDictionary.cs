@@ -1,9 +1,4 @@
-﻿#if NET_STANDARD
-using Portable.Xaml.Markup;
-#else
-using System.Windows.Markup;
-#endif
-
+﻿using Portable.Xaml.Markup;
 using QA.Configuration;
 
 namespace QA.Validation.Xaml

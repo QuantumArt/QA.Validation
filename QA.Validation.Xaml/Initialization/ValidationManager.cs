@@ -6,11 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
 using QA.Configuration;
-#if NET_STANDARD
 using Portable.Xaml;
-#else
-using System.Xaml;
-#endif
 
 namespace QA.Validation.Xaml.Initialization
 {

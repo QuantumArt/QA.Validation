@@ -3,13 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if NET_STANDARD
 using Portable.Xaml.Markup;
 using Portable.Xaml;
-#else
-using System.Windows.Markup;
-using System.Xaml;
-#endif
 
 namespace QA.Validation.Xaml.Markup
 {

@@ -46,15 +46,14 @@ namespace QA.Validation.Xaml
             : base(message, inner)
         {
             Reason = reason;
-        }       
+        }
 
         /// <summary>
         /// When overridden in a derived class, sets the System.Runtime.Serialization.SerializationInfo with information about the exception.
         /// </summary>
         /// <param name="info">The System.Runtime.Serialization.SerializationInfo that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The System.Runtime.Serialization.StreamingContext that contains contextual information about the source or destination.</param>
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+      public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
             {
@@ -66,7 +65,6 @@ namespace QA.Validation.Xaml
             base.GetObjectData(info, context);
         }
 
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         private XamlValidatorException(
             SerializationInfo info,
             StreamingContext context)
@@ -109,5 +107,5 @@ namespace QA.Validation.Xaml
         }
 
         #endregion
-    }    
+    }
 }

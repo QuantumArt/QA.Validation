@@ -1,10 +1,4 @@
-﻿#if NET_STANDARD
-using Portable.Xaml.Markup;
-#else
-using System.Windows.Markup;
-#endif
-
-namespace QA.Validation.Xaml
+﻿namespace QA.Validation.Xaml
 {
     /// <summary>
     /// Операнд ОТРИЦАНИЕ

@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-#if NET_STANDARD
 using Portable.Xaml.Markup;
-#else
-using System.Windows.Markup;
-#endif
 
 namespace QA.Validation.Xaml
 {

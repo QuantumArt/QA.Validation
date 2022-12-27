@@ -1,10 +1,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
-#if NET_STANDARD
 using Portable.Xaml.Markup;
-#else
-using System.Windows.Markup;
-#endif
 
 namespace QA.Validation.Xaml
 {
