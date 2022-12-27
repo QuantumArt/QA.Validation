@@ -1,26 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net471;netcoreapp2.2</TargetFrameworks>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Moq" Version="4.16.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="netstandard" />
-    <Reference Include="System.Web" />
+    <PackageReference Include="Moq" Version="4.18.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QA.Validation.Xaml.Extensions\QA.Validation.Xaml.Extensions.csproj" />
     <ProjectReference Include="..\QA.Validation.Xaml.Tests\QA.Validation.Xaml.Tests.csproj" />
   </ItemGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
     <DefineConstants>NET_CORE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Stubs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ValueArguments\Example_000.xaml" />
+    <EmbeddedResource Include="ValueArguments\Example_001.xaml" />
+    <EmbeddedResource Include="ValueArguments\Example_002.xaml" />
+    <EmbeddedResource Include="ValueArguments\Example_003.xaml" />
   </ItemGroup>
 </Project>

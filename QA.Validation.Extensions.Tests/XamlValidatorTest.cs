@@ -502,23 +502,6 @@ namespace QA.Validation.Extensions.Tests
             Assert.IsTrue(context.Result.Errors.Count == 2);
         }
 
-        [TestMethod]
-        [TestCategory("ValueArgumentTest")]
-        public void Basic_arguments()
-        {
-            var model = new Dictionary<string, string>()
-            {
-                { "field_1234", "" },
-                { "field_1235", "ТЕСТ все Входящие для ёжика буД!@#$%^&ут бесплатны!123 123 3" },
-            };
-
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_001);
-            var context = new ValidationContext();
-
-            validator.Validate(model, context);
-
-            Assert.IsTrue(((string)model["field_1234"]).Length > 100);
-        }
 
         #endregion
     }

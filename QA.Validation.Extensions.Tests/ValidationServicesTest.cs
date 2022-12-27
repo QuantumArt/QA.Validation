@@ -5,16 +5,12 @@ using System.Globalization;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QA.Configuration;
+using QA.Validation.Xaml;
 using QA.Validation.Xaml.Extensions.Conditions;
 using QA.Validation.Xaml.ListTypes;
 using QA.Validation.Xaml.Tests.Util;
-#if NET_CORE
-using Portable.Xaml;
-#else
-using System.Xaml;
-#endif
 
-namespace QA.Validation.Xaml.Tests
+namespace QA.Validation.Extensions.Tests
 {
     /// <summary>
     /// Тесты интеграционного API.
@@ -574,7 +570,7 @@ namespace QA.Validation.Xaml.Tests
 //            dict.Resources.Add("MyFavoriteColor", System.Drawing.Color.AliceBlue);
 
             // добавим объект из этой сборки
-            dict.Resources.Add("MyInfo", new Model.Person
+            dict.Resources.Add("MyInfo", new Xaml.Tests.Model.Person
             {
                 Age = 12,
                 Date = DateTime.Now,
