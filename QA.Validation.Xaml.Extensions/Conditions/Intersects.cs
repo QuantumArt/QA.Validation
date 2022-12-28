@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
-using System.Windows.Markup;
+using Portable.Xaml.Markup;
 using QA.Validation.Xaml.ListTypes;
 using QA.Validation.Xaml.RuleConditions;
 
@@ -69,7 +68,7 @@ namespace QA.Validation.Xaml.Extensions.Conditions
 
             // делаем запрос к БД, результат которого - пересечение id связанных статей (с одним значением группировочного поля)
             // выводим список пересекающихся статей в виде общего сообщения валидации
-            
+
             throw new NotImplementedException();
         }
 

@@ -1,12 +1,14 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using QA.Validation.Xaml;
 using QA.Validation.Xaml.Extensions.ValueArguments;
-using QA.Validation.Xaml.Tests.Util;
 using QA.Validation.Xaml.ListTypes;
+using QA.Validation.Xaml.Tests.Util;
 
-namespace QA.Validation.Xaml.Tests
+namespace QA.Validation.Extensions.Tests
 {
     [TestClass]
     public class ValueArgumentTest
@@ -19,6 +21,25 @@ namespace QA.Validation.Xaml.Tests
 
         [TestMethod]
         [TestCategory("ValueArgumentTest")]
+        public void Basic_arguments()
+        {
+            var model = new Dictionary<string, string>()
+            {
+                { "field_1234", "" },
+                { "field_1235", "ТЕСТ все Входящие для ёжика буД!@#$%^&ут бесплатны!123 123 3" },
+            };
+
+            var validator = ValidationHelper.GetXaml<XamlValidator>(Assembly.GetExecutingAssembly(), ValidatorConstants.ValueArguments.Example_001);
+            var context = new ValidationContext();
+
+            validator.Validate(model, context);
+
+            Assert.IsTrue(((string)model["field_1234"]).Length > 100);
+        }
+
+
+        [TestMethod]
+        [TestCategory("ValueArgumentTest")]
         public void Test_setting_value()
         {
             var model = new Dictionary<string, string>()
@@ -26,31 +47,12 @@ namespace QA.Validation.Xaml.Tests
                     { "field_1234", "" }
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_000);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(Assembly.GetExecutingAssembly(), ValidatorConstants.ValueArguments.Example_000);
             var context = new ValidationContext();
 
             validator.Validate(model, context);
 
             Assert.AreEqual("new value", model["field_1234"]) ;
-        }
-
-
-        [TestMethod]
-        [TestCategory("ValueArgumentTest")]
-        public void Basic_arguments()
-        {
-            var model = new Dictionary<string, string>() 
-                { 
-                    { "field_1234", "" },
-                    { "field_1235", "ТЕСТ все Входящие для ёжика буД!@#$%^&ут бесплатны!123 123 3" },
-                };
-
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_001);
-            var context = new ValidationContext();
-
-            validator.Validate(model, context);
-
-            Assert.IsTrue(((string)model["field_1234"]).Length > 100);
         }
 
 
@@ -65,7 +67,7 @@ namespace QA.Validation.Xaml.Tests
                     { "field_1236", "" },
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_002);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(Assembly.GetExecutingAssembly(), ValidatorConstants.ValueArguments.Example_002);
             var context = new ValidationContext();
 
             validator.Validate(model, context);
@@ -86,7 +88,7 @@ namespace QA.Validation.Xaml.Tests
                     { "field_1236", "" },
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_002);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(Assembly.GetExecutingAssembly(), ValidatorConstants.ValueArguments.Example_002);
             var context = new ValidationContext();
 
             validator.Validate(model, context);
@@ -108,7 +110,7 @@ namespace QA.Validation.Xaml.Tests
                     { "field_1236", "" },
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_002);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(Assembly.GetExecutingAssembly(), ValidatorConstants.ValueArguments.Example_002);
             var context = new ValidationContext();
 
             validator.Validate(model, context);
@@ -129,7 +131,7 @@ namespace QA.Validation.Xaml.Tests
                     { "field_1236", "" },
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_002);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(Assembly.GetExecutingAssembly(), ValidatorConstants.ValueArguments.Example_002);
             var context = new ValidationContext();
 
             validator.Validate(model, context);
@@ -150,7 +152,7 @@ namespace QA.Validation.Xaml.Tests
                     { "field_1236", "" },
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.ValueArguments.Example_003);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(Assembly.GetExecutingAssembly(),ValidatorConstants.ValueArguments.Example_003);
             var context = new ValidationContext();
 
             validator.Validate(model, context);
@@ -225,8 +227,8 @@ namespace QA.Validation.Xaml.Tests
        // [TestCategory("Lambda test")]
         public void Test_lambda_all_args()
         {
-            var dict = new Dictionary<string, Type> 
-            { 
+            var dict = new Dictionary<string, Type>
+            {
                 { "prop1", typeof(string) },
             };
 

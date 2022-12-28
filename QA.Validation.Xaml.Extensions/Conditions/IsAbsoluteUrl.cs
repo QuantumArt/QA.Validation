@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using System.Windows.Markup;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml.Extensions.Conditions
 {
-    using QA.Validation.Xaml;
 
     /// <summary>
     /// Проверка корректности адреса Url

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Markup;
+﻿using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {
@@ -12,7 +8,7 @@ namespace QA.Validation.Xaml
         private bool _isValueSet;
         private object _value;
 
-        public PropertyDefinition Source { get; set; }       
+        public PropertyDefinition Source { get; set; }
         public object Value
         {
             get

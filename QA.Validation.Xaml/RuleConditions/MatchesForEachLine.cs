@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows.Markup;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {
@@ -14,12 +14,12 @@ namespace QA.Validation.Xaml
         /// <summary>
         /// Текст регулярного выражения
         /// </summary>
-        public string Expression { get; set; }
+        public override string Expression { get; set; }
 
         /// <summary>
         /// Опции регулярного выражения
         /// </summary>
-        public RegexOptions RegexOptions { get; set; }
+        public override RegexOptions RegexOptions { get; set; }
 
         public bool Trim { get; set; }
 

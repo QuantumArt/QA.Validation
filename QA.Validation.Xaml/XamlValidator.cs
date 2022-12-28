@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Windows.Markup;
-using QA.Validation.Xaml.ListTypes;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {

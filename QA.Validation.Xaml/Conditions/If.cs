@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Windows.Markup;
 
 namespace QA.Validation.Xaml
 {
     /// <summary>
     /// Ветвление ЕСЛИ
     /// </summary>
-    [ContentProperty("Condition")]
     public class If : CompositeCondition
     {
         [Obsolete("Use Then")]

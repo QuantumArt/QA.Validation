@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace QA.Validation.Xaml.Tests.Util
 {
     public static class ValidatorConstants
@@ -49,14 +44,15 @@ namespace QA.Validation.Xaml.Tests.Util
             public const string MatchesForEachLine = "QA.Validation.Xaml.Tests.Issues.Issue_0002.MatchesForEachLine.xaml";
             public const string MatchesForEachLineMeta = "QA.Validation.Xaml.Tests.Issues.Issue_0002.MatchesForEachLineMeta.xaml";
             public const string Issue_40666 = "QA.Validation.Xaml.Tests.Issues.Issue_40666.xaml";
+            public const string TestMessageTemplate = "QA.Validation.Xaml.Tests.Issues.TestMessageTemplate.xaml";
         }
 
         public static class ValueArguments
         {
-            public const string Example_000 = "QA.Validation.Xaml.Tests.ValueArguments.Example_000.xaml";
-            public const string Example_001 = "QA.Validation.Xaml.Tests.ValueArguments.Example_001.xaml";
-            public const string Example_002 = "QA.Validation.Xaml.Tests.ValueArguments.Example_002.xaml";
-            public const string Example_003 = "QA.Validation.Xaml.Tests.ValueArguments.Example_003.xaml";            
+            public const string Example_000 = "QA.Validation.Extensions.Tests.ValueArguments.Example_000.xaml";
+            public const string Example_001 = "QA.Validation.Extensions.Tests.ValueArguments.Example_001.xaml";
+            public const string Example_002 = "QA.Validation.Extensions.Tests.ValueArguments.Example_002.xaml";
+            public const string Example_003 = "QA.Validation.Extensions.Tests.ValueArguments.Example_003.xaml";
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Windows.Markup;
+﻿using Portable.Xaml.Markup;
 using QA.Configuration;
 
 namespace QA.Validation.Xaml

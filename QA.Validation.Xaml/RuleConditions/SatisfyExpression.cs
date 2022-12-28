@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Dynamic2;
-using System.Windows.Markup;
+using Portable.Xaml.Markup;
 using QA.Validation.Xaml.Dynamic;
 
 namespace QA.Validation.Xaml
 {
     /// <summary>
-    /// Проверяет 
+    /// Проверяет
     /// </summary>
     [ContentProperty("Expression")]
     public class SatisfyExpression : PropertyValidationCondition
     {
         private readonly object _sync = new object();
-        private string _expression;        
+        private string _expression;
         private Func<DynamicContext, bool> _func;
 
         /// <summary>
@@ -66,7 +65,7 @@ namespace QA.Validation.Xaml
                 Context = context,
                 Value = context.ValueProvider.GetValue(source)
             };
-            
+
             return _func(ctx);
         }
     }

@@ -1,8 +1,7 @@
-﻿using System.Windows.Markup;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using QA.Validation.Xaml.TypeConverters;
 using System;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {

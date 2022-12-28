@@ -43,7 +43,7 @@ namespace QA.Validation.Xaml.Fluent
                 .GetManifestResourceStream(path))
             {
                 // создаем экземпляр валидатора
-                return (XamlObjectValidator)XamlConfigurationParser.CreateFrom(stream);
+                return (XamlObjectValidator)XamlConfigurationParser.LoadFrom(stream);
             }
         }
 

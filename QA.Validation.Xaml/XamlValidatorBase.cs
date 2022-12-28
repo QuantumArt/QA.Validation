@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-using System.Windows.Markup;
+using Portable.Xaml.Markup;
 using QA.Configuration;
 
 namespace QA.Validation.Xaml
@@ -13,7 +13,7 @@ namespace QA.Validation.Xaml
         /// Правила валидации
         /// </summary>
         [Ambient]
-        public List<IValidationRule> ValidationRules { get; private set; }
+        public IList<IValidationRule> ValidationRules { get; private set; }
 
         /// <summary>
         /// Описания полейы

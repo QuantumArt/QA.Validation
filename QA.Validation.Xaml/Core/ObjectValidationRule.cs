@@ -1,15 +1,32 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Markup;
+using System.Linq;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {
-    [ContentProperty("Condition")]
+    [ContentProperty("Items")]
     public abstract class ObjectValidationRule : IValidationRule
     {
         /// <summary>
         /// Условие правила
         /// </summary>
-        public ValidationCondition Condition { get; set; }
+        ///
+        public IList<ValidationCondition> Items { get; private set; }
+
+        public ObjectValidationRule()
+        {
+            Items = new List<ValidationCondition>();
+        }
+
+        public ValidationCondition Condition
+        {
+            get { return Items.Any() ? Items.First() : null; }
+            set
+            {
+                Items.Clear();
+                Items.Add(value);
+            }
+        }
 
         public bool Validate(IValueProvider provider, IDefinitionStorage storage, ValidationContext result)
         {
@@ -20,6 +37,7 @@ namespace QA.Validation.Xaml
                 ValueProvider = provider,
                 ServiceProvider = result.ServiceProvider,
                 CustomerCode = result.CustomerCode,
+                LocalizeMessages = result.LocalizeMessages,
                 SiteId = result.SiteId,
                 ContentId = result.ContentId
 

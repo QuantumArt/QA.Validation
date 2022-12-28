@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Windows.Markup;
-using System.Xaml;
+using Portable.Xaml.Markup;
+using Portable.Xaml;
 
 namespace QA.Validation.Xaml.Markup
 {
@@ -88,15 +88,12 @@ namespace QA.Validation.Xaml.Markup
 			};
 
             IEnumerable<AmbientPropertyValue> allAmbientValues = ambientProvider.GetAllAmbientValues(null, false, types, new XamlMember[]
-			{				
+			{
                 ambientMember,
 			});
 
-            List<AmbientPropertyValue> list = allAmbientValues as List<AmbientPropertyValue>;
-
-            for (int i = 0; i < list.Count; i++)
+            foreach (var ambientPropertyValue in allAmbientValues)
             {
-                AmbientPropertyValue ambientPropertyValue = list[i];
                 if (ambientPropertyValue.Value is Dictionary<string, DynamicResourceDictionary>)
                 {
                     Dictionary<string, DynamicResourceDictionary> resourceDictionary = (Dictionary<string, DynamicResourceDictionary>)ambientPropertyValue.Value;

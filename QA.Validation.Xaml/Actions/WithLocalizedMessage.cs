@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Windows.Markup;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {

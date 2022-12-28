@@ -1,6 +1,5 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using System.Windows.Markup;
+﻿using System.Text.RegularExpressions;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {
@@ -13,12 +12,12 @@ namespace QA.Validation.Xaml
         /// <summary>
         /// Текст регулярного выражения
         /// </summary>
-        public string Expression { get; set; }
+        public virtual string Expression { get; set; }
 
         /// <summary>
         /// Опции регулярного выражения
         /// </summary>
-        public RegexOptions RegexOptions { get; set; }
+        public virtual RegexOptions RegexOptions { get; set; }
 
         public override bool Execute(ValidationConditionContext context)
         {

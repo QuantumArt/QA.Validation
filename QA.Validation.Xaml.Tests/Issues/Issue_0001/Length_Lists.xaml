@@ -21,6 +21,6 @@
         </If>
     </ForMember>
 
-    <ForMember Definition="{x:Definition strings}" Condition="{x:Reference condition}">       
+    <ForMember Definition="{x:Definition strings}" Condition="{x:Reference condition}">
     </ForMember>
 </XamlValidator>

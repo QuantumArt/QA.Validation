@@ -2,7 +2,7 @@
     xmlns="http://artq.com/validation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace: System;assembly=mscorlib">
-    
+
     <!--
         описание полей
         Alias:          ключ для использования в валидаторе. Произвольный текст (латинские быквы, цифры, подчеркивание)
@@ -15,10 +15,10 @@
         <PropertyDefinition Alias="DuplicateName" PropertyName="field_1235" PropertyType="{x:Type x:String}"/>
     </XamlValidator.Definitions>
 
-    <!-- Заполнение поля ValidationRules (оно указано как ContentProperty)-->    
+    <!-- Заполнение поля ValidationRules (оно указано как ContentProperty)-->
     <!--применение правила к свойству (к полю)
         Если поле Name имеет значение null, то выводится ошибка "Не может быть null"
-    -->  
+    -->
     <ForMember Definition="{x:Definition Name}">
         <If>
             <!--установка свойства Condition (оно указано как ContentProperty)-->
@@ -31,7 +31,7 @@
     </ForMember>
 
     <!--применение правила к свойству (к полю)
-        Пример обратного синтаксиса: 
+        Пример обратного синтаксиса:
             Поле DuplicateName обязательно для заполнения, если поле Name не пустое
         Пример приведения типов: полю Message класса RequiredIf устанавливается объект типа WithMessage-->
     <ForMember Definition="{x:Definition DuplicateName}">
@@ -41,9 +41,9 @@
             </Not>
         </RequiredIf>
     </ForMember>
-    
+
     <!--применение правила ко всему объекту
-        Если значения полей Name и DuplicateName не совпадают, 
+        Если значения полей Name и DuplicateName не совпадают,
             то выводится локализованное сообщение-->
     <Must>
         <If>

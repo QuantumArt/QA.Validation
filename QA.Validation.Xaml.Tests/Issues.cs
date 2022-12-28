@@ -13,8 +13,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Equals_Condition_0001()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_1234", "true" },
                 };
 
@@ -30,8 +30,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Equals_Condition_0002()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_1234", "false" },
                 };
 
@@ -48,8 +48,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Equals_Condition_0003()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_1234", "123" },
                 };
 
@@ -65,8 +65,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Equals_Condition_0004()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_1234", "124" },
                 };
 
@@ -83,8 +83,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Equals_Condition_0005()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_1234", "" },
                 };
 
@@ -104,8 +104,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_GreaterThan_Condition_0001()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "String_Field", "12" },
                     { "Int32_Field", "12" },
                 };
@@ -127,8 +127,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_GreaterThan_Condition_0002()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "String_Field", "122" },
                     { "Int32_Field", "122" },
                 };
@@ -151,8 +151,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_GreaterThan_Condition_0003()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field1", "2012.03.03 18:12:33" },
                     { "field2", "2012.01.03 18:12:33" },
                 };
@@ -171,8 +171,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_GreaterThan_Condition_0004()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field1", "2012.03.03 18:12:33" },
                     { "field2", "2012.03.03 18:12:34" },
                 };
@@ -195,8 +195,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Boolean_From_Digit_One()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_1234", "1" },
                 };
 
@@ -212,8 +212,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Boolean_From_Didgit_Zero()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_1234", "0" },
                 };
 
@@ -235,8 +235,8 @@ namespace QA.Validation.Xaml.Tests
         {
             lock (typeof(DynamicResourceDictionaryContainer))
             {
-                var model = new Dictionary<string, string>() 
-                { 
+                var model = new Dictionary<string, string>()
+                {
                     { "field_1234", "" },
                 };
 
@@ -244,8 +244,9 @@ namespace QA.Validation.Xaml.Tests
                 string text1 = "test text 1";
                 string text2 = "test text 2";
 
-                string resource1 = CreateDictionaryText(text1);
-                string resource2 = CreateDictionaryText(text2);
+                var templateText = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Issues.TestMessageTemplate);
+                var resource1 = String.Format(templateText, text1);
+                var resource2 = String.Format(templateText, text2);
 
                 var validatorText = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Issues.Uses_DynamicResource);
 
@@ -276,7 +277,7 @@ namespace QA.Validation.Xaml.Tests
             dynamicResource.TryGetResourceDictionary("Messages", out dict);
 
             //добавим объект типа string
-            dict.Resources.Add("test", new WithMessage { Text = message });
+            dict.Resources.Add("test", new WithMessage() { Text = message });
             #endregion
 
             // генерируем xaml-текст такого словаря:
@@ -291,9 +292,9 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_MatchesForEachLine_01()
         {
-            var model = new Dictionary<string, string>() 
-                { 
-                    { "String_Field", 
+            var model = new Dictionary<string, string>()
+                {
+                    { "String_Field",
 @"12345
 123445
 345345345" },
@@ -313,9 +314,9 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_MatchesForEachLine_Allow_Empty_Strings()
         {
-            var model = new Dictionary<string, string>() 
-                { 
-                    { "String_Field2", 
+            var model = new Dictionary<string, string>()
+                {
+                    { "String_Field2",
 @"12345
 
 123445
@@ -336,9 +337,9 @@ namespace QA.Validation.Xaml.Tests
         //[TestCategory("Issues")]
         public void Issue_MatchesForEachLine_Empty_Strings_Not_Allowed()
         {
-            var model = new Dictionary<string, string>() 
-                { 
-                    { "String_Field", 
+            var model = new Dictionary<string, string>()
+                {
+                    { "String_Field",
 @"12345
 
 123445
@@ -359,13 +360,13 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_MatchesForEachLine_Trim()
         {
-            var model = new Dictionary<string, string>() 
-                { 
-                    { "String_Field3", 
-@" 12345  
+            var model = new Dictionary<string, string>()
+                {
+                    { "String_Field3",
+@" 12345
     123445
 345345345"},
-          {"String_Field", @""},  
+          {"String_Field", @""},
           {"String_Field2", @""},
                 };
 
@@ -382,9 +383,9 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_MatchesForEachLine_Meta()
         {
-            var model = new Dictionary<string, string>() 
-                { 
-                    { "String_Field", 
+            var model = new Dictionary<string, string>()
+                {
+                    { "String_Field",
 @"<meta name=""123"" content=""3456"" />
 <meta name=""133"" content=""3456"" />"}
                 };
@@ -395,9 +396,9 @@ namespace QA.Validation.Xaml.Tests
             validator.Validate(model, context);
             Assert.IsTrue(context.IsValid);
 
-            model = new Dictionary<string, string>() 
-                { 
-                    { "String_Field", 
+            model = new Dictionary<string, string>()
+                {
+                    { "String_Field",
 @"        <meta name=""123"" content=""3456"" />
 
 
@@ -414,13 +415,13 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_MatchesForEachLine_Spaces_Not_Allowed()
         {
-            var model = new Dictionary<string, string>() 
-                { 
-                    { "String_Field", 
-@" 12345  
+            var model = new Dictionary<string, string>()
+                {
+                    { "String_Field",
+@" 12345
     123445
 345345345"},
-          {"String_Field3", @""},  
+          {"String_Field3", @""},
           {"String_Field2", @""},
                 };
 
@@ -436,10 +437,10 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_MatchesForEachLine_Allow_SingleLine()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "String_Field", @"12345" },
-                    { "String_Field2", @"" },  
+                    { "String_Field2", @"" },
                     {"String_Field3", @""},
                 };
 
@@ -458,8 +459,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Length_MinLength_invalid()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "String_Field", "92" },
                 };
 
@@ -478,8 +479,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Length_MinLength_exact()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "String_Field", "1234567890" },
                 };
 
@@ -497,8 +498,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Length_MinLength_valid()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "String_Field", "1234567890111" },
                 };
 
@@ -517,8 +518,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Length_MinLength_Arrays_valid()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "ints", "1,2" },
                     { "strings", "a11,aa2,as3" },
                 };
@@ -538,8 +539,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Length_MinLength_Arrays_invalid()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "ints", "1,2,3,1,2" },
                     { "strings", "asd" },
                 };
@@ -559,8 +560,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Length_MinLength_Arrays1_valid()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "ints", "1,2,3,4" },
                 };
 
@@ -578,8 +579,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Length_MinLength_Arrays1_invalid()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "ints", "1,2" },
                 };
 
@@ -597,8 +598,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("Issues")]
         public void Issue_Length_MinLength_Arrays1_invalid_empty()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "ints", "" },
                 };
 
@@ -621,8 +622,8 @@ namespace QA.Validation.Xaml.Tests
             //<PropertyDefinition Alias="Year" Description="Year" PropertyName="field_173111" PropertyType="x:Int32" />
             //<PropertyDefinition Alias="SortOrder" Description="SortOrder" PropertyName="field_173112" PropertyType="x:Int32"/>
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_173111", "2015" },
                     { "field_173112", "12" },
                 };
@@ -640,8 +641,8 @@ namespace QA.Validation.Xaml.Tests
             //<PropertyDefinition Alias="Year" Description="Year" PropertyName="field_173111" PropertyType="x:Int32" />
             //<PropertyDefinition Alias="SortOrder" Description="SortOrder" PropertyName="field_173112" PropertyType="x:Int32"/>
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_173111", "2015" },
                     { "field_173112", "1" },
                 };

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using QA.Validation.Xaml.Extensions.Rules.Remote;
 
 namespace QA.Validation.Xaml.Extensions.Rules
@@ -43,7 +44,7 @@ namespace QA.Validation.Xaml.Extensions.Rules
         public string ContentType { get; set; }
 
         /// <summary>
-        /// Таймаут на обращение к сервису валидации (в мс). 
+        /// Таймаут на обращение к сервису валидации (в мс).
         /// По умолчанию 5000 (5 секунд)
         /// </summary>
         public int Timeout { get; set; }
@@ -112,6 +113,7 @@ namespace QA.Validation.Xaml.Extensions.Rules
             var context = new RemoteValidationContext
             {
                 CustomerCode = ctx.CustomerCode ?? CustomerCode,
+                LocalizeMessages = ctx.LocalizeMessages,
                 CurrentUICulture = CultureInfo.CurrentUICulture.Name,
                 CurrentCulture = CultureInfo.CurrentCulture.Name,
                 SiteId = ctx.SiteId != 0 ? ctx.SiteId : SiteId,
@@ -142,8 +144,7 @@ namespace QA.Validation.Xaml.Extensions.Rules
                     headers,
                     Timeout);
 
-            RemoteValidationResult result = (new JavaScriptSerializer())
-                .Deserialize<RemoteValidationResult>(responseBody);
+            RemoteValidationResult result = (JsonConvert.DeserializeObject<RemoteValidationResult>(responseBody));
 
 
             if (result.NewValues != null)

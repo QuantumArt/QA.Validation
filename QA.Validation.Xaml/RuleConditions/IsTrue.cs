@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows.Markup;
-
-namespace QA.Validation.Xaml
+﻿namespace QA.Validation.Xaml
 {
     /// <summary>
     /// Сравнивает значения поля с True

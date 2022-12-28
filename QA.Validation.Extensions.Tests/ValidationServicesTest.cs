@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Xaml;
+using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using QA.Configuration;
+using QA.Validation.Xaml;
 using QA.Validation.Xaml.Extensions.Conditions;
 using QA.Validation.Xaml.ListTypes;
 using QA.Validation.Xaml.Tests.Util;
 
-namespace QA.Validation.Xaml.Tests
+namespace QA.Validation.Extensions.Tests
 {
     /// <summary>
     /// Тесты интеграционного API.
@@ -93,7 +94,7 @@ namespace QA.Validation.Xaml.Tests
                 Alias = fieldName }
             });
 
-            var validator = (XamlValidator)XamlServices.Parse(emptyValidatorString);
+            var validator = (XamlValidator)XamlConfigurationParser.CreateFrom(emptyValidatorString);
 
             // добавим в валидатор логику выставления значения для этого поля
             validator.ValidationRules.Add(new ForMember
@@ -102,9 +103,9 @@ namespace QA.Validation.Xaml.Tests
                 Condition = new ApplyValue { Value = fieldValue }
             });
 
-            var newValidatorText = XamlServices.Save(validator);
+            var newValidatorText = XamlConfigurationParser.Save(validator);
             return newValidatorText;
-        } 
+        }
         #endregion
 
 
@@ -259,8 +260,8 @@ namespace QA.Validation.Xaml.Tests
 
             Assert.AreEqual(1, result.Result.Errors.Count);
 
-            // Указываем пустое значение, 
-            obj.Model = new Dictionary<string, string>() 
+            // Указываем пустое значение,
+            obj.Model = new Dictionary<string, string>()
                 {
                     { "field_1234", "Alexander" },
                     { "field_1235", "Alexander" },
@@ -391,7 +392,8 @@ namespace QA.Validation.Xaml.Tests
 
         [TestMethod]
         [TestCategory("ValidationServices: generation")]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(TargetInvocationException))]
+
         public void Test_GenerateXamlValidatorText_Checks_That_PropertyName_Is_Required()
         {
             List<PropertyDefinition> definitions = new List<PropertyDefinition>()
@@ -399,12 +401,13 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "Name", PropertyName = "", PropertyType = typeof(string), Description = "Имя" },
             };
 
-            ValidationServices.GenerateXamlValidatorText(definitions);
+            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            XamlConfigurationParser.CreateFrom(result);
         }
 
         [TestMethod]
         [TestCategory("ValidationServices: generation")]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(TargetInvocationException))]
         public void Test_GenerateXamlValidatorText_Checks_That_Alias_Is_Required()
         {
             List<PropertyDefinition> definitions = new List<PropertyDefinition>()
@@ -412,7 +415,8 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "", PropertyName = "field_1234", PropertyType = typeof(string), Description = "Имя" },
             };
 
-            ValidationServices.GenerateXamlValidatorText(definitions);
+            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            XamlConfigurationParser.CreateFrom(result);
         }
 
         [TestMethod]
@@ -426,12 +430,13 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "Name", PropertyName = "field_1235", PropertyType = typeof(string), Description = "Отчество" },
             };
 
-            ValidationServices.GenerateXamlValidatorText(definitions);
+            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            XamlConfigurationParser.CreateFrom(result);
         }
 
         [TestMethod]
         [TestCategory("ValidationServices: generation")]
-        [ExpectedException(typeof(XamlValidatorException))]
+        [ExpectedException(typeof(TargetInvocationException))]
         public void Test_GenerateXamlValidatorText_Checks_That_Alias_Consists_Of_Literals()
         {
             List<PropertyDefinition> definitions = new List<PropertyDefinition>()
@@ -439,12 +444,13 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "Name Name() - 123 !@#$%^&*()_+", PropertyName = "field_1234", PropertyType = typeof(string) },
             };
 
-            ValidationServices.GenerateXamlValidatorText(definitions);
+            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            XamlConfigurationParser.CreateFrom(result);
         }
 
         [TestMethod]
         [TestCategory("ValidationServices: generation")]
-        [ExpectedException(typeof(XamlValidatorException))]
+        [ExpectedException(typeof(TargetInvocationException))]
         public void Test_GenerateXamlValidatorText_Checks_That_Alias_Cannot_Start_With_Number()
         {
             List<PropertyDefinition> definitions = new List<PropertyDefinition>()
@@ -452,7 +458,8 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "1Name", PropertyName = "field_1234", PropertyType = typeof(string), Description = "Имя" },
             };
 
-            ValidationServices.GenerateXamlValidatorText(definitions);
+            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            XamlConfigurationParser.CreateFrom(result);
         }
 
         [TestMethod]
@@ -474,7 +481,8 @@ namespace QA.Validation.Xaml.Tests
 
         [TestMethod]
         [TestCategory("ValidationServices: generation")]
-        [ExpectedException(typeof(XamlValidatorException))]
+        [ExpectedException(typeof(TargetInvocationException))]
+
         public void Test_GenerateXamlValidatorText_Checks_That_Alias_Cannot_Contain_Spaces()
         {
             List<PropertyDefinition> definitions = new List<PropertyDefinition>()
@@ -482,7 +490,8 @@ namespace QA.Validation.Xaml.Tests
                 new PropertyDefinition { Alias = "_Nam e", PropertyName = "field_1234", PropertyType = typeof(string), Description = "Имя" },
             };
 
-            ValidationServices.GenerateXamlValidatorText(definitions);
+            var result = ValidationServices.GenerateXamlValidatorText(definitions);
+            XamlConfigurationParser.CreateFrom(result);
         }
 
         [TestMethod]
@@ -537,12 +546,12 @@ namespace QA.Validation.Xaml.Tests
             //добавим объект типа string
             dict.Resources.Add("MyPhoneNumber", "+7 926 706 48 72");
 
-            //добавим объекты типа System.Drawing.*
-            dict.Resources.Add("MyLocation", new System.Drawing.Point { X = 554400, Y = 373000 });
-            dict.Resources.Add("MyFavoriteColor", System.Drawing.Color.AliceBlue);
+//            //добавим объекты типа System.Drawing.*
+//            dict.Resources.Add("MyLocation", new System.Drawing.Point { X = 554400, Y = 373000 });
+//            dict.Resources.Add("MyFavoriteColor", System.Drawing.Color.AliceBlue);
 
             // добавим объект из этой сборки
-            dict.Resources.Add("MyInfo", new Model.Person
+            dict.Resources.Add("MyInfo", new Xaml.Tests.Model.Person
             {
                 Age = 12,
                 Date = DateTime.Now,

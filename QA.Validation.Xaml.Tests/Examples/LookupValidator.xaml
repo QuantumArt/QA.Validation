@@ -12,7 +12,7 @@
         <PropertyDefinition Alias="Age" PropertyName="Age" PropertyType="{x:Type x:Int32}"/>
     </XamlValidator.Definitions>
 
-    <ForMember Definition="{x:Definition Name}">        
+    <ForMember Definition="{x:Definition Name}">
         <Sequence StopOnFirstFailure="True">
             <!--поддержка последовательных условий c различными сообщениями-->
             <If>
@@ -35,7 +35,7 @@
             </If>
         </Sequence>
     </ForMember>
-    
+
     <ForMember Definition="{x:Definition Date}">
         <!--пример сложного условия: Если поле не пустое, то его значение должно быть валидировано-->
         <If>

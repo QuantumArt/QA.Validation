@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using QA.Configuration;
 using System.IO;
-using System.Xaml;
 
 namespace QA.Validation.Xaml.Tests.Util
 {
@@ -13,11 +9,16 @@ namespace QA.Validation.Xaml.Tests.Util
     {
         public static TValidator GetXaml<TValidator>(string path)
         {
-            using (var stream = Assembly.GetExecutingAssembly()
-               .GetManifestResourceStream(path))
+            return GetXaml<TValidator>(Assembly.GetExecutingAssembly(), path);
+        }
+
+        public static TValidator GetXaml<TValidator>(Assembly assembly, string path)
+        {
+            using (var stream = assembly
+                       .GetManifestResourceStream(path))
             {
                 // создаем экземпляр валидатора
-                return (TValidator)XamlConfigurationParser.CreateFrom(stream);
+                return (TValidator)XamlConfigurationParser.LoadFrom(stream);
             }
         }
 
@@ -35,7 +36,7 @@ namespace QA.Validation.Xaml.Tests.Util
         }
 
         public static string GetEmbeddedResourceText(string path)
-        {            
+        {
             using (var stream = Assembly.GetExecutingAssembly()
                .GetManifestResourceStream(path))
             {

@@ -12,11 +12,11 @@ namespace QA.Validation.Xaml.Fluent
         {
             //var ctx = new ForMember() { Definition = PropertyDefinition.Create(prop) };
             //validator.ValidationRules.Add(ctx);
-            //return ctx;            
+            //return ctx;
             throw new NotImplementedException();
         }
 
-        public static If If(this IValidationRule rule) 
+        public static If If(this IValidationRule rule)
         {
             rule.Condition = new If();
             return (If)rule.Condition;
@@ -29,19 +29,19 @@ namespace QA.Validation.Xaml.Fluent
 
         public static If True(this If rule, ValidationCondition condition)
         {
-            rule.True = condition;
+            rule.Then = condition;
             return rule;
         }
 
         public static If False(this If rule, ValidationCondition condition)
         {
-            rule.False = condition;
+            rule.Else = condition;
             return rule;
         }
 
         public static CompositeCondition WithCondition(this CompositeCondition item, ValidationCondition condition)
         {
-            item.Condition = condition;
+            //item.Condition = condition;
             return item;
         }
     }

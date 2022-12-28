@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Windows.Markup;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {
@@ -24,7 +23,7 @@ namespace QA.Validation.Xaml
 
             return string.Format(Text, Arguments.Select(x =>
                 x is IValueArgument ?
-                ((IValueArgument)x).Process(definition, provider, context, currentValue) : 
+                ((IValueArgument)x).Process(definition, provider, context, currentValue) :
                 x)
                 .ToArray());
         }

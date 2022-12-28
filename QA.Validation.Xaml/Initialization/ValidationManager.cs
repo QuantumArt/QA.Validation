@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.Caching;
 using System.Security.Cryptography;
 using System.Text;
-using System.Xaml;
 using System.Xml.Linq;
-using System.Xml.Serialization;
+using QA.Configuration;
+using Portable.Xaml;
 
 namespace QA.Validation.Xaml.Initialization
 {
@@ -132,12 +132,13 @@ namespace QA.Validation.Xaml.Initialization
 
             // генерация текста
             var validator = new XamlValidator();
+
             foreach (var definition in definitions)
             {
-                validator.Definitions.Add(definition.Alias, definition);
+                validator.Definitions.Add(new KeyValuePair<string, PropertyDefinition>(definition.Alias, definition));
             }
 
-            return XamlServices.Save(validator);
+            return XamlConfigurationParser.Save(validator);
         }
 
         public string GenerateDynamicResourceText(DynamicResourceDictionaryContainer container)
@@ -147,7 +148,7 @@ namespace QA.Validation.Xaml.Initialization
                 container = new DynamicResourceDictionaryContainer();
             }
 
-            return XamlServices.Save(container);
+            return XamlConfigurationParser.Save(container);
         }
         public PropertyDefinition[] GetPropertyDefinitions(string validatorText, string dynamicResourceText)
         {
@@ -191,6 +192,7 @@ namespace QA.Validation.Xaml.Initialization
             {
                 ServiceProvider = serviceProvider,
                 CustomerCode = paramObject.CustomerCode,
+                LocalizeMessages = paramObject.LocalizeMessages,
                 SiteId = paramObject.SiteId,
                 ContentId = paramObject.ContentId
             };

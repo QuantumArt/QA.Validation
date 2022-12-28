@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Markup;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {
@@ -12,7 +12,7 @@ namespace QA.Validation.Xaml
         /// <summary>
         /// Коллекция вложенных условий
         /// </summary>
-        public List<ValidationCondition> Items { get; private set; }
+        public IList<ValidationCondition> Items { get; private set; }
 
         public MultiCondition()
         {

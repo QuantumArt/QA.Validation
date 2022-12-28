@@ -1,6 +1,5 @@
-﻿using System.Windows.Markup;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using Portable.Xaml.Markup;
 using QA.Validation.Xaml.TypeConverters;
 
 namespace QA.Validation.Xaml

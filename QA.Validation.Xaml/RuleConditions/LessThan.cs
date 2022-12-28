@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Windows.Markup;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {
@@ -11,7 +11,7 @@ namespace QA.Validation.Xaml
     public class LessThan : PropertyValidationCondition
     {
         public IComparable Value { get; set; }
-        
+
         public PropertyDefinition Target { get; set; }
 
         public override bool Execute(ValidationConditionContext context)

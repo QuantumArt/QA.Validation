@@ -4,10 +4,12 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using QA.Validation.Xaml;
 using QA.Validation.Xaml.Extensions.Conditions;
+using QA.Validation.Xaml.Extensions.ValueArguments;
 using QA.Validation.Xaml.Tests.Util;
 
-namespace QA.Validation.Xaml.Tests
+namespace QA.Validation.Extensions.Tests
 {
     /// <summary>
     /// Валидация модели, описанной словарем
@@ -15,6 +17,12 @@ namespace QA.Validation.Xaml.Tests
     [TestClass()]
     public class XamlValidatorTest
     {
+        static XamlValidatorTest()
+        {
+            var encode = new Encode();
+            System.Diagnostics.Trace.Write(encode.ToString());
+        }
+
         #region Additional test attributes
 
         /// <summary>
@@ -35,7 +43,7 @@ namespace QA.Validation.Xaml.Tests
             lock (typeof(DynamicResourceDictionaryContainer))
             {
                 var dict = ValidationHelper.GetXaml<DynamicResourceDictionaryContainer>(DynamicResourceConstants.Container);
-                DynamicResourceDictionaryContainer.SetResourceProvider(() => dict); 
+                DynamicResourceDictionaryContainer.SetResourceProvider(() => dict);
             }
         }
 
@@ -46,8 +54,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("XamlValidator: samples")]
         public void Test_Checks_That_One_Property_Is_Not_Null()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Name", null },
                     { "DuplicateName", null },
                     { "Age", "0" },
@@ -74,8 +82,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("XamlValidator: samples")]
         public void Test_Checks_That_Another_Property_Is_Required_If_The_First_One_Is_Provided()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Name", "Иван" },
                     { "DuplicateName", null },
                     { "Age", "0" },
@@ -100,8 +108,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("XamlValidator: samples")]
         public void Test_Checks_Validation_Of_Equality_Of_Two_Members_With_Localized_Messages()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Name", "Ivanov" },
                     { "DuplicateName", "Ivanova" },
                     { "Age", "0" },
@@ -145,8 +153,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("XamlValidator: samples")]
         public void Test_Checks_That_Resource_Dictionaries_Work()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Name", "Ivan" },
                     { "DuplicateName", "Ivan" },
                     { "Age", "35" },
@@ -184,8 +192,8 @@ namespace QA.Validation.Xaml.Tests
             //<!--пример сложного условия: Если поле не пустое, то его значение должно быть валидировано-->
             // указываем непустое значение
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Name", "Alexander" },
                     { "DuplicateName", "Alexander" },
                     { "Age", "35" },
@@ -208,9 +216,9 @@ namespace QA.Validation.Xaml.Tests
 
             Assert.AreEqual(1, context.Result.Errors.Count);
 
-            // Указываем пустое значение, 
-            model = new Dictionary<string, string>() 
-                { 
+            // Указываем пустое значение,
+            model = new Dictionary<string, string>()
+                {
                     { "Name", "Alexander" },
                     { "DuplicateName", "Alexander" },
                     { "Age", "35" },
@@ -231,8 +239,8 @@ namespace QA.Validation.Xaml.Tests
             //<!--Приминение подключаемого ресурсного словаря.
             //    В примере используется файл {Project}\DynamicResources/Container.xaml-->
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Name", "Vasiliy" },
                     { "DuplicateName", "Vasiliy" },
                     { "Age", "35" },
@@ -260,8 +268,8 @@ namespace QA.Validation.Xaml.Tests
             //<!--Приминение подключаемого ресурсного словаря.
             //    В примере используется файл {Project}\DynamicResources/Container.xaml-->
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Names", "1, 2, 3, 4, 5" },
                     { "Ids", null },
                 };
@@ -285,8 +293,8 @@ namespace QA.Validation.Xaml.Tests
             //<!--Приминение подключаемого ресурсного словаря.
             //    В примере используется файл {Project}\DynamicResources/Container.xaml-->
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Names", "1, 2, 3, 4, 5" },
                     { "Ids", "1, 2, 3, 4, 5" },
                 };
@@ -308,8 +316,8 @@ namespace QA.Validation.Xaml.Tests
             //<!--Приминение подключаемого ресурсного словаря.
             //    В примере используется файл {Project}\DynamicResources/Container.xaml-->
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "PropertyNotExists", "value" },
                 };
 
@@ -326,8 +334,8 @@ namespace QA.Validation.Xaml.Tests
             //<!--Приминение подключаемого ресурсного словаря.
             //    В примере используется файл {Project}\DynamicResources/Container.xaml-->
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Names", "иван, родил, девчонку, иван, тащить, пелёнку" },
                     { "Ids", "1, 2, 3, 1, 5" },
                 };
@@ -353,8 +361,8 @@ namespace QA.Validation.Xaml.Tests
             //<!--Приминение подключаемого ресурсного словаря.
             //    В примере используется файл {Project}\DynamicResources/Container.xaml-->
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Names", "иван, родил, девчонку, велел, тащить, пелёнку" },
                     { "Ids", "1, 2, 3, 12, 5" },
                 };
@@ -371,8 +379,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("XamlValidator: samples")]
         public void Test_Checks_That_One_Property_Is_Not_Null_In_Case_Of_Different_Alias_And_PropretyName()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_1234", null },
                     { "field_1235", null },
                 };
@@ -395,8 +403,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("XamlValidator: samples")]
         public void Test_Checks_That_Passes_In_Case_Of_Different_Alias_And_PropretyName()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_1234", "Ivanov" },
                     { "field_1235", "Ivanov" },
                 };
@@ -413,8 +421,8 @@ namespace QA.Validation.Xaml.Tests
         [TestCategory("XamlValidator: samples")]
         public void Test_WithValueFormattedMessage()
         {
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "field_1234", "Ivanov123" },
                 };
 
@@ -435,8 +443,8 @@ namespace QA.Validation.Xaml.Tests
             //<!--Приминение подключаемого ресурсного словаря.
             //    В примере используется файл {Project}\DynamicResources/Container.xaml-->
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Name", "122" },
                     { "Age", "9"},
                     {"Date", DateTime.Now.AddDays(-11).ToString()}
@@ -457,8 +465,8 @@ namespace QA.Validation.Xaml.Tests
             //<!--Приминение подключаемого ресурсного словаря.
             //    В примере используется файл {Project}\DynamicResources/Container.xaml-->
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Name", "123" },
                     { "Age", "19"},
                     {"Date", DateTime.Now.AddDays(1).ToString()}
@@ -479,8 +487,8 @@ namespace QA.Validation.Xaml.Tests
             //<!--Приминение подключаемого ресурсного словаря.
             //    В примере используется файл {Project}\DynamicResources/Container.xaml-->
 
-            var model = new Dictionary<string, string>() 
-                { 
+            var model = new Dictionary<string, string>()
+                {
                     { "Name", "123" },
                     { "Age", "19"},
                     {"Date", DateTime.Now.AddYears(-10).ToString()}
@@ -493,6 +501,7 @@ namespace QA.Validation.Xaml.Tests
 
             Assert.IsTrue(context.Result.Errors.Count == 2);
         }
+
 
         #endregion
     }
