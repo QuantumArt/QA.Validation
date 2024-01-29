@@ -457,66 +457,66 @@ namespace QA.Validation.Xaml.Tests
         #region Length
         [TestMethod]
         [TestCategory("Issues")]
-        public void Issue_Length_MinLength_invalid()
+        public void Issue_LengthInRange_From_invalid()
         {
             var model = new Dictionary<string, string>()
                 {
                     { "String_Field", "92" },
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.Length_MinLength);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.LengthInRange_From);
             var context = new ValidationContext();
 
             validator.Validate(model, context);
 
             Assert.IsFalse(context.IsValid);
             Assert.AreEqual(1, context.Result.Errors.Count);
-            Assert.AreEqual("MinLength=10 else", context.Result.Errors[0].Message);
+            Assert.AreEqual("From=10 else", context.Result.Errors[0].Message);
             Assert.AreEqual("String_Field", context.Result.Errors[0].Definition.PropertyName);
         }
 
         [TestMethod]
         [TestCategory("Issues")]
-        public void Issue_Length_MinLength_exact()
+        public void Issue_LengthInRange_From_exact()
         {
             var model = new Dictionary<string, string>()
                 {
                     { "String_Field", "1234567890" },
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.Length_MinLength);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.LengthInRange_From);
             var context = new ValidationContext();
 
             validator.Validate(model, context);
 
             Assert.IsFalse(context.IsValid);
             Assert.AreEqual(1, context.Result.Errors.Count);
-            Assert.AreEqual("MinLength=10 then", context.Result.Errors[0].Message);
+            Assert.AreEqual("From=10 then", context.Result.Errors[0].Message);
         }
 
         [TestMethod]
         [TestCategory("Issues")]
-        public void Issue_Length_MinLength_valid()
+        public void Issue_LengthInRange_From_valid()
         {
             var model = new Dictionary<string, string>()
                 {
                     { "String_Field", "1234567890111" },
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.Length_MinLength);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.LengthInRange_From);
             var context = new ValidationContext();
 
             validator.Validate(model, context);
 
             Assert.IsFalse(context.IsValid);
             Assert.AreEqual(1, context.Result.Errors.Count);
-            Assert.AreEqual("MinLength=10 then", context.Result.Errors[0].Message);
+            Assert.AreEqual("From=10 then", context.Result.Errors[0].Message);
         }
 
 
         [TestMethod]
         [TestCategory("Issues")]
-        public void Issue_Length_MinLength_Arrays_valid()
+        public void Issue_LengthInRange_From_Arrays_valid()
         {
             var model = new Dictionary<string, string>()
                 {
@@ -537,7 +537,7 @@ namespace QA.Validation.Xaml.Tests
 
         [TestMethod]
         [TestCategory("Issues")]
-        public void Issue_Length_MinLength_Arrays_invalid()
+        public void Issue_LengthInRange_From_Arrays_invalid()
         {
             var model = new Dictionary<string, string>()
                 {
@@ -558,14 +558,14 @@ namespace QA.Validation.Xaml.Tests
 
         [TestMethod]
         [TestCategory("Issues")]
-        public void Issue_Length_MinLength_Arrays1_valid()
+        public void Issue_LengthInRange_From_Arrays1_valid()
         {
             var model = new Dictionary<string, string>()
                 {
                     { "ints", "1,2,3,4" },
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.Length_Lists_MinLength);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.LengthInRange_Lists_From);
             var context = new ValidationContext();
 
             validator.Validate(model, context);
@@ -577,14 +577,14 @@ namespace QA.Validation.Xaml.Tests
 
         [TestMethod]
         [TestCategory("Issues")]
-        public void Issue_Length_MinLength_Arrays1_invalid()
+        public void Issue_LengthInRange_From_Arrays1_invalid()
         {
             var model = new Dictionary<string, string>()
                 {
                     { "ints", "1,2" },
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.Length_Lists_MinLength);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.LengthInRange_Lists_From);
             var context = new ValidationContext();
 
             validator.Validate(model, context);
@@ -596,14 +596,14 @@ namespace QA.Validation.Xaml.Tests
 
         [TestMethod]
         [TestCategory("Issues")]
-        public void Issue_Length_MinLength_Arrays1_invalid_empty()
+        public void Issue_LengthInRange_From_Arrays1_invalid_empty()
         {
             var model = new Dictionary<string, string>()
                 {
                     { "ints", "" },
                 };
 
-            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.Length_Lists_MinLength);
+            var validator = ValidationHelper.GetXaml<XamlValidator>(ValidatorConstants.Issues.LengthInRange_Lists_From);
             var context = new ValidationContext();
 
             validator.Validate(model, context);

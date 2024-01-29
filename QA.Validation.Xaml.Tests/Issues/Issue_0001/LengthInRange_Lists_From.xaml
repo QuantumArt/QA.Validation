@@ -4,18 +4,18 @@
     xmlns:sys="clr-namespace: System;assembly=mscorlib">
     <!--описание полей-->
     <XamlValidator.Definitions>
-        <PropertyDefinition Alias="String_Field" PropertyName="String_Field" PropertyType="{x:Type sys:String}"/>
+        <PropertyDefinition Alias="ints" PropertyName="ints" PropertyType="{x:Type ListOfInt}"/>
     </XamlValidator.Definitions>
 
-    <ForMember Definition="{x:Definition String_Field}">
+    <ForMember Definition="{x:Definition ints}">
         <If x:Name="condition">
             <!--установка свойства Condition (оно указано как ContentProperty)-->
-            <Length  MinLength="10"/>
+            <LengthInRange From="3"/>
             <If.Then>
-                <WithMessage Text="MinLength=10 then" />
+                <WithMessage Text="OK" />
             </If.Then>
             <If.Else>
-                <WithMessage Text="MinLength=10 else" />
+                <WithMessage Text="FAIL" />
             </If.Else>
         </If>
     </ForMember>

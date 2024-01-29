@@ -8,10 +8,10 @@ namespace QA.Validation.Xaml
     [ContentProperty("Value")]
     public class LengthInRange : PropertyValidationCondition
     {
-        private Length _inner;
+        private LengthInternal _inner;
 
         /// <summary>
-        /// Минимальная длина
+        /// Максимальная длина
         /// </summary>
         public int? To
         {
@@ -26,7 +26,7 @@ namespace QA.Validation.Xaml
         }
 
         /// <summary>
-        /// Максимальная длина
+        /// Минимальная длина
         /// </summary>
         public int? From
         {
@@ -47,7 +47,7 @@ namespace QA.Validation.Xaml
 
         public LengthInRange()
         {
-            _inner = new Length();
+            _inner = new LengthInternal();
         }
     }
 }

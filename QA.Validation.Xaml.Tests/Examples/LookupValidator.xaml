@@ -28,7 +28,7 @@
                 </If.True>
             </If>
             <If>
-                <Length MinLength="5"/>
+                <LengthInRange From="5"/>
                 <If.True>
                     <WithMessage Text="Длина поля должна быть не менее 5 символов." />
                 </If.True>

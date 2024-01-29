@@ -124,7 +124,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Issues\Issue_0001\Length_MinLength.xaml">
+    <EmbeddedResource Include="Issues\Issue_0001\LengthInRange_From.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -139,7 +139,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Issues\Issue_0001\Length_Lists_MinLength.xaml">
+    <EmbeddedResource Include="Issues\Issue_0001\LengthInRange_Lists_From.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
