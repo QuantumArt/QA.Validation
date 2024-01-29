@@ -144,7 +144,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Issues\Issue_0001\Length_Lists_MaxLength.xaml">
+    <EmbeddedResource Include="Issues\Issue_0001\Length_Lists_LengthMax.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

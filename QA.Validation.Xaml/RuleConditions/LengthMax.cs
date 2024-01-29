@@ -1,22 +1,25 @@
-﻿using Portable.Xaml.Markup;
+﻿using System.Linq;
+using System.Collections;
+using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {
     /// <summary>
     /// Проверяет длину строки, массива или любого типа, реализующего IEnumerable
     /// </summary>
-    public class LengthInRange : PropertyValidationCondition
+    [ContentProperty("Value")]
+    public class LengthMax : PropertyValidationCondition
     {
         private Length _inner;
 
         /// <summary>
         /// Максимальная длина
         /// </summary>
-        public int? To
+        public int Value
         {
             get
             {
-                return _inner.MaxLength;
+                return _inner.MaxLength ?? 0;
             }
             set
             {
@@ -24,29 +27,15 @@ namespace QA.Validation.Xaml
             }
         }
 
-        /// <summary>
-        /// Минимальная длина
-        /// </summary>
-        public int? From
-        {
-            get
-            {
-                return _inner.MinLength;
-            }
-            set
-            {
-                _inner.MinLength = value;
-            }
-        }
 
         public override bool Execute(ValidationConditionContext context)
         {
             return _inner.Execute(context);
         }
 
-        public LengthInRange()
+        public LengthMax()
         {
-            _inner = new Length();
+            _inner = new Length { MinLength = 0 };
         }
     }
 }
