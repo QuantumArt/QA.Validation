@@ -10,12 +10,12 @@
     <ForMember Definition="{x:Definition String_Field}">
         <If x:Name="condition">
             <!--установка свойства Condition (оно указано как ContentProperty)-->
-            <Length  MinLength="10"/>
+            <LengthInRange From="10"/>
             <If.Then>
-                <WithMessage Text="MinLength=10 then" />
+                <WithMessage Text="From=10 then" />
             </If.Then>
             <If.Else>
-                <WithMessage Text="MinLength=10 else" />
+                <WithMessage Text="From=10 else" />
             </If.Else>
         </If>
     </ForMember>

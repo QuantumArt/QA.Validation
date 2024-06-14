@@ -490,7 +490,7 @@ namespace QA.Validation.Extensions.Tests
             var model = new Dictionary<string, string>()
                 {
                     { "Name", "123" },
-                    { "Age", "19"},
+                    { "Age", "18"},
                     {"Date", DateTime.Now.AddYears(-10).ToString()}
                 };
 

@@ -45,7 +45,7 @@
             <SatisfyExpression>Convert.ToDateTime(Value) >= DateTime.Now</SatisfyExpression>
             <If.False>
                 <!--добавление ошибки валидации-->
-                <WithMessage Text="дата должна быть не позднее текущей" />
+                <WithMessage Text="дата должна быть не ранее текущей" />
             </If.False>
         </If>
     </ForMember>

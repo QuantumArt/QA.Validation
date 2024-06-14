@@ -53,7 +53,7 @@
             <Not>
                 <Equals Value=""/>
             </Not>
-            <Length MaxLength="50" MinLength="1"/>
+            <LengthInRange From="1" To="50"/>
             <Matches Expression="[a-z|а-я|'|\ \-]" RegexOptions="IgnoreCase"/>
         </And>
 
@@ -72,7 +72,7 @@
                 </If.True>
             </If>
             <If>
-                <Length MaxLength="50" MinLength="1"/>
+                <LengthInRange From="1" To="50" />
                 <If.False>
                     <x:DynamicResource Name="Messages" Key="msg_LastNameLength"/>
                 </If.False>

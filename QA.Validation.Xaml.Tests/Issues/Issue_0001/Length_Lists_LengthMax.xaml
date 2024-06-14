@@ -10,7 +10,7 @@
     <ForMember Definition="{x:Definition ints}">
         <If x:Name="condition">
             <!--установка свойства Condition (оно указано как ContentProperty)-->
-            <Length MinLength="3"/>
+            <LengthMax Value="3"/>
             <If.Then>
                 <WithMessage Text="OK" />
             </If.Then>

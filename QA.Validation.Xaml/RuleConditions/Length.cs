@@ -1,22 +1,20 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Collections;
-using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
 {
     /// <summary>
     /// Проверяет длину строки, массива или любого типа, реализующего IEnumerable
     /// </summary>
-    [ContentProperty("Value")]
     public class Length : PropertyValidationCondition
     {
         /// <summary>
-        /// Минимальная длина
+        /// Максимальная длина
         /// </summary>
         public int? MaxLength { get; set; }
 
         /// <summary>
-        /// Максимальная длина
+        /// Минимальная длина
         /// </summary>
         public int? MinLength { get; set; }
 
@@ -56,7 +54,7 @@ namespace QA.Validation.Xaml
         private bool CheckCount(int count)
         {
             return (MaxLength != null ? count <= MaxLength : true) &&
-                (MinLength != null ? count >= MinLength : true);
+                   (MinLength != null ? count >= MinLength : true);
         }
     }
 }

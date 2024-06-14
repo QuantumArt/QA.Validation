@@ -32,12 +32,12 @@ namespace QA.Validation.Xaml.Tests.Util
             public const string Equals_Converter_Boolean = "QA.Validation.Xaml.Tests.Issues.Issue_0001.Equals_Converter_Boolean.xaml";
             public const string Equals_Converter_Int32 = "QA.Validation.Xaml.Tests.Issues.Issue_0001.Equals_Converter_Int32.xaml";
             public const string GreaterThan = "QA.Validation.Xaml.Tests.Issues.Issue_0001.GreaterThan.xaml";
-            public const string Length_MinLength = "QA.Validation.Xaml.Tests.Issues.Issue_0001.Length_MinLength.xaml";
+            public const string LengthInRange_From = "QA.Validation.Xaml.Tests.Issues.Issue_0001.LengthInRange_From.xaml";
             public const string Length_Lists = "QA.Validation.Xaml.Tests.Issues.Issue_0001.Length_Lists.xaml";
             public const string GreaterThan_Two_Properties = "QA.Validation.Xaml.Tests.Issues.Issue_0001.GreaterThan_Two_Properties.xaml";
 
             //Length_Lists_MinLength
-            public const string Length_Lists_MinLength = "QA.Validation.Xaml.Tests.Issues.Issue_0001.Length_Lists_MinLength.xaml";
+            public const string LengthInRange_Lists_From = "QA.Validation.Xaml.Tests.Issues.Issue_0001.LengthInRange_Lists_From.xaml";
             public const string Length_Lists_MaxLength = "QA.Validation.Xaml.Tests.Issues.Issue_0001.Length_Lists_MaxLength.xaml";
 
             public const string Uses_DynamicResource = "QA.Validation.Xaml.Tests.Issues.Issue_0002.Uses_DynamicResource.xaml";
