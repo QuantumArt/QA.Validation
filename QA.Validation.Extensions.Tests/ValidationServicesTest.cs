@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -603,6 +603,100 @@ namespace QA.Validation.Extensions.Tests
             {
                 Assert.AreEqual(definitions[i], resultingDefinitions[i]);
             }
+        }
+
+        [TestMethod]
+        [TestCategory("ValidationServices: test validators")]
+        public void Test_TestValidator_With_Model_With_ListOfInt_Checks_That_IsEven_Passes_On_Valid()
+        {
+            string dynamicResourceText = null;
+            string baseValidatorText = null;
+            var validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.ListOfInt_Length);
+
+            var model = new Dictionary<string, string>()
+            {
+                {"field_1234", null},
+                {"field_1235", null},
+                {"field_1236", null},
+                {"field_1237", null}
+            };
+
+            ValidationServices.TestValidator(model, validator, dynamicResourceText, baseValidatorText);
+        }
+
+        [TestMethod]
+        [TestCategory("ValidationServices: samples")]
+        public void Test_ValidateModel_Checks_That_IsEven_And_MinLength_For_ListOfInt_Passes_On_ValidListLength()
+        {
+            var obj = new ValidationParamObject
+            {
+                DynamicResource = null,
+                Validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.ListOfInt_Length),
+                Model = new Dictionary<string, string>()
+                {
+                    {"field_1234","6"},
+                    {"field_1235", "1, 2, 3, 4"},
+                    {"field_1236", "1, 2, 3, 4"},
+                    {"field_1237", "even"}
+                }
+            };
+
+            var result = ValidationServices.ValidateModel(obj);
+
+            Assert.IsTrue(result.IsValid);
+        }
+
+        [TestMethod]
+        [TestCategory("ValidationServices: samples")]
+        public void Test_ValidateModel_Checks_That_IsEven_For_ListOfInt_Fails_On_InvalidListLength()
+        {
+            var obj = new ValidationParamObject
+            {
+                DynamicResource = null,
+                Validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.ListOfInt_Length),
+                Model = new Dictionary<string, string>()
+                {
+                    {"field_1234", "5"},
+                    {"field_1235", "1, 2, 3, 4, 5"},
+                    {"field_1236", "1, 2"},
+                    {"field_1237", "odd"}
+                }
+            };
+
+            var result = ValidationServices.ValidateModel(obj);
+
+            Assert.IsFalse(result.IsValid);
+            Assert.IsNotNull(result.Result);
+            Assert.AreEqual(result.Result.Errors.Count, 4);
+            Assert.AreEqual(result.Result.Errors[0].Message, "Количество статей должно быть четное");
+            Assert.AreEqual(result.Result.Errors[0].Definition.PropertyName, "field_1235");
+            Assert.AreEqual(result.Result.Errors[1].Message, "Количество статей должно быть четное и не меньше 4");
+            Assert.AreEqual(result.Result.Errors[1].Definition.PropertyName, "field_1236");
+            Assert.AreEqual(result.Result.Errors[2].Message, "ItemId должно быть четное");
+            Assert.AreEqual(result.Result.Errors[2].Definition.PropertyName, "field_1234");
+            Assert.AreEqual(result.Result.Errors[3].Message, "Длина названия должна быть четной");
+            Assert.AreEqual(result.Result.Errors[3].Definition.PropertyName, "field_1237");
+        }
+
+        [TestMethod]
+        [TestCategory("ValidationServices: test validators")]
+        public void Test_TestValidator_With_Advanced_Dictionary_And_Empty_Fields()
+        {
+            string dynamicResourceText = null;
+            string baseValidatorText = null;
+            var validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Advanced_Dictionary);
+
+            var model = new Dictionary<string, string>()
+            {
+                    { "Name", "" },
+                    { "DuplicateName", "" },
+                    { "Age", "" },
+                    { "Passport", "" },
+                    { "Email", "" },
+                    { "Date", "" },
+            };
+
+            ValidationServices.TestValidator(model, validator, dynamicResourceText, baseValidatorText);
         }
     }
 }

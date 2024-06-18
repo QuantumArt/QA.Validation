@@ -1,0 +1,48 @@
+<XamlValidator Discriminator="{x:Null}" xmlns="http://artq.com/validation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <XamlValidator.Definitions>
+        <PropertyDefinition Alias="field_1234" Description="ItemId" PropertyName="field_1234" PropertyType="x:Int32" x:Key="field_1234" />
+        <PropertyDefinition Alias="field_1235" Description="Группа статей" PropertyName="field_1235" PropertyType="ListOfInt" x:Key="field_1235" />
+        <PropertyDefinition Alias="field_1236" Description="Другая группа статей" PropertyName="field_1236" PropertyType="ListOfInt" x:Key="field_1236" />
+        <PropertyDefinition Alias="field_1237" Description="Название" PropertyName="field_1237" PropertyType="x:String" x:Key="field_1237" />
+    </XamlValidator.Definitions>
+
+    <ForMember Definition="{x:Definition field_1235}" >
+        <If>
+            <IsEven />
+            <If.False>
+                <WithMessage Text="Количество статей должно быть четное" />
+            </If.False>
+        </If>
+    </ForMember>
+
+    <ForMember Definition="{x:Definition field_1236}" >
+        <If>
+            <And>
+                <IsEven />
+                <Length MinLength="4" />
+            </And>
+            <If.False>
+                <WithMessage Text="Количество статей должно быть четное и не меньше 4" />
+            </If.False>
+        </If>
+    </ForMember>
+
+    <ForMember Definition="{x:Definition field_1234}" >
+        <If>
+            <IsEven />
+            <If.False>
+                <WithMessage Text="ItemId должно быть четное" />
+            </If.False>
+        </If>
+    </ForMember>
+
+    <ForMember Definition="{x:Definition field_1237}" >
+        <If>
+            <IsEven />
+            <If.False>
+                <WithMessage Text="Длина названия должна быть четной" />
+            </If.False>
+        </If>
+    </ForMember>
+
+</XamlValidator>

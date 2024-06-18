@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Portable.Xaml.Markup;
 
 namespace QA.Validation.Xaml
@@ -32,6 +32,10 @@ namespace QA.Validation.Xaml
 
                     return ((IComparable)value1).CompareTo(value2) > 0;
                 }
+            }
+            else if (value1 is null && typeof(int).IsAssignableFrom(source.PropertyType))
+            {
+                return false;
             }
 
             throw GetNotSupportedException(value1);
