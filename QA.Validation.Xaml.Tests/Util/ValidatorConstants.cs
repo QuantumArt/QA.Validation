@@ -54,5 +54,7 @@ namespace QA.Validation.Xaml.Tests.Util
             public const string Example_002 = "QA.Validation.Extensions.Tests.ValueArguments.Example_002.xaml";
             public const string Example_003 = "QA.Validation.Extensions.Tests.ValueArguments.Example_003.xaml";
         }
+
+        public const string ListOfInt_Length = "QA.Validation.Xaml.Tests.Examples.ListOfInt_Length.xaml";
     }
 }

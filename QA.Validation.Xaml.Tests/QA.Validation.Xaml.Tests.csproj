@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -20,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Examples\Basic_Object.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Examples\ListOfInt_Length.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
