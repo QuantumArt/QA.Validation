@@ -677,5 +677,26 @@ namespace QA.Validation.Extensions.Tests
             Assert.AreEqual(result.Result.Errors[3].Message, "Длина названия должна быть четной");
             Assert.AreEqual(result.Result.Errors[3].Definition.PropertyName, "field_1237");
         }
+
+        [TestMethod]
+        [TestCategory("ValidationServices: test validators")]
+        public void Test_TestValidator_With_Advanced_Dictionary_And_Empty_Fields()
+        {
+            string dynamicResourceText = null;
+            string baseValidatorText = null;
+            var validator = ValidationHelper.GetEmbeddedResourceText(ValidatorConstants.Advanced_Dictionary);
+
+            var model = new Dictionary<string, string>()
+            {
+                    { "Name", "" },
+                    { "DuplicateName", "" },
+                    { "Age", "" },
+                    { "Passport", "" },
+                    { "Email", "" },
+                    { "Date", "" },
+            };
+
+            ValidationServices.TestValidator(model, validator, dynamicResourceText, baseValidatorText);
+        }
     }
 }
