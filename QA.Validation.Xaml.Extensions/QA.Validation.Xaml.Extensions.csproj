@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Version>1.4.2</Version>
+    <Version>1.4.3</Version>
     <Authors>Nickolay Karlov</Authors>
     <Company>Quantum Art</Company>
     <Product>QA.Validation.Xaml.Extensions</Product>
@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/QuantumArt/QA.Validation</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Core Configuration</PackageTags>
-    <AssemblyVersion>1.4.2.0</AssemblyVersion>
+    <AssemblyVersion>1.4.3.0</AssemblyVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
